@@ -14,7 +14,7 @@
             </div>
         </div>
     </div>
-    <!-- Navigation Links -->
+    <!-- Dashboard -->
     <div class="flex flex-col mb-0 ml-0">
         <x-sidebar-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
             <x-slot name="icon">
@@ -35,7 +35,9 @@
             </div>
         </b>
 
-		<button type="button" class="flex items-center w-full p-2 text-black-600 transition duration-75 hover:bg-green-700 hover:text-gray-100 text-black-800" aria-controls="ITS" data-collapse-toggle="ITS">
+        <!-- ITS Inventory -->
+
+		<button type="button" class="flex items-center w-full p-2 text-black-600 transition duration-75 hover:bg-green-700 hover:text-gray-100 text-black-800 active:bg-green-700 focus:outline-none focus:ring focus:ring-green-700" aria-controls="ItsInventory" data-collapse-toggle="ItsInventory">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
             </svg>
@@ -43,7 +45,7 @@
             <span class="flex-1 ml-3 text-left whitespace-nowrap text-lg md:text-sm" sidebar-toggle-item>Inventory</span>
             <svg sidebar-toggle-item class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>
-		<ul id="ITS" class="hidden py-2 space-y-2">
+		<ul id="ItsInventory" class="hidden py-2 space-y-2">
 			<li>
 				<a href="device"
                     class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Devices</a>
@@ -57,7 +59,52 @@
 					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Consumables</a>
 			</li>
 		</ul>
+        <!-- ITS Management -->
+        <button type="button" class="flex items-center w-full p-2 text-black-600 transition duration-75 hover:bg-green-700 hover:text-gray-100 text-black-800 active:bg-green-700 focus:outline-none focus:ring focus:ring-green-700" aria-controls="ItsManagement" data-collapse-toggle="ItsManagement">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+              </svg>
 
+            <span class="flex-1 ml-3 text-left whitespace-nowrap text-lg md:text-sm" sidebar-toggle-item>Management</span>
+            <svg sidebar-toggle-item class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+		<ul id="ItsManagement" class="hidden py-2 space-y-2">
+			<li>
+				<a href="managementdevice"
+                    class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Devices</a>
+			</li>
+			<li>
+				<a href="managementcablesandperipherals"
+					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Cables & Peripherals</a>
+			</li>
+			<li>
+				<a href="managementconsumables"
+					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Consumables</a>
+			</li>
+		</ul>
+
+        <!-- ITS Employee Accountability -->
+
+        <button type="button" class="flex items-center w-full p-2 text-black-600 transition duration-75 hover:bg-green-700 hover:text-gray-100 text-black-800 active:bg-green-700 focus:outline-none focus:ring focus:ring-green-700" aria-controls="ItsEmployeeAccount" data-collapse-toggle="ItsEmployeeAccount">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+            </svg>
+
+            <span class="flex-1 ml-3 text-left whitespace-nowrap text-lg md:text-sm" sidebar-toggle-item>Employee Accountability</span>
+            <svg sidebar-toggle-item class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+		<ul id="ItsEmployeeAccount" class="hidden py-2 space-y-2">
+			<li>
+				<a href=""
+                    class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Devices</a>
+			</li>
+			<li>
+				<a href=""
+					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Employees</a>
+			</li>
+		</ul>
+
+        <!-- Allied Health Inventory -->
 
         <div class="border-b-2 border-neutral-100 px-6 py-1 dark:border-black/20 mb-2"></div>
 
@@ -69,7 +116,7 @@
             </div>
         </b>
 
-		<button type="button" class="flex items-center w-full p-2 text-black-600 transition duration-75 hover:bg-green-700 hover:text-gray-100 text-black-800" aria-controls="AH" data-collapse-toggle="AH">
+		<button type="button" class="flex items-center w-full p-2 text-black-600 transition duration-75 hover:bg-green-700 hover:text-gray-100 text-black-800 active:bg-green-700 focus:outline-none focus:ring focus:ring-green-700" aria-controls="AhInventory" data-collapse-toggle="AhInventory">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
             </svg>
@@ -77,17 +124,42 @@
             <span class="flex-1 ml-3 text-left whitespace-nowrap text-lg md:text-sm" sidebar-toggle-item>Inventory</span>
             <svg sidebar-toggle-item class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>
-		<ul id="AH" class="hidden py-2 space-y-2">
+		<ul id="AhInventory" class="hidden py-2 space-y-2">
 			<li>
-				<a href="device"
+				<a href="equipments"
                     class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Equipments</a>
 			</li>
 			<li>
-				<a href="cablesandperipherals"
+				<a href="reagents"
 					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Reagents</a>
 			</li>
 			<li>
-				<a href="consumables"
+				<a href="ahconsumables"
+					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Consumables</a>
+			</li>
+		</ul>
+
+        <!-- Allied Health Management -->
+
+        <button type="button" class="flex items-center w-full p-2 text-black-600 transition duration-75 hover:bg-green-700 hover:text-gray-100 text-black-800 active:bg-green-700 focus:outline-none focus:ring focus:ring-green-700" aria-controls="AhManagement" data-collapse-toggle="AhManagement">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+              </svg>
+
+            <span class="flex-1 ml-3 text-left whitespace-nowrap text-lg md:text-sm" sidebar-toggle-item>Management</span>
+            <svg sidebar-toggle-item class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+		<ul id="AhManagement" class="hidden py-2 space-y-2">
+			<li>
+				<a href="managementequipments"
+                    class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Equipments</a>
+			</li>
+			<li>
+				<a href="managementreagents"
+					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Reagents</a>
+			</li>
+			<li>
+				<a href="ahmanagementconsumables"
 					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Consumables</a>
 			</li>
 		</ul>
