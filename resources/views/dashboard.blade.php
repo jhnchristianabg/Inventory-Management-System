@@ -73,7 +73,7 @@
         </div>
 
 
-      <!-- Ends Here! -->
+      <!-- This Field is for Cables and Peripherals Cards -->
 
         <div class="flex justify-left" style ="margin-left:20px; float:right">
             <div class="rounded-lg border border-[#332D2D] bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-black">
@@ -120,6 +120,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- This Field is for Consumables Cards -->
 
         <div class="flex justify-left" style ="margin-left:20px; float:right">
             <div class="rounded-lg border border-[#332D2D] bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-black">
@@ -182,12 +184,12 @@
         </a>
     </div>
 
-    <!-- This Field is for Devices Cards -->
+    <!-- This Field is for Equipments Cards -->
 
     <div class="flex justify-left">
         <div class="rounded-lg border border-[#332D2D] bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-black">
             <div class="border-b-2 border-neutral-100 px-6 py-3 dark:border-black/20">
-                <b>Equipment</b>
+                <b>Equipments</b>
                 <button type="button" class="text-black-400 hover:text-black border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-yellow-300 dark:text-black-300 dark:hover:text-black dark:hover:bg-yellow-400 dark:focus:ring-yellow-900" style ="margin-left:17px">Add</button>
                 <button type="button" class="text-black-400 hover:text-black border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-yellow-300 dark:text-black-300 dark:hover:text-black dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">Deploy</button>
                 <button type="button" class="text-black-400 hover:text-black border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-yellow-300 dark:text-black-300 dark:hover:text-black dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">Pullout</button>
@@ -229,7 +231,7 @@
         </div>
 
 
-      <!-- Ends Here! -->
+      <!-- This Field is for Reagents Cards -->
 
         <div class="flex justify-left" style ="margin-left:20px; float:right">
             <div class="rounded-lg border border-[#332D2D] bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-black">
@@ -276,6 +278,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- This Field is for Consumables Cards -->
 
         <div class="flex justify-left" style ="margin-left:20px; float:right">
             <div class="rounded-lg border border-[#332D2D] bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-black">
