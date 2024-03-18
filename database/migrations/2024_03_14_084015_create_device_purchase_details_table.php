@@ -19,12 +19,13 @@ return new class extends Migration
 
             $table->increments('id');
             $table->foreign('id')->references('id')->on('devices');
-            $table->integer('DeviceID');
+            $table->String('DeviceID');
             $table->integer('DevicePriceprunit')->nullable();
             $table->string('DeviceSupplier', 255)->nullable();
             $table->string('DeviceDateOfPurch', 255)->nullable();
             $table->string('DeviceWarranty', 255)->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

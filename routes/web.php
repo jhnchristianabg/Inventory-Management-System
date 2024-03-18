@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DeviceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,12 @@ Route::get('/managementconsumables', function () {
     return view('managementconsumables');
 })->middleware(['auth'])->name('managementconsumables');
 
+/* ITS Employee Accountability Routes */
+
+Route::get('/itsemployeeaccountabilitydevice', function () {
+    return view('itsemployeeaccountabilitydevice');
+})->middleware(['auth'])->name('itsemployeeaccountabilitydevice');
+
 /* AH Inventory Routes */
 Route::get('/equipments', function () {
     return view('equipments');
@@ -75,3 +82,9 @@ Route::get('/managementreagents', function () {
 Route::get('/ahmanagementconsumables', function () {
     return view('ahmanagementconsumables');
 })->middleware(['auth'])->name('ahmanagementconsumables');
+
+
+// Routes for Adding Device
+
+Route::get('/device', [DeviceController::class,'index']);
+Route::post('add',[DeviceController::Class,'add']);

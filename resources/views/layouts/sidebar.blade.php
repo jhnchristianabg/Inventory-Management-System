@@ -95,7 +95,7 @@
         </button>
 		<ul id="ItsEmployeeAccount" class="hidden py-2 space-y-2">
 			<li>
-				<a href=""
+				<a href="itsemployeeaccountabilitydevice"
                     class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Devices</a>
 			</li>
 			<li>
