@@ -88,3 +88,30 @@ Route::get('/ahmanagementconsumables', function () {
 
 Route::get('/device', [DeviceController::class,'index']);
 Route::post('add',[DeviceController::Class,'add']);
+
+/* Routes for VIEW TABLE Display Devices from DB*/
+// Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
+Route::get('device',[DeviceController::class,'show']);
+
+
+/* Routes for DEVICEDETAILS.BLADE.PHP */
+Route::get('/devicedetails', function () {
+    return view('devicedetails');
+})->middleware(['auth'])->name('devicedetails');
+
+/* Route for VIEW Device Details MODAL DB SHOW*/
+// Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
+Route::get('devicedetails/{id}',[DeviceController::class,'details']);
+
+/* Routes for DEVICEEDIT.BLADE.PHP */
+Route::get('/deviceedit', function () {
+    return view('deviceedit');
+})->middleware(['auth'])->name('deviceedit');
+
+/* Route for EDIT Device Details DB SHOW*/
+// Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
+Route::get('deviceedit/{id}',[DeviceController::class,'edit']);
+
+/* UPDATING DATA */
+// Route::post('ACTION',[CONTROLLER::class,'FUNCTION']);
+Route::put('update_device/{id}',[DeviceController::class,'update']);

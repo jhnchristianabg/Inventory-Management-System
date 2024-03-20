@@ -20,6 +20,19 @@
                     </ol>
                 </x-slot>
 
+
+
+                <!-- Modal Button toggle -->
+                <button class="relative overflow-x-auto inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:ring-yellow-500 float-right mx-1" data-modal-target="crud-modal" data-modal-toggle="crud-modal" type="button">
+
+                    ADD
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                </button>
+
+                <div class="border-b-2 border-neutral-100 px-6 py-3 dark:border-black/20 my-6">
+                </div>
                 <!-- Notification -->
 
                 @if(Session::get('success'))
@@ -50,29 +63,17 @@
 
                 @endif
 
-                <!-- Modal Button toggle -->
-                <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:ring-yellow-500 float-right mx-1" data-modal-target="crud-modal" data-modal-toggle="crud-modal" type="button">
-
-                    ADD
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                    </svg>
-                </button>
-
-                <div class="border-b-2 border-neutral-100 px-6 py-3 dark:border-black/20 my-6">
-                </div>
-
                 <!-- Main modal -->
-                <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full">
-                    <div class="relative p-4 w-full max-w-md max-h-full mr-96">
+                <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full backdrop-blur-sm">
+                    <div class="relative p-4 w-full max-w-md max-h-full mr-64">
                         <!-- Modal content -->
-                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 px-4" style="width:1000px">
+                        <div class="relative bg-white rounded-lg shadow-lg dark:bg-blueGray-100 px-4" style="width:900px">
                             <!-- Modal header -->
                                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                    <h3 class="text-blueGray-700 text-xl font-bold">
                                         ADD NEW DEVICE
                                     </h3>
-                                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
+                                    <button type="button" class="text-black-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-green-600 dark:hover:text-white" data-modal-toggle="crud-modal">
                                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                         </svg>
@@ -80,61 +81,62 @@
                                     </button>
                                 </div>
 
-
-
                             <!-- Modal body -->
                             <form class="p-4 md:p-5" action="add" method="POST">
                                 {{ csrf_field() }}
                                 <div class="grid gap-4 mb-4 grid-cols-2">
                                     <!-- Device Requirements -->
                                     <div class="float-left">
-                                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 float-left mr-3">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
+                                            </svg>
+                                        <h3 class="text-blueGray-900 text-lg font-bold uppercase mb-3">
                                             DEVICE
                                         </h3>
                                     <div class="col-span-2 mt-5">
-                                        <label for="DeviceID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Device ID</label>
-                                        <input type="text" name="DeviceID" id="DeviceID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-30 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input Device ID" required="">
+                                        <label for="DeviceID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device ID</label>
+                                        <input type="text" name="DeviceID" id="DeviceID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Device ID" required="">
                                     </div>
                                     <div class="col-span-2 mt-3">
-                                        <label for="DeviceName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Device Name</label>
-                                        <input type="text" name="DeviceName" id="DeviceName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-30 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input Device Name" required="">
+                                        <label for="DeviceName" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device Name</label>
+                                        <input type="text" name="DeviceName" id="DeviceName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Device Name" required="">
                                     </div>
                                     <div class="flex">
                                         <div class="col-span-2 sm:col-span-1 mt-3">
-                                            <label for="DeviceBrand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand</label>
-                                            <input type="text" name="DeviceBrand" id="DeviceBrand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-30 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input Device Brand" required="">
+                                            <label for="DeviceBrand" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Brand</label>
+                                            <input type="text" name="DeviceBrand" id="DeviceBrand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Device Brand" required="">
                                         </div>
                                         <div class="ml-3">
                                             <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <label for="DeviceModel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Model</label>
-                                                <input type="text" name="DeviceModel" id="DeviceModel" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-30 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input Device Model" required="">
+                                                <label for="DeviceModel" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Model</label>
+                                                <input type="text" name="DeviceModel" id="DeviceModel" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Device Model" required="">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="flex">
                                         <div class="col-span-2 sm:col-span-1 mt-3">
-                                            <label for="DeviceSerialNo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Serial Number</label>
-                                            <input type="text" name="DeviceSerialNo" id="DeviceSerialNo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-30 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input Device Serial No.">
+                                            <label for="DeviceSerialNo" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Serial Number</label>
+                                            <input type="text" name="DeviceSerialNo" id="DeviceSerialNo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Device Serial No.">
                                         </div>
                                         <div class="col-span-2 sm:col-span-1 mt-3">
                                             <div class="ml-3">
-                                                <label for="DeviceMacAdd" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">MAC Address</label>
-                                                <input type="text" name="DeviceMacAdd" id="DeviceMacAdd" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-30 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input Device MAC Address">
+                                                <label for="DeviceMacAdd" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">MAC Address</label>
+                                                <input type="text" name="DeviceMacAdd" id="DeviceMacAdd" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Device MAC Address">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="flex">
                                         <div class="col-span-2 sm:col-span-1 mt-3">
-                                            <label for="DeviceLocation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"style="width:181px">Location</label>
-                                            <select name="DeviceLocation" id="DeviceLocation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-30 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"style="width:181px">
+                                            <label for="DeviceLocation" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase"style="width:181px">Location</label>
+                                            <select name="DeviceLocation" id="DeviceLocation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500"style="width:181px">
                                                 <option name="DeviceLocation" value="Office">Office</option>
                                                 <option name="DeviceLocation" value="Storage">Storage</option>
                                             </select>
                                         </div>
                                         <div class="col-span-2 sm:col-span-1 mt-3">
                                             <div class="ml-3">
-                                                <label for="DeviceStatus" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
-                                                <select name="DeviceStatus" id="DeviceStatus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-30 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"style="width:181px">
+                                                <label for="DeviceStatus" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Status</label>
+                                                <select name="DeviceStatus" id="DeviceStatus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500"style="width:181px">
                                                     <option name="DeviceStatus" value="Working">Working</option>
                                                     <option name="DeviceStatus" value="Not Working">Not Working</option>
                                                 </select>
@@ -142,87 +144,93 @@
                                         </div>
                                     </div>
                                     <div class="col-span-2">
-                                        <label for="DeviceRemarks" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white  mt-3">Remarks</label>
-                                        <textarea name="DeviceRemarks" id="DeviceRemarks" rows="5" cols="46"class="block p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write Device Remarks here"></textarea>
+                                        <label for="DeviceRemarks" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase mt-3">Remarks</label>
+                                        <textarea name="DeviceRemarks" id="DeviceRemarks" rows="5" cols="46"class="block p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Write Device Remarks here"></textarea>
                                     </div>
                                     </div>
                                     <!-- Device Requirements End Here! -->
 
                                     <!-- Device Specs -->
                                     <div class="float-right">
-                                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 float-left mr-3">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
+                                        </svg>
+                                        <h3 class="text-blueGray-900 text-lg font-bold uppercase mb-3">
                                             DEVICE SPECIFICATION
                                         </h3>
                                         <div class="flex">
                                             <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <label for="DeviceOperatingSys" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Operating System</label>
-                                                <input type="text" name="DeviceOperatingSys" id="DeviceOperatingSys" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-30 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input Operating System">
+                                                <label for="DeviceOperatingSys" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Operating System</label>
+                                                <input type="text" name="DeviceOperatingSys" id="DeviceOperatingSys" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Operating System">
                                             </div>
                                             <div class="ml-3">
                                                 <div class="col-span-2 sm:col-span-1 mt-3">
-                                                    <label for="DeviceProductKey" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Key</label>
-                                                    <input type="text" name="DeviceProductKey" id="DeviceProductKey" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-30 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input Product Key">
+                                                    <label for="DeviceProductKey" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Product Key</label>
+                                                    <input type="text" name="DeviceProductKey" id="DeviceProductKey" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Product Key">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="flex">
                                             <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <label for="DeviceProcessor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Processor</label>
-                                                <input type="text" name="DeviceProcessor" id="DeviceProcessor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-30 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input Processor">
+                                                <label for="DeviceProcessor" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Processor</label>
+                                                <input type="text" name="DeviceProcessor" id="DeviceProcessor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Processor">
                                             </div>
                                             <div class="ml-3">
                                                 <div class="col-span-2 sm:col-span-1 mt-3">
-                                                    <label for="DeviceMemory" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Memory</label>
-                                                    <input type="text" name="DeviceMemory" id="DeviceMemory" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-30 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input Memory">
+                                                    <label for="DeviceMemory" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Memory</label>
+                                                    <input type="text" name="DeviceMemory" id="DeviceMemory" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Memory">
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="flex">
                                             <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <label for="DeviceStorage1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Storage 1</label>
-                                                <input type="text" name="DeviceStorage1" id="DeviceStorage1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-30 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input Storage 1">
+                                                <label for="DeviceStorage1" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Storage 1</label>
+                                                <input type="text" name="DeviceStorage1" id="DeviceStorage1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Storage 1">
                                             </div>
                                             <div class="ml-3">
                                                 <div class="col-span-2 sm:col-span-1 mt-3 mb-7">
-                                                    <label for="DeviceStorage2" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Storage 2</label>
-                                                    <input type="text" name="DeviceStorage2" id="DeviceStorage2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-30 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input Storage 2">
+                                                    <label for="DeviceStorage2" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Storage 2</label>
+                                                    <input type="text" name="DeviceStorage2" id="DeviceStorage2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Storage 2">
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- Device Specs Ends Here!-->
 
                                         <!-- Device Purchase Details -->
-                                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 float-left mr-3">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                        </svg>
+                                        <h3 class="text-blueGray-900 text-lg font-bold uppercase mb-3">
                                             DEVICE PURCHASE DETAILS
                                         </h3>
                                         <div class="flex">
                                             <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <label for="DevicePriceprunit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price per unit</label>
-                                                <input type="text" name="DevicePriceprunit" id="DevicePriceprunit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-30 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input Price per unit" required="">
+                                                <label for="DevicePriceprunit" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Price per unit</label>
+                                                <input type="text" name="DevicePriceprunit" id="DevicePriceprunit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Price per unit" required="">
                                             </div>
                                             <div class="ml-3">
                                                 <div class="col-span-2 sm:col-span-1 mt-3">
-                                                    <label for="DeviceSupplier" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Supplier</label>
-                                                    <input type="text" name="DeviceSupplier" id="DeviceSupplier" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-30 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input Supplier" required="">
+                                                    <label for="DeviceSupplier" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Supplier</label>
+                                                    <input type="text" name="DeviceSupplier" id="DeviceSupplier" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Supplier" required="">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="flex">
                                             <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <label for="DeviceDateOfPurch" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date of Purchase</label>
-                                                <input type="text" name="DeviceDateOfPurch" id="DeviceDateOfPurch" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-30 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input Date of Purchase" required="">
+                                                <label for="DeviceDateOfPurch" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Date of Purchase</label>
+                                                <input type="text" name="DeviceDateOfPurch" id="DeviceDateOfPurch" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Date of Purchase" required="">
                                             </div>
                                             <div class="ml-3">
                                                 <div class="col-span-2 sm:col-span-1 mt-3">
-                                                    <label for="DeviceWarranty" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Warranty</label>
-                                                    <input type="text" name="DeviceWarranty" id="DeviceWarranty" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-30 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input Warranty">
+                                                    <label for="DeviceWarranty" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Warranty</label>
+                                                    <input type="text" name="DeviceWarranty" id="DeviceWarranty" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Warranty">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="inline-flex text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" style="margin-left:685px">
+                                <button type="submit" class="inline-flex text-white inline-flex items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" style="margin-left:635px">
                                     <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                                         Add new device
                                 </button>
@@ -231,7 +239,81 @@
                     </div>
                 </div>
 
+                <!-- TABLE FOR DEVICE VIEW-->
 
+                <div class="relative overflow-x-auto">
+                    <table class="w-full text-sm text-left rtl:text-right font-light text-surface text-black ">
+                        <thead class="text-md uppercase bg-gray-200 font-bold">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    Device ID
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Name
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Brand
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Model
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Serial No
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    MAC Address
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Location
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Status
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Remarks
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($deviceview as $devices)
+                            <tr class="bg-white border-b dark:border-gray-300 text-black">
+                                <td class="px-6 py-4 font-bold uppercase">{{$devices['DeviceID']}}</td>
+                                <td class="px-6 py-4">{{$devices['DeviceName']}}</td>
+                                <td class="px-6 py-4">{{$devices['DeviceBrand']}}</td>
+                                <td class="px-6 py-4">{{$devices['DeviceModel']}}</td>
+                                <td class="px-6 py-4">{{$devices['DeviceSerialNo']}}</td>
+                                <td class="px-6 py-4">{{$devices['DeviceMacAdd']}}</td>
+                                <td class="px-6 py-4">{{$devices['DeviceLocation']}}</td>
+                                <td class="px-6 py-4 font-bold uppercase text-xs">{{$devices['DeviceStatus']}}</td>
+                                <td class="px-6 py-4">{{$devices['DeviceRemarks']}}</td>
+                                <td class="px-6 py-4">
+                                    <button type="button" onclick="location.href='{{ url('devicedetails/'.$devices->id) }}'">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                            <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+                                            <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41ZM14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                    <button type="button" onclick="location.href='{{ url('deviceedit/'.$devices->id) }}'">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                            <path d="m5.433 13.917 1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                            <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z" />
+                                        </svg>
+                                    </button>
+                                    <button type="button" onclick="location.href='{{ url('') }}'">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                            <path d="M2 3a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H2Z" />
+                                            <path fill-rule="evenodd" d="M2 7.5h16l-.811 7.71a2 2 0 0 1-1.99 1.79H4.802a2 2 0 0 1-1.99-1.79L2 7.5Zm5.22 1.72a.75.75 0 0 1 1.06 0L10 10.94l1.72-1.72a.75.75 0 1 1 1.06 1.06L11.06 12l1.72 1.72a.75.75 0 1 1-1.06 1.06L10 13.06l-1.72 1.72a.75.75 0 0 1-1.06-1.06L8.94 12l-1.72-1.72a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
             </x-app-layout>
         </body>
