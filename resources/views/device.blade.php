@@ -340,7 +340,7 @@
                                 <td class="px-6 py-4 font-bold uppercase text-xs">{{$devices['DeviceStatus']}}</td>
                                 <td class="px-6 py-4">{{$devices['DeviceRemarks']}}</td>
                                 <td class="px-6 py-4">
-                                    <button type="button" onclick="location.href='{{ url('devicedetails/'.$devices->id) }}'" class="mr-3">
+                                    <button type="button" onclick="location.href='{{ url('devicedetails/'.$devices->id) }}'" class="mr-5">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                             <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
                                             <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41ZM14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" clip-rule="evenodd" />

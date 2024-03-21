@@ -14,6 +14,11 @@ class DeviceController extends Controller
         return view('device');
     }
 
+    public function count(){
+        $totaldevices = DeviceModel::count();
+        return view('dashboard', ['totaldevices' => $totaldevices]);
+    }
+
     public function add(Request $request){
         $request->validate([
             'DeviceID'=> 'required',

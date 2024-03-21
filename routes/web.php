@@ -116,5 +116,8 @@ Route::get('deviceedit/{id}',[DeviceController::class,'edit']);
 // Route::post('ACTION',[CONTROLLER::class,'FUNCTION']);
 Route::put('update_device/{id}',[DeviceController::class,'update']);
 
-//
+/* SOFT DELETE DATA */
 Route::delete('device/{id}', [DeviceController::class, 'softDelete'])->name('devices.soft-delete');
+
+//
+Route::get('/dashboard', [DeviceController::class, 'count'])->name('dashboard');
