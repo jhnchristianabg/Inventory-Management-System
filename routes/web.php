@@ -115,3 +115,6 @@ Route::get('deviceedit/{id}',[DeviceController::class,'edit']);
 /* UPDATING DATA */
 // Route::post('ACTION',[CONTROLLER::class,'FUNCTION']);
 Route::put('update_device/{id}',[DeviceController::class,'update']);
+
+//
+Route::delete('device/{id}', [DeviceController::class, 'softDelete'])->name('devices.soft-delete');

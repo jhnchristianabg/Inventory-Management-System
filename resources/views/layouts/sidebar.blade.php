@@ -5,8 +5,8 @@
     <div class="divide-y divide-gray-100 divide-solid">
         <div class="p-5 text-center">
             <!-- Profile Picture -->
-            <a href="" class="inline-block w-auto p-2 mb-4 bg-white rounded-full">
-                <img src="{{ asset('img/user.png') }}" alt="" class="object-cover object-top w-32 h-32 align-top rounded-full">
+            <a href="/dashboard" class="inline-block w-auto p-2 mb-4 bg-white rounded-full">
+                <img src="{{ asset('img/feuc.png') }}" alt="" class="scale-110 object-contain object-top w-28 h-28 align-top rounded-full">
             </a>
             <!-- Profile Info -->
             <div>

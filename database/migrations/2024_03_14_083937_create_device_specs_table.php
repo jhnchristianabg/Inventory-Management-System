@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('DeviceProductKey', 255)->nullable();
             $table->string('DeviceProcessor', 255)->nullable();
             $table->integer('DeviceMemory')->nullable();
+            $table->string('DeviceSize')->nullable();
             $table->integer('DeviceStorage1')->nullable();
             $table->integer('DeviceStorage2')->nullable();
             $table->timestamp('created_at')->useCurrent();

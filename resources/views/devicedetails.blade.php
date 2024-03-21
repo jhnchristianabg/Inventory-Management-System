@@ -127,10 +127,21 @@
                                                 <label for="DeviceProcessor" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Processor</label>
                                                 <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$specs[0]->DeviceProcessor}}" disabled readonly>
                                             </div>
-                                            <div class="ml-3">
-                                                <div class="col-span-2 sm:col-span-1 mt-3">
-                                                    <label for="DeviceMemory" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Memory</label>
-                                                    <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$specs[0]->DeviceMemory}}" disabled readonly>
+
+                                            <div class="flex h-15 w-10">
+                                                <div class="ml-3 mt-3">
+                                                    <div>
+                                                        <label for="DeviceMemory" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Memory</label>
+                                                        <div class="relative mt-2 rounded-md shadow-sm"style="width:180px">
+                                                            <input type="text" name="DeviceMemory" id="DeviceMemory" class="cursor-not-allowed block w-full h-10 rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6 dark:bg-green-50" value="{{$specs[0]->DeviceMemory}}" disabled readonly>
+                                                            <div class="absolute inset-y-0 right-0 flex items-center">
+                                                                <select name="DeviceSize" id="DeviceSize" class="font-semibold cursor-not-allowed h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-7 text-black focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm" disabled readonly>
+                                                                    <option name="DeviceSize" value="TB"  @if ($specs[0]->DeviceSize == 'TB') selected @endif >TB</option>
+                                                                    <option name="DeviceSize" value="GB" @if ($specs[0]->DeviceSize == 'GB') selected @endif >GB</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

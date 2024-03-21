@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\DeviceModel;
+use App\Models\DeviceModel1;
+use App\Models\DeviceModel2;
 
 class DeviceController extends Controller
 {
@@ -27,9 +29,13 @@ class DeviceController extends Controller
             'DeviceProductKey',
             'DeviceProcessor',
             'DeviceMemory',
+            'DeviceSize',
             'DeviceStorage1',
-            'DeviceStorage2'
-
+            'DeviceStorage2',
+            'DevicePriceprunit'=> 'required',
+            'DeviceSupplier'=> 'required',
+            'DeviceDateOfPurch'=> 'required',
+            'DeviceWarranty'
         ]);
 
         $query = DB::table('devices')->insert([
@@ -50,6 +56,7 @@ class DeviceController extends Controller
             'DeviceProductKey'=>$request->input('DeviceProductKey'),
             'DeviceProcessor'=>$request->input('DeviceProcessor'),
             'DeviceMemory'=>$request->input('DeviceMemory'),
+            'DeviceSize'=>$request->input('DeviceSize'),
             'DeviceStorage1'=>$request->input('DeviceStorage1'),
             'DeviceStorage2'=>$request->input('DeviceStorage2')
 
@@ -85,8 +92,11 @@ class DeviceController extends Controller
     }
 
     public function edit($id){
-       $devices = DeviceModel::find($id);
-       return view ('deviceedit',compact('devices'));
+        // $Variable = DB::table('table name')->find($id);
+       $devices = DB::table('devices')->find($id);
+       $device_specs = DB::table('device_specs')->find($id);
+       $device_purchase_details = DB::table('device_purchase_details')->find($id);
+       return view ('deviceedit',compact('devices','device_specs','device_purchase_details'));
     }
 
     public function update(Request $request, $id){
@@ -101,10 +111,20 @@ class DeviceController extends Controller
             'DeviceLocation'=> 'required',
             'DeviceStatus',
             'DeviceRemarks',
-
+            'DeviceOperatingSys',
+            'DeviceProductKey',
+            'DeviceProcessor',
+            'DeviceMemory',
+            'DeviceSize',
+            'DeviceStorage1',
+            'DeviceStorage2',
+            'DevicePriceprunit'=> 'required',
+            'DeviceSupplier'=> 'required',
+            'DeviceDateOfPurch'=> 'required',
+            'DeviceWarranty'
         ]);
 
-        $devices = DeviceModel::where('id',$id)->update([
+        $devices = DB::table('devices')->where('id',$id)->update([
             'DeviceID' => $request['DeviceID'],
             'DeviceName' => $request['DeviceName'],
             'DeviceBrand' => $request['DeviceBrand'],
@@ -116,6 +136,37 @@ class DeviceController extends Controller
             'DeviceRemarks' => $request['DeviceRemarks']
         ]);
 
-        return redirect('/device')->with('success',' ');
+        $device_specs = DB::table('device_specs')->where('id',$id)->update([
+            'DeviceOperatingSys' => $request['DeviceOperatingSys'],
+            'DeviceProductKey' => $request['DeviceProductKey'],
+            'DeviceProcessor' => $request['DeviceProcessor'],
+            'DeviceMemory' => $request['DeviceMemory'],
+            'DeviceSize'=> $request['DeviceSize'],
+            'DeviceStorage1' => $request['DeviceStorage1'],
+            'DeviceStorage2' => $request['DeviceStorage2']
+        ]);
+
+        $device_purchase_details = DB::table('device_purchase_details')->where('id',$id)->update([
+            'DevicePriceprunit' => $request['DevicePriceprunit'],
+            'DeviceSupplier' => $request['DeviceSupplier'],
+            'DeviceDateOfPurch' => $request['DeviceDateOfPurch'],
+            'DeviceWarranty' => $request['DeviceWarranty']
+        ]);
+
+
+        return redirect('/device')->with('update',' ');
+    }
+
+    public function softDelete($id)
+    {
+        $device = DeviceModel::findOrFail($id);
+        $device_specs = DeviceModel1::findOrFail($id);
+        $device_purchase_details = DeviceModel2::findOrFail($id);
+
+        $device->delete();
+        $device_specs->delete();
+        $device_purchase_details->delete();
+
+        return redirect('/device')->with('delete',' ');
     }
 }
