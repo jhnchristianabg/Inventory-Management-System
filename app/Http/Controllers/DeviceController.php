@@ -82,7 +82,7 @@ class DeviceController extends Controller
     }
 
     public function show(){
-        $data=DeviceModel::all();
+        $data=DeviceModel::paginate(8);
         // return view('BLADE NAME',['VARIABLE'=>$data]);
         return view('device',['deviceview'=>$data]);
     }
@@ -174,4 +174,28 @@ class DeviceController extends Controller
 
         return redirect('/device')->with('delete',' ');
     }
+
+    public function search_device(Request $request){
+
+        $data = '%' . $request->input('search') . '%'; // Wrap the search term with '%' for wildcard matching
+
+    $deviceview = DB::table('devices')
+        ->where(function ($query) use ($data) {
+            $query->where('DeviceID', 'like', $data)
+                ->orWhere('DeviceName', 'like', $data)
+                ->orWhere('DeviceBrand', 'like', $data)
+                ->orWhere('DeviceModel', 'like', $data)
+                ->orWhere('DeviceSerialNo', 'like', $data)
+                ->orWhere('DeviceMacAdd', 'like', $data)
+                ->orWhere('DeviceLocation', 'like', $data)
+                ->orWhere('DeviceStatus', 'like', $data)
+                ->orWhere('DeviceRemarks', 'like', $data);
+        })
+        ->whereNull('deleted_at')
+        ->paginate(8);
+
+    return view('device', compact('deviceview'));
+
+    }
+
 }
