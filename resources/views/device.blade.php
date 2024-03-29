@@ -2,6 +2,7 @@
     <html lang="en">
         <head>
             <title>ITS / Inventory</title>
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
         </head>
         <body>
             <x-app-layout>
@@ -35,6 +36,7 @@
                 </div>
                 <!-- Notification -->
 
+                <!-- Notification for SUCCESS -->
                 @if(Session::get('success'))
 
                 <div class="mb-3 bg-green-100 border-t-4 border-green-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
@@ -52,6 +54,8 @@
                 {{ Session::get('success')}}
 
                 @endif
+
+                <!-- Notification for UPDATE -->
 
                 @if(Session::get('update'))
 
@@ -71,6 +75,8 @@
 
                 @endif
 
+                <!-- Notification for DELETE -->
+
                 @if(Session::get('delete'))
 
                 <div class="mb-3 bg-green-100 border-t-4 border-green-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
@@ -89,6 +95,8 @@
 
                 @endif
 
+                <!-- Notification for FAILED -->
+
                 @if(Session::get('fail'))
                 <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
                     <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -102,6 +110,8 @@
                         {{ Session::get('fail')}}
 
                 @endif
+
+                <!-- MODAL FOR ADD BUTTON (CREATING DATA) -->
 
                 <!-- Main modal -->
                 <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full backdrop-blur-sm">
@@ -133,13 +143,38 @@
                                         <h3 class="text-blueGray-900 text-lg font-bold uppercase mb-3">
                                             DEVICE
                                         </h3>
+
                                     <div class="col-span-2 mt-5">
-                                        <label for="DeviceID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device ID</label>
-                                        <input type="text" name="DeviceID" id="DeviceID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Device ID" required="">
+                                        <label for="DeviceType" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device Type</label>
+                                        <select name="DeviceType" id="DeviceType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500"style="width:181px">
+                                            <option name="DeviceType" value="System Unit">System Unit</option>
+                                            <option name="DeviceType" value="Laptop">Laptop</option>
+                                            <option name="DeviceType" value="AIO Desktop">AIO Desktop</option>
+                                            <option name="DeviceType" value="IMAC">IMAC</option>
+                                            <option name="DeviceType" value="Monitor">Monitor</option>
+                                            <option name="DeviceType" value="Speaker">Speaker</option>
+                                            <option name="DeviceType" value="Projector">Projector</option>
+                                            <option name="DeviceType" value="Printer">Printer</option>
+                                            <option name="DeviceType" value="TV">TV</option>
+                                            <option name="DeviceType" value="IP Phone">IP Phone</option>
+                                            <option name="DeviceType" value="Network Switch">Network Switch</option>
+                                            <option name="DeviceType" value="Server">Server</option>
+                                            <option name="DeviceType" value="Wireless Router">Wireless Router</option>
+                                            <option name="DeviceType" value="Tablet">Tablet</option>
+                                        </select>
                                     </div>
-                                    <div class="col-span-2 mt-3">
-                                        <label for="DeviceName" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device Name</label>
-                                        <input type="text" name="DeviceName" id="DeviceName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Device Name" required="">
+
+                                    <div class="flex">
+                                        <div class="col-span-2 sm:col-span-1 mt-3">
+                                            <label for="DeviceID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device ID</label>
+                                            <input type="text" name="DeviceID" id="DeviceID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Device ID" required="">
+                                        </div>
+                                        <div class="ml-3">
+                                            <div class="col-span-2 sm:col-span-1 mt-3">
+                                                <label for="DeviceName" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device Name</label>
+                                                <input type="text" name="DeviceName" id="DeviceName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Device Name" required="">
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="flex">
                                         <div class="col-span-2 sm:col-span-1 mt-3">
@@ -189,9 +224,9 @@
                                     </div>
                                     </div>
                                     <!-- Device Requirements End Here! -->
-
                                     <!-- Device Specs -->
                                     <div class="float-right">
+                                        <div id="floorDropdown">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 float-left mr-3">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
                                         </svg>
@@ -245,6 +280,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        </div>
                                         <!-- Device Specs Ends Here!-->
 
                                         <!-- Device Purchase Details -->
@@ -278,6 +314,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- Device Purchase Details Ends Here -->
                                     </div>
                                 </div>
                                 <button type="submit" class="inline-flex text-white inline-flex items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" style="margin-left:635px">
@@ -290,7 +327,7 @@
                 </div>
 
                 <!-- TABLE FOR DEVICE VIEW-->
-
+                <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-1 gap-3">
                 <div class="relative overflow-x-auto">
 
                     <!-- Search -->
@@ -308,45 +345,186 @@
                     </div>
                     </form>
 
-                    <table class="w-full text-sm text-left rtl:text-right font-light text-surface text-black ">
-                        <thead class="text-md uppercase bg-gray-200 font-bold">
+                    <!-- COLUMN TABLE SORTING -->
+
+                    <table class="w-full text-xs text-left rtl:text-right font-light text-surface text-black ">
+                        <thead class="text-xs uppercase bg-gray-200 font-bold">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
-                                    Device ID
+                                    <a href="{{ route('device.show', ['column' => 'DeviceID', 'direction' => ($column == 'DeviceID' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                        Device ID
+                                        @if($column == 'DeviceID')
+                                            @if($direction == 'asc')
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                            </svg>
+                                            @else
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                            @endif
+                                        @endif
+                                    </a>
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Name
+                                    <a href="{{ route('device.show', ['column' => 'DeviceType', 'direction' => ($column == 'DeviceType' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                        Type
+                                        @if($column == 'DeviceType')
+                                            @if($direction == 'asc')
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                            </svg>
+                                            @else
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                            @endif
+                                        @endif
+                                    </a>
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Brand
+                                    <a href="{{ route('device.show', ['column' => 'DeviceName', 'direction' => ($column == 'DeviceName' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                        Name
+                                        @if($column == 'DeviceName')
+                                            @if($direction == 'asc')
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                            </svg>
+                                            @else
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                            @endif
+                                        @endif
+                                    </a>
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Model
+                                    <a href="{{ route('device.show', ['column' => 'DeviceBrand', 'direction' => ($column == 'DeviceBrand' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                        Brand
+                                        @if($column == 'DeviceBrand')
+                                            @if($direction == 'asc')
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                            </svg>
+                                            @else
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                            @endif
+                                        @endif
+                                    </a>
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Serial No
+                                    <a href="{{ route('device.show', ['column' => 'DeviceModel', 'direction' => ($column == 'DeviceModel' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                        Model
+                                        @if($column == 'DeviceModel')
+                                            @if($direction == 'asc')
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                            </svg>
+                                            @else
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                            @endif
+                                        @endif
+                                    </a>
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    MAC Address
+                                    <a href="{{ route('device.show', ['column' => 'DeviceSerialNo', 'direction' => ($column == 'DeviceSerialNo' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                        Serial #
+                                        @if($column == 'DeviceSerialNo')
+                                            @if($direction == 'asc')
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                            </svg>
+                                            @else
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                            @endif
+                                        @endif
+                                    </a>
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Location
+                                    <a href="{{ route('device.show', ['column' => 'DeviceMacAdd', 'direction' => ($column == 'DeviceMacAdd' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                        MAC Address
+                                        @if($column == 'DeviceMacAdd')
+                                            @if($direction == 'asc')
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                            </svg>
+                                            @else
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                            @endif
+                                        @endif
+                                    </a>
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Status
+                                    <a href="{{ route('device.show', ['column' => 'DeviceLocation', 'direction' => ($column == 'DeviceLocation' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                        Location
+                                        @if($column == 'DeviceLocation')
+                                            @if($direction == 'asc')
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                            </svg>
+                                            @else
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                            @endif
+                                        @endif
+                                    </a>
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Remarks
+                                    <a href="{{ route('device.show', ['column' => 'DeviceStatus', 'direction' => ($column == 'DeviceStatus' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                        Status
+                                        @if($column == 'DeviceStatus')
+                                            @if($direction == 'asc')
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                            </svg>
+                                            @else
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                            @endif
+                                        @endif
+                                    </a>
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    <a href="{{ route('device.show', ['column' => 'DeviceRemarks', 'direction' => ($column == 'DeviceRemarks' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                        Remarks
+                                        @if($column == 'DeviceRemarks')
+                                            @if($direction == 'asc')
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                            </svg>
+                                            @else
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                            @endif
+                                        @endif
+                                    </a>
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Action
                                 </th>
                             </tr>
+
+                            <!-- COLUMN TABLE SORTING Ends Here -->
+
+                            <!-- DISPLAYING OF DATA TABLE -->
+
                         </thead>
                         <tbody>
                             @foreach($deviceview as $devices)
                             <tr class="bg-white border-b dark:border-gray-300 text-black">
                                 <td class="px-6 py-4 font-bold uppercase">{{$devices->DeviceID}}</td>
+                                <td class="px-6 py-4">{{$devices->DeviceType}}</td>
                                 <td class="px-6 py-4">{{$devices->DeviceName}}</td>
                                 <td class="px-6 py-4">{{$devices->DeviceBrand}}</td>
                                 <td class="px-6 py-4">{{$devices->DeviceModel}}</td>
@@ -356,7 +534,8 @@
                                 <td class="px-6 py-4 font-bold uppercase text-xs">{{$devices->DeviceStatus}}</td>
                                 <td class="px-6 py-4">{{$devices->DeviceRemarks}}</td>
                                 <td class="px-6 py-4">
-                                    <button type="button" onclick="location.href='{{ url('devicedetails/'.$devices->id) }}'" class="mr-5">
+                                    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-3">
+                                    <button type="button" onclick="location.href='{{ url('devicedetails/'.$devices->id) }}'">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                             <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
                                             <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41ZM14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" clip-rule="evenodd" />
@@ -368,26 +547,45 @@
                                             <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z" />
                                         </svg>
                                     </button>
-                                    <form method="POST" action="{{ route('devices.soft-delete', ['id' => $devices->id]) }}" class="float-right mr-2">
+                                    <form method="POST" action="{{ route('devices.soft-delete', ['id' => $devices->id]) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" onclick="return confirm('Are you sure you want to soft delete this data?')">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mt-1">
                                                 <path d="M2 3a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H2Z" />
                                                 <path fill-rule="evenodd" d="M2 7.5h16l-.811 7.71a2 2 0 0 1-1.99 1.79H4.802a2 2 0 0 1-1.99-1.79L2 7.5Zm5.22 1.72a.75.75 0 0 1 1.06 0L10 10.94l1.72-1.72a.75.75 0 1 1 1.06 1.06L11.06 12l1.72 1.72a.75.75 0 1 1-1.06 1.06L10 13.06l-1.72 1.72a.75.75 0 0 1-1.06-1.06L8.94 12l-1.72-1.72a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
                                             </svg>
                                         </button>
                                     </form>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
-
                         </tbody>
+                        <!-- DISPLAYING OF DATA TABLE Ends Here -->
                     </table>
+
+                    <!-- PAGINATION -->
+
                     <div class="mt-3">
-                        {{ $deviceview->links() }}
+                        {{ $deviceview->appends(['column' => $column, 'direction' => $direction])->links() }}
                     </div>
+
+                    <!-- PAGINATION Ends Here -->
                 </div>
+                </div>
+
+                <script>
+                    document.getElementById('DeviceType').addEventListener('change', function() {
+                        var floorDropdown = document.getElementById('floorDropdown');
+                        if (this.value === 'System Unit' || this.value === 'Laptop' || this.value === 'AIO Desktop' || this.value === 'IMAC') {
+                            floorDropdown.style.display = 'block';
+                        } else {
+                            floorDropdown.style.display = 'none';
+                        }
+                    });
+                </script>
+
 
             </x-app-layout>
         </body>

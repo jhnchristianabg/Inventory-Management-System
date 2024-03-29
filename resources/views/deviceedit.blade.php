@@ -51,14 +51,38 @@
                                         <h3 class="text-blueGray-900 text-lg font-bold uppercase mb-3">
                                             DEVICE
                                         </h3>
+
                                     <div class="col-span-2 mt-5">
-                                        <label for="DeviceID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device ID</label>
-                                        {{-- value must set into 0 to read NULL --}}
-                                        <input type="text" name="DeviceID" id="DeviceID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$devices->DeviceID}}" placeholder="Input Device ID" required="">
+                                        <label for="DeviceType" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device Type</label>
+                                        <select name="DeviceType" id="DeviceType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500"style="width:181px">
+                                            <option name="DeviceType" value="System Unit" @if ($devices->DeviceType == 'System Unit') selected @endif>System Unit</option>
+                                            <option name="DeviceType" value="Laptop" @if ($devices->DeviceType == 'Laptop') selected @endif>Laptop</option>
+                                            <option name="DeviceType" value="AIO Desktop" @if ($devices->DeviceType == 'AIO Desktop') selected @endif>AIO Desktop</option>
+                                            <option name="DeviceType" value="IMAC" @if ($devices->DeviceType == 'IMAC') selected @endif>IMAC</option>
+                                            <option name="DeviceType" value="Monitor" @if ($devices->DeviceType == 'Monitor') selected @endif>Monitor</option>
+                                            <option name="DeviceType" value="Speaker" @if ($devices->DeviceType == 'Speaker') selected @endif>Speaker</option>
+                                            <option name="DeviceType" value="Projector" @if ($devices->DeviceType == 'Projector') selected @endif>Projector</option>
+                                            <option name="DeviceType" value="Printer" @if ($devices->DeviceType == 'Printer') selected @endif>Printer</option>
+                                            <option name="DeviceType" value="TV" @if ($devices->DeviceType == 'TV') selected @endif>TV</option>
+                                            <option name="DeviceType" value="IP Phone" @if ($devices->DeviceType == 'IP Phone') selected @endif>IP Phone</option>
+                                            <option name="DeviceType" value="Network Switch" @if ($devices->DeviceType == 'Network Switch') selected @endif>Network Switch</option>
+                                            <option name="DeviceType" value="Server" @if ($devices->DeviceType == 'Server') selected @endif>Server</option>
+                                            <option name="DeviceType" value="Wireless Router" @if ($devices->DeviceType == 'Wireless Router') selected @endif>Wireless Router</option>
+                                            <option name="DeviceType" value="Tablet" @if ($devices->DeviceType == 'Tablet') selected @endif>Tablet</option>
+                                        </select>
                                     </div>
-                                    <div class="col-span-2 mt-3">
-                                        <label for="DeviceName" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device Name</label>
-                                        <input type="text" name="DeviceName" id="DeviceName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$devices->DeviceName}}" placeholder="Input Device Name" required="">
+
+                                    <div class="flex">
+                                        <div class="col-span-2 sm:col-span-1 mt-3">
+                                            <label for="DeviceID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device ID</label>
+                                            <input type="text" name="DeviceID" id="DeviceID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$devices->DeviceID}}" placeholder="Input Device ID" required="">
+                                        </div>
+                                        <div class="ml-3">
+                                            <div class="col-span-2 sm:col-span-1 mt-3">
+                                                <label for="DeviceName" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device Name</label>
+                                                <input type="text" name="DeviceName" id="DeviceName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$devices->DeviceName}}" placeholder="Input Device Name" required="">
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="flex">
                                         <div class="col-span-2 sm:col-span-1 mt-3">
@@ -111,6 +135,7 @@
 
                                     <!-- Device Specs -->
                                     <div class="float-right">
+                                        <div id="floorDropdown">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 float-left mr-3">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
                                         </svg>
@@ -164,6 +189,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        </div>
                                         <!-- Device Specs Ends Here!-->
 
                                         <!-- Device Purchase Details -->
@@ -207,6 +233,17 @@
                         </div>
                     </div>
                 </div>
+
+                <script>
+                    document.getElementById('DeviceType').addEventListener('change', function() {
+                        var floorDropdown = document.getElementById('floorDropdown');
+                        if (this.value === 'System Unit' || this.value === 'Laptop' || this.value === 'AIO Desktop' || this.value === 'IMAC') {
+                            floorDropdown.style.display = 'block';
+                        } else {
+                            floorDropdown.style.display = 'none';
+                        }
+                    });
+                </script>
 
             </x-app-layout>
         </body>

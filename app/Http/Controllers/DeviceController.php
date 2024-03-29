@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\CPModel;
 use App\Models\DeviceModel;
 use App\Models\DeviceModel1;
 use App\Models\DeviceModel2;
+use App\Models\DeviceModel3;
 
 class DeviceController extends Controller
 {
@@ -16,12 +18,15 @@ class DeviceController extends Controller
 
     public function count(){
         $totaldevices = DeviceModel::count();
-        return view('dashboard', ['totaldevices' => $totaldevices]);
+        $totalcp = CPModel::count();
+        return view('dashboard', ['totaldevices' => $totaldevices, 'totalcp' => $totalcp]);
     }
 
     public function add(Request $request){
+
         $request->validate([
             'DeviceID'=> 'required',
+            'DeviceType',
             'DeviceName'=> 'required',
             'DeviceBrand'=> 'required',
             'DeviceModel'=> 'required',
@@ -45,6 +50,7 @@ class DeviceController extends Controller
 
         $query = DB::table('devices')->insert([
             'DeviceID'=>$request->input('DeviceID'),
+            'DeviceType'=>$request->input('DeviceType'),
             'DeviceName'=>$request->input('DeviceName'),
             'DeviceBrand'=>$request->input('DeviceBrand'),
             'DeviceModel'=>$request->input('DeviceModel'),
@@ -74,6 +80,7 @@ class DeviceController extends Controller
             'DeviceWarranty'=>$request->input('DeviceWarranty')
 
         ]);
+
         if($query){
             return back()->with('success',' ');
         }else{
@@ -81,11 +88,43 @@ class DeviceController extends Controller
         }
     }
 
-    public function show(){
-        $data=DeviceModel::paginate(8);
-        // return view('BLADE NAME',['VARIABLE'=>$data]);
-        return view('device',['deviceview'=>$data]);
+    public function show(Request $request){
+        $column = $request->get('column', 'DeviceID'); // Default column to sort
+        $direction = $request->get('direction', 'asc'); // Default sorting direction
+        $perPage = 8;
+
+        $data = DeviceModel::orderBy($column, $direction)->paginate($perPage);
+
+        return view('device', [
+            'deviceview' => $data,
+            'column' => $column,
+            'direction' => $direction
+        ]);
     }
+
+    public function search_device(Request $request){
+        $searchTerm = $request->input('search');
+        $perPage = 8;
+        $column = $request->get('column', 'DeviceID'); // Default column to sort
+        $direction = $request->get('direction', 'asc'); // Default sorting direction
+
+        $deviceview = DeviceModel::where(function ($query) use ($searchTerm) {
+            $query->where('DeviceID', 'like', "%$searchTerm%")
+                  ->orWhere('DeviceType', 'like', "%$searchTerm%")
+                  ->orWhere('DeviceName', 'like', "%$searchTerm%")
+                  ->orWhere('DeviceBrand', 'like', "%$searchTerm%")
+                  ->orWhere('DeviceModel', 'like', "%$searchTerm%")
+                  ->orWhere('DeviceSerialNo', 'like', "%$searchTerm%")
+                  ->orWhere('DeviceMacAdd', 'like', "%$searchTerm%")
+                  ->orWhere('DeviceLocation', 'like', "%$searchTerm%")
+                  ->orWhere('DeviceStatus', 'like', "%$searchTerm%")
+                  ->orWhere('DeviceRemarks', 'like', "%$searchTerm%");
+        })->orderBy($column, $direction)->paginate($perPage);
+
+        return view('device', compact('deviceview', 'searchTerm', 'column', 'direction'));
+    }
+
+    /* --------------THIS FIELD IS FOR TABLE ACTIONS -------------- */
 
     public function details($id){
         // Variable = DB::select('select * from "DB TABLE NAME" where "TABLE" = ?', [$"TABLE"]);
@@ -108,6 +147,7 @@ class DeviceController extends Controller
         //
         $request->validate([
             'DeviceID'=> 'required',
+            'DeviceType',
             'DeviceName'=> 'required',
             'DeviceBrand'=> 'required',
             'DeviceModel'=> 'required',
@@ -131,6 +171,7 @@ class DeviceController extends Controller
 
         $devices = DB::table('devices')->where('id',$id)->update([
             'DeviceID' => $request['DeviceID'],
+            'DeviceType' => $request['DeviceType'],
             'DeviceName' => $request['DeviceName'],
             'DeviceBrand' => $request['DeviceBrand'],
             'DeviceModel' => $request['DeviceModel'],
@@ -175,27 +216,32 @@ class DeviceController extends Controller
         return redirect('/device')->with('delete',' ');
     }
 
-    public function search_device(Request $request){
+    /* --------------TABLE ACTIONS ENDS HERE -------------- */
 
-        $data = '%' . $request->input('search') . '%'; // Wrap the search term with '%' for wildcard matching
+    /* --------------ADDING LOCATION -------------- */
 
-    $deviceview = DB::table('devices')
-        ->where(function ($query) use ($data) {
-            $query->where('DeviceID', 'like', $data)
-                ->orWhere('DeviceName', 'like', $data)
-                ->orWhere('DeviceBrand', 'like', $data)
-                ->orWhere('DeviceModel', 'like', $data)
-                ->orWhere('DeviceSerialNo', 'like', $data)
-                ->orWhere('DeviceMacAdd', 'like', $data)
-                ->orWhere('DeviceLocation', 'like', $data)
-                ->orWhere('DeviceStatus', 'like', $data)
-                ->orWhere('DeviceRemarks', 'like', $data);
-        })
-        ->whereNull('deleted_at')
-        ->paginate(8);
+    public function addloc(Request $request){
+        $request->validate([
+            'Building' => 'required',
+            'Floor' => 'required',
+            'RoomNo' => 'required',
+            'RoomName'=> 'required'
+        ]);
 
-    return view('device', compact('deviceview'));
+        $query = DB::table('locations')->insert([
+            'Building'=>$request->input('Building'),
+            'Floor'=>$request->input('Floor'),
+            'RoomNo'=>$request->input('RoomNo'),
+            'RoomName'=>$request->input('RoomName')
+        ]);
 
+        if($query){
+            return back()->with('success',' ');
+        }else{
+            return back()->with('fail',' ');
+        }
     }
+
+    /* --------------ADDING LOCATION ENDS HERE -------------- */
 
 }

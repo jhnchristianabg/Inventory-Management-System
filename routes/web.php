@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\CPController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,7 +103,7 @@ Route::post('add',[DeviceController::Class,'add']);
 
 /* Routes for VIEW TABLE Display Devices from DB*/
 // Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
-Route::get('device',[DeviceController::class,'show']);
+Route::get('device', [DeviceController::class, 'show'])->name('device.show');
 /*---------------------------------------------------------------------*/
 
 
@@ -141,9 +142,50 @@ Route::delete('device/{id}', [DeviceController::class, 'softDelete'])->name('dev
 
 Route::get('search_device',[DeviceController::Class, 'search_device']);
 
+/*---------------------------------------------------------------------*/
+/* Report Generation */
+
+Route::get('report', function () {
+    return view('report');
+})->middleware(['auth'])->name('report');
+/*---------------------------------------------------------------------*/
 
 //
 
 Route::get('try', function () {
     return view('try');
 })->middleware(['auth'])->name('try');
+
+
+/* LOCATION */
+
+Route::get('location', function () {
+    return view('location');
+})->middleware(['auth'])->name('location');
+
+Route::post('location',[DeviceController::Class,'addloc'])->name('add.location');
+
+/*---------------------------------------------------------------------*/
+// Routes for Adding CABLES AND PERIPHERALS
+
+Route::get('/cablesandperipherals', [CPController::class,'index']);
+Route::post('add_cp',[CPController::Class,'add_cp']);
+/*---------------------------------------------------------------------*/
+/* Routes for VIEW TABLE Display Cables & Peripherals from DB*/
+// Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
+Route::get('cablesandperipherals', [CPController::class, 'show_cp'])->name('cablesandperipherals.show');
+/*---------------------------------------------------------------------*/
+/* SEARCH Cables & Peripherals */
+
+Route::get('search_cp',[CPController::Class, 'search_cp']);
+
+/*---------------------------------------------------------------------*/
+/* Routes for CPDETAILS.BLADE.PHP */
+Route::get('/cpdetails', function () {
+    return view('cpdetails');
+})->middleware(['auth'])->name('cpdetails');
+/*---------------------------------------------------------------------*/
+/* Route for VIEW CPDETAILS MODAL DB SHOW*/
+// Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
+Route::get('cpdetails/{id}',[CPController::class,'cp_details']);
+/*---------------------------------------------------------------------*/

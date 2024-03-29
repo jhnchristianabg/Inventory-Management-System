@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2024 at 03:56 PM
+-- Generation Time: Mar 29, 2024 at 06:14 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,12 +24,79 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cables_and_peripherals`
+--
+
+CREATE TABLE `cables_and_peripherals` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `CPID` varchar(255) NOT NULL,
+  `CPType` varchar(255) DEFAULT NULL,
+  `CPName` varchar(255) NOT NULL,
+  `CPBrand` varchar(255) NOT NULL,
+  `CPModel` varchar(255) NOT NULL,
+  `CPQuantity` varchar(255) DEFAULT NULL,
+  `CPStatus` varchar(255) DEFAULT NULL,
+  `CPRemarks` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cables_and_peripherals`
+--
+
+INSERT INTO `cables_and_peripherals` (`id`, `CPID`, `CPType`, `CPName`, `CPBrand`, `CPModel`, `CPQuantity`, `CPStatus`, `CPRemarks`, `created_at`, `updated_at`) VALUES
+(1, 'F3U-HED-1', 'Cable', 'Cable-1', 'None', 'None', '1', 'Working', 'Available', '2024-03-29 15:24:42', '2024-03-29 15:24:42'),
+(2, 'F3U-HED-2', 'Adapter', '2', 'None', 'None', '1', 'Working', 'Available', '2024-03-29 15:33:40', '2024-03-29 15:33:40'),
+(3, 'F3U-HED-3', 'Converter', '3', 'None', 'None', '1', 'Not Working', 'Defect', '2024-03-29 15:43:30', '2024-03-29 15:43:30'),
+(4, 'F3U-HED-4', 'Charger', '4', 'None', 'None', '1', 'Working', 'Available', '2024-03-29 15:44:16', '2024-03-29 15:44:16'),
+(5, 'F3U-HED-5', 'Cable', '5', 'None', 'None', '1', 'Not Working', 'Defect', '2024-03-29 15:46:22', '2024-03-29 15:46:22'),
+(6, 'F3U-HED-6', 'Keyboard', '6', 'A4Tech', 'None', '1', 'Working', 'Available', '2024-03-29 15:47:13', '2024-03-29 15:47:13'),
+(7, 'F3U-HED-7', 'Mouse', '7', 'A4Tech', 'A4-Mouse', '1', 'Working', 'Available', '2024-03-29 15:47:55', '2024-03-29 15:47:55'),
+(8, 'F3U-HED-8', 'Headset', 'JBL-HDST', 'JBL', 'JBL-01', '1', 'Working', 'Available', '2024-03-29 15:48:59', '2024-03-29 15:48:59'),
+(9, 'F3U-HED-9', 'Microphone', 'JBL-MIC', 'JBL', 'JBL-02', '1', 'Not Working', 'Defect', '2024-03-29 15:49:42', '2024-03-29 15:49:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cp_purchase_details`
+--
+
+CREATE TABLE `cp_purchase_details` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `CPPriceprunit` int(11) DEFAULT NULL,
+  `CPSupplier` varchar(255) DEFAULT NULL,
+  `CPDateOfPurch` varchar(255) DEFAULT NULL,
+  `CPWarranty` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cp_purchase_details`
+--
+
+INSERT INTO `cp_purchase_details` (`id`, `CPPriceprunit`, `CPSupplier`, `CPDateOfPurch`, `CPWarranty`, `created_at`, `updated_at`) VALUES
+(1, 1, 'None', '03-18-2024', '03-18-2025', '2024-03-29 15:24:42', '2024-03-29 15:24:42'),
+(2, 1, 'None', '03-18-2024', '03-18-2025', '2024-03-29 15:33:40', '2024-03-29 15:33:40'),
+(3, 1, 'None', '03-18-2024', '03-18-2025', '2024-03-29 15:43:30', '2024-03-29 15:43:30'),
+(4, 1, 'None', '03-18-2024', '03-18-2025', '2024-03-29 15:44:16', '2024-03-29 15:44:16'),
+(5, 1, 'None', '03-18-2024', '03-18-2025', '2024-03-29 15:46:22', '2024-03-29 15:46:22'),
+(6, 800, 'A4Tech', '03-20-2024', '03-20-2025', '2024-03-29 15:47:13', '2024-03-29 15:47:13'),
+(7, 500, 'A4Tech', '03-20-2024', '03-20-2025', '2024-03-29 15:47:55', '2024-03-29 15:47:55'),
+(8, 3000, 'JBL', '03-20-2024', '03-20-2025', '2024-03-29 15:48:59', '2024-03-29 15:48:59'),
+(9, 2500, 'JBL', '03-20-2024', '03-20-2025', '2024-03-29 15:49:42', '2024-03-29 15:49:42');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `devices`
 --
 
 CREATE TABLE `devices` (
   `id` int(10) UNSIGNED NOT NULL,
   `DeviceID` varchar(255) NOT NULL,
+  `DeviceType` varchar(255) DEFAULT NULL,
   `DeviceName` varchar(255) NOT NULL,
   `DeviceBrand` varchar(255) NOT NULL,
   `DeviceModel` varchar(255) NOT NULL,
@@ -49,19 +116,17 @@ CREATE TABLE `devices` (
 -- Dumping data for table `devices`
 --
 
-INSERT INTO `devices` (`id`, `DeviceID`, `DeviceName`, `DeviceBrand`, `DeviceModel`, `DeviceSerialNo`, `DeviceMacAdd`, `DeviceLocation`, `DeviceStatus`, `DeviceRemarks`, `DeviceDisplay`, `DeviceNoOfPorts`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'MON-001', 'HCL1', 'Lenovo', 'ThinkCentre', 'LNV-THNKCTR-01', 'LNV-01', 'Office', 'Working', 'Good', NULL, NULL, '2024-03-22 14:19:09', '2024-03-22 14:19:09', NULL),
-(2, 'MON-002', 'HCL2', 'Lenovo', 'ThinkCentre', 'LNV-THNKCTR-02', 'LNV-02', 'Office', 'Working', 'Good', NULL, NULL, '2024-03-22 14:20:35', '2024-03-22 14:20:35', NULL),
-(3, 'MON-003', 'HCL3', 'Lenovo', 'ThinkCentre', 'LNV-THNKCTR-03', 'LNV-03', 'Office', 'Working', 'Good', NULL, NULL, '2024-03-22 14:21:53', '2024-03-22 14:21:53', NULL),
-(4, 'MON-004', 'HCL4', 'ASUS', 'Predator', 'ASS-PRDTR-01', 'ASS-01', 'Office', 'Working', 'Good', NULL, NULL, '2024-03-22 14:22:58', '2024-03-22 14:22:58', NULL),
-(5, 'MON-005', 'HCL5', 'ASUS', 'Predator', 'ASS-PRDTR-02', 'ASS-02', 'Office', 'Working', 'Good', NULL, NULL, '2024-03-22 14:23:49', '2024-03-22 14:23:49', NULL),
-(6, 'MON-006', 'HCL6', 'ASUS', 'Predator', 'ASS-PRDTR-03', 'ASS-03', 'Office', 'Working', 'Good', NULL, NULL, '2024-03-22 14:24:40', '2024-03-22 14:24:40', NULL),
-(7, 'MON-007', 'HCL7', 'ACER', 'Aspire 7', 'ACR-ASP-01', 'ACR-01', 'Office', 'Working', 'Good', NULL, NULL, '2024-03-22 14:27:04', '2024-03-22 14:27:04', NULL),
-(8, 'MON-008', 'HCL8', 'ACER', 'Aspire 7', 'ACR-ASP-02', 'ACR-02', 'Office', 'Working', 'Good', NULL, NULL, '2024-03-22 14:27:48', '2024-03-22 14:27:48', NULL),
-(9, 'MON-009', 'HCL19', 'ACER', 'Aspire 7', 'ACR-ASP-03', 'ACR-03', 'Office', 'Working', 'Good', NULL, NULL, '2024-03-22 14:28:33', '2024-03-22 14:28:33', NULL),
-(10, 'MON-010', 'HCL10', 'APPLE', 'IMAC', 'APP-IMC-01', 'APP-01', 'Office', 'Working', 'Good', NULL, NULL, '2024-03-22 14:31:14', '2024-03-22 14:31:14', NULL),
-(11, 'MON-011', 'HCL11', 'APPLE', 'IMAC', 'APP-IMC-02', 'APP-02', 'Office', 'Working', 'Good', NULL, NULL, '2024-03-22 14:32:17', '2024-03-22 14:32:17', NULL),
-(12, 'MON-012', 'HCL12', 'APPLE', 'IMAC', 'APP-IMC-03', 'APP-03', 'Storage', 'Not Working', 'Bad', NULL, NULL, '2024-03-22 14:33:38', '2024-03-22 06:34:57', '2024-03-22 06:34:57');
+INSERT INTO `devices` (`id`, `DeviceID`, `DeviceType`, `DeviceName`, `DeviceBrand`, `DeviceModel`, `DeviceSerialNo`, `DeviceMacAdd`, `DeviceLocation`, `DeviceStatus`, `DeviceRemarks`, `DeviceDisplay`, `DeviceNoOfPorts`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'HED-FEU-1', 'System Unit', 'HCL1', 'Lenovo', 'ThinkCentre', 'LNV-THNKCTR-01', 'LNV-01', 'Office', 'Working', 'Available', NULL, NULL, '2024-03-29 15:28:00', '2024-03-29 15:28:00', NULL),
+(2, 'HED-FEU-2', 'Laptop', 'HCL2', 'ACER', 'Aspire 7', 'ACR-ASP-01', 'ACR-01', 'Office', 'Working', 'Available', NULL, NULL, '2024-03-29 15:30:21', '2024-03-29 15:30:21', NULL),
+(3, 'HED-FEU-3', 'AIO Desktop', 'HCL3', 'ASUS', 'Predator', 'ASS-PRDTR-01', 'ASS-01', 'Office', 'Working', 'Available', NULL, NULL, '2024-03-29 15:36:21', '2024-03-29 15:36:21', NULL),
+(4, 'HED-FEU-4', 'IMAC', 'HCL4', 'APPLE', 'IMAC', 'APP-IMC-01', 'APP-01', 'Storage', 'Not Working', 'Defect', NULL, NULL, '2024-03-29 15:37:28', '2024-03-29 15:37:28', NULL),
+(5, 'HED-FEU-5', 'Monitor', 'HCL5', 'Lenovo', 'ThinkVision', 'LNV-THNKVSN-01', 'LNV-02', 'Office', 'Working', 'Available', NULL, NULL, '2024-03-29 15:38:29', '2024-03-29 15:38:29', NULL),
+(6, 'HED-FEU-6', 'Speaker', 'HCL6', 'JBL', 'JBL', 'JBLBLTH-01', 'JBL-01', 'Office', 'Working', 'Available', NULL, NULL, '2024-03-29 15:39:13', '2024-03-29 15:39:13', NULL),
+(7, 'HED-FEU-7', 'Projector', 'HCL7', 'EPSON', 'H751C', 'EPSN-PRJC-01', 'EPSN-01', 'Storage', 'Working', 'Available', NULL, NULL, '2024-03-29 15:40:37', '2024-03-29 15:40:37', NULL),
+(8, 'HED-FEU-8', 'Printer', 'HCL8', 'HP', 'HP8000', 'HP-PRNTR-01', 'HP-01', 'Office', 'Working', 'Available', NULL, NULL, '2024-03-29 15:41:16', '2024-03-29 15:41:16', NULL),
+(9, 'HED-FEU-9', 'TV', 'HCL9', 'LG', 'LG-TV', 'LG-TV-01', 'LG-01', 'Office', 'Working', 'Available', NULL, NULL, '2024-03-29 15:42:00', '2024-03-29 15:42:00', NULL),
+(10, 'HED-FEU-10', 'IP Phone', 'HCL10', 'YEALINK', 'YEALINK', 'IPPHN-YEA-01', 'IP-01', 'Storage', 'Not Working', 'Defect', NULL, NULL, '2024-03-29 15:51:41', '2024-03-29 07:52:11', '2024-03-29 07:52:11');
 
 -- --------------------------------------------------------
 
@@ -85,18 +150,16 @@ CREATE TABLE `device_purchase_details` (
 --
 
 INSERT INTO `device_purchase_details` (`id`, `DevicePriceprunit`, `DeviceSupplier`, `DeviceDateOfPurch`, `DeviceWarranty`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 30500, 'Lenovo', '03-18-2024', '03-18-2025', '2024-03-22 14:19:09', '2024-03-22 14:19:09', NULL),
-(2, 30500, 'Lenovo', '03-18-2024', '03-18-2025', '2024-03-22 14:20:35', '2024-03-22 14:20:35', NULL),
-(3, 30500, 'Lenovo', '03-18-2024', '03-18-2025', '2024-03-22 14:21:53', '2024-03-22 14:21:53', NULL),
-(4, 50000, 'ASUS', '03-20-2024', '03-20-2025', '2024-03-22 14:22:58', '2024-03-22 14:22:58', NULL),
-(5, 50000, 'ASUS', '03-20-2024', '03-20-2025', '2024-03-22 14:23:49', '2024-03-22 14:23:49', NULL),
-(6, 50000, 'ASUS', '03-20-2024', '03-20-2025', '2024-03-22 14:24:40', '2024-03-22 14:24:40', NULL),
-(7, 45000, 'ACER', '03-21-2024', '03-21-2025', '2024-03-22 14:27:04', '2024-03-22 14:27:04', NULL),
-(8, 45000, 'ACER', '03-21-2024', '03-21-2025', '2024-03-22 14:27:48', '2024-03-22 14:27:48', NULL),
-(9, 45000, 'ACER', '03-21-2024', '03-21-2025', '2024-03-22 14:28:33', '2024-03-22 14:28:33', NULL),
-(10, 60000, 'APPLE', '03-22-2024', '03-22-2025', '2024-03-22 14:31:14', '2024-03-22 14:31:14', NULL),
-(11, 60000, 'APPLE', '03-22-2024', '03-22-2025', '2024-03-22 14:32:17', '2024-03-22 14:32:17', NULL),
-(12, 60000, 'APPLE', '03-22-2024', '03-22-2025', '2024-03-22 14:33:38', '2024-03-22 06:34:57', '2024-03-22 06:34:57');
+(1, 30500, 'Lenovo', '03-18-2024', '03-18-2025', '2024-03-29 15:28:00', '2024-03-29 15:28:00', NULL),
+(2, 45000, 'ACER', '03-20-2024', '03-20-2025', '2024-03-29 15:30:21', '2024-03-29 15:30:21', NULL),
+(3, 50000, 'ASUS', '03-18-2024', '03-18-2025', '2024-03-29 15:36:21', '2024-03-29 15:36:21', NULL),
+(4, 60000, 'APPLE', '03-18-2024', '03-18-2025', '2024-03-29 15:37:28', '2024-03-29 15:37:28', NULL),
+(5, 15000, 'Lenovo', '03-18-2024', '03-18-2025', '2024-03-29 15:38:29', '2024-03-29 15:38:29', NULL),
+(6, 6000, 'JBL', '03-18-2024', '03-18-2025', '2024-03-29 15:39:13', '2024-03-29 15:39:13', NULL),
+(7, 15000, 'EPSON', '03-20-2024', '03-20-2025', '2024-03-29 15:40:37', '2024-03-29 15:40:37', NULL),
+(8, 12000, 'HP', '03-20-2024', '03-20-2025', '2024-03-29 15:41:16', '2024-03-29 15:41:16', NULL),
+(9, 12000, 'LG', '03-20-2024', '03-20-2025', '2024-03-29 15:42:00', '2024-03-29 15:42:00', NULL),
+(10, 3000, 'YEALINK', '03-20-2024', '03-20-2025', '2024-03-29 15:51:41', '2024-03-29 07:52:11', '2024-03-29 07:52:11');
 
 -- --------------------------------------------------------
 
@@ -123,18 +186,16 @@ CREATE TABLE `device_specs` (
 --
 
 INSERT INTO `device_specs` (`id`, `DeviceOperatingSys`, `DeviceProductKey`, `DeviceProcessor`, `DeviceMemory`, `DeviceSize`, `DeviceStorage1`, `DeviceStorage2`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Microsoft', 'LNV-01-01', 'i7 10th Gen', 512, 'GB', NULL, NULL, '2024-03-22 14:19:09', '2024-03-22 14:19:09', NULL),
-(2, 'Microsoft', 'LNV-02-02', 'i7 10th Gen', 512, 'GB', NULL, NULL, '2024-03-22 14:20:35', '2024-03-22 14:20:35', NULL),
-(3, 'Microsoft', 'LNV-01-03', 'i7 10th Gen', 512, 'GB', NULL, NULL, '2024-03-22 14:21:53', '2024-03-22 14:21:53', NULL),
-(4, 'Microsoft', 'ASS-01-01', 'i9 10th Gen', 1, 'TB', NULL, NULL, '2024-03-22 14:22:58', '2024-03-22 14:22:58', NULL),
-(5, 'Microsoft', 'ASS-01-02', 'i9 10th Gen', 1, 'TB', NULL, NULL, '2024-03-22 14:23:49', '2024-03-22 14:23:49', NULL),
-(6, 'Microsoft', 'ASS-01-03', 'i9 10th Gen', 1, 'TB', NULL, NULL, '2024-03-22 14:24:40', '2024-03-22 14:24:40', NULL),
-(7, 'Microsoft', 'ACR-01-01', 'AMD R5', 550, 'GB', NULL, NULL, '2024-03-22 14:27:04', '2024-03-22 14:27:04', NULL),
-(8, 'Microsoft', 'ACR-01-02', 'AMD R5', 550, 'GB', NULL, NULL, '2024-03-22 14:27:48', '2024-03-22 14:27:48', NULL),
-(9, 'Microsoft', 'ACR-01-03', 'AMD R5', 550, 'GB', NULL, NULL, '2024-03-22 14:28:33', '2024-03-22 14:28:33', NULL),
-(10, 'IOS', 'APP-01-01', 'IOS', 1, 'TB', NULL, NULL, '2024-03-22 14:31:14', '2024-03-22 14:31:14', NULL),
-(11, 'IOS', 'APP-01-02', 'IOS', 1, 'TB', NULL, NULL, '2024-03-22 14:32:17', '2024-03-22 14:32:17', NULL),
-(12, 'IOS', 'APP-01-03', 'IOS', 1, 'TB', NULL, NULL, '2024-03-22 14:33:38', '2024-03-22 06:34:57', '2024-03-22 06:34:57');
+(1, 'Microsoft', 'LNV-01-01', 'i7 10th Gen', 550, 'GB', NULL, NULL, '2024-03-29 15:28:00', '2024-03-29 15:28:00', NULL),
+(2, 'Microsoft', 'ACR-01-01', 'AMD R5', 512, 'GB', NULL, NULL, '2024-03-29 15:30:21', '2024-03-29 15:30:21', NULL),
+(3, 'Microsoft', 'ASS-01-01', 'i9 10th Gen', 1, 'TB', NULL, NULL, '2024-03-29 15:36:21', '2024-03-29 15:36:21', NULL),
+(4, 'IOS', 'APP-01-01', 'IOS', 1, 'TB', NULL, NULL, '2024-03-29 15:37:28', '2024-03-29 15:37:28', NULL),
+(5, NULL, NULL, NULL, NULL, 'TB', NULL, NULL, '2024-03-29 15:38:29', '2024-03-29 15:38:29', NULL),
+(6, NULL, NULL, NULL, NULL, 'TB', NULL, NULL, '2024-03-29 15:39:13', '2024-03-29 15:39:13', NULL),
+(7, NULL, NULL, NULL, NULL, 'TB', NULL, NULL, '2024-03-29 15:40:37', '2024-03-29 15:40:37', NULL),
+(8, NULL, NULL, NULL, NULL, 'TB', NULL, NULL, '2024-03-29 15:41:16', '2024-03-29 15:41:16', NULL),
+(9, NULL, NULL, NULL, NULL, 'TB', NULL, NULL, '2024-03-29 15:42:00', '2024-03-29 15:42:00', NULL),
+(10, NULL, NULL, NULL, NULL, 'TB', NULL, NULL, '2024-03-29 15:51:41', '2024-03-29 07:52:11', '2024-03-29 07:52:11');
 
 -- --------------------------------------------------------
 
@@ -150,6 +211,22 @@ CREATE TABLE `failed_jobs` (
   `payload` longtext NOT NULL,
   `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `locations`
+--
+
+CREATE TABLE `locations` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `Building` varchar(255) NOT NULL,
+  `Floor` varchar(255) NOT NULL,
+  `RoomNo` varchar(255) NOT NULL,
+  `RoomName` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -178,7 +255,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (7, '2024_03_14_084015_create_device_purchase_details_table', 1),
 (8, '2024_03_21_134444_add_delete_at_field_to_devices', 1),
 (9, '2024_03_21_152413_add_delete_at_field_to_device_specs', 1),
-(10, '2024_03_21_152435_add_delete_at_field_to_device_purchase_details', 1);
+(10, '2024_03_21_152435_add_delete_at_field_to_device_purchase_details', 1),
+(11, '2024_03_28_051045_create_locations_table', 1),
+(12, '2024_03_29_135716_create_cables_and_peripherals_table', 1),
+(13, '2024_03_29_140100_create_cp_purchase_details_table', 1);
 
 -- --------------------------------------------------------
 
@@ -232,11 +312,23 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'ITS Admin', 'ITSAdmin@feucavite.edu.ph', NULL, '$2y$10$GP/juTSzB8zhRSeOZSaku.mElzl6LYBR03cmyq7HqaV42a88dCBUS', NULL, '2024-03-22 06:17:37', '2024-03-22 06:17:37');
+(1, 'ITS Admin', 'ITSAdmin@feucavite.edu.ph', NULL, '$2y$10$G8A9yM6./1HITHOz2aQ14uk62hRl9R2a26r42.EbcV.TDyHNrvwR.', NULL, '2024-03-29 07:21:50', '2024-03-29 07:21:50');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cables_and_peripherals`
+--
+ALTER TABLE `cables_and_peripherals`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cp_purchase_details`
+--
+ALTER TABLE `cp_purchase_details`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `devices`
@@ -262,6 +354,12 @@ ALTER TABLE `device_specs`
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `locations`
+--
+ALTER TABLE `locations`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -295,22 +393,34 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `cables_and_peripherals`
+--
+ALTER TABLE `cables_and_peripherals`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `cp_purchase_details`
+--
+ALTER TABLE `cp_purchase_details`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `devices`
 --
 ALTER TABLE `devices`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `device_purchase_details`
 --
 ALTER TABLE `device_purchase_details`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `device_specs`
 --
 ALTER TABLE `device_specs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -319,10 +429,16 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `locations`
+--
+ALTER TABLE `locations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

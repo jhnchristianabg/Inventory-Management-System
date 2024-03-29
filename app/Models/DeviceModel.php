@@ -30,3 +30,11 @@ class DeviceModel2 extends Model
     protected $table='device_purchase_details';
 
 }
+
+class DeviceModel3 extends Model
+{
+    use SoftDeletes;
+
+    protected $table='location';
+
+}

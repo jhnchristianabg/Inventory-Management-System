@@ -19,6 +19,7 @@ return new class extends Migration
 
             $table->increments('id');
             $table->string('DeviceID');
+            $table->string('DeviceType')->nullable();
             $table->string('DeviceName', 255);
             $table->string('DeviceBrand', 255);
             $table->string('DeviceModel', 255);

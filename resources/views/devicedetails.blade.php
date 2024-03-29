@@ -51,13 +51,21 @@
                                             DEVICE
                                         </h3>
                                     <div class="col-span-2 mt-5">
-                                        <label for="DeviceID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device ID</label>
-                                        {{-- value must set into 0 to read NULL --}}
-                                        <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$devdetails[0]->DeviceID}}" disabled readonly>
+                                        <label for="DeviceType" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device Type</label>
+                                        <input type="text" id="DeviceType" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$devdetails[0]->DeviceType}}" disabled readonly>
                                     </div>
-                                    <div class="col-span-2 mt-3">
-                                        <label for="DeviceName" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device Name</label>
-                                        <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$devdetails[0]->DeviceName}}" disabled readonly>
+                                    <div class="flex">
+                                        <div class="col-span-2 sm:col-span-1 mt-3">
+                                            <label for="DeviceID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device ID</label>
+                                                {{-- value must set into 0 to read NULL --}}
+                                            <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$devdetails[0]->DeviceID}}" disabled readonly>
+                                        </div>
+                                        <div class="ml-3">
+                                            <div class="col-span-2 sm:col-span-1 mt-3">
+                                                <label for="DeviceName" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device Name</label>
+                                                <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$devdetails[0]->DeviceName}}" disabled readonly>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="flex">
                                         <div class="col-span-2 sm:col-span-1 mt-3">
