@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\CPModel;
+use App\Models\CPModel2;
 
 class CPController extends Controller
 {
@@ -99,4 +100,63 @@ class CPController extends Controller
         // return view('Blade', compact('Variable'));
         return view('cpdetails', ['cps_details'=>$cps_details,'cps_purchasedetails'=>$cps_purchasedetails]);
     }
+
+    public function cp_edit($id){
+        // $Variable = DB::table('table name')->find($id);
+       $cps = DB::table('cables_and_peripherals')->find($id);
+       $cps_purchasedetails = DB::table('cp_purchase_details')->find($id);
+       return view ('cpedit',compact('cps','cps_purchasedetails'));
+    }
+
+    public function cp_update(Request $request, $id){
+        //
+        $request->validate([
+            'CPID'=> 'required',
+            'CPType',
+            'CPName'=> 'required',
+            'CPBrand'=> 'required',
+            'CPModel'=> 'required',
+            'CPQuantity'=> 'required',
+            'CPStatus',
+            'CPRemarks',
+            'CPPriceprunit'=> 'required',
+            'CPSupplier'=> 'required',
+            'CPDateOfPurch'=> 'required',
+            'CPWarranty'
+        ]);
+
+        $cps = DB::table('cables_and_peripherals')->where('id',$id)->update([
+            'CPID' => $request['CPID'],
+            'CPType' => $request['CPType'],
+            'CPName' => $request['CPName'],
+            'CPBrand' => $request['CPBrand'],
+            'CPModel' => $request['CPModel'],
+            'CPQuantity' => $request['CPQuantity'],
+            'CPStatus' => $request['CPStatus'],
+            'CPRemarks' => $request['CPRemarks']
+        ]);
+
+        $cps_purchasedetails = DB::table('cp_purchase_details')->where('id',$id)->update([
+            'CPPriceprunit' => $request['CPPriceprunit'],
+            'CPSupplier' => $request['CPSupplier'],
+            'CPDateOfPurch' => $request['CPDateOfPurch'],
+            'CPWarranty' => $request['CPWarranty']
+        ]);
+
+
+        return redirect('/cablesandperipherals')->with('update',' ');
+    }
+
+    public function cp_softDelete($id)
+    {
+        $cps = CPModel::findOrFail($id);
+        $cps_purchasedetails = CPModel::findOrFail($id);
+
+        $cps->delete();
+        $cps_purchasedetails->delete();
+
+        return redirect('/cablesandperipherals')->with('delete',' ');
+    }
+
+    /* --------------TABLE ACTIONS ENDS HERE -------------- */
 }

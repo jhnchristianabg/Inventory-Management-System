@@ -166,26 +166,51 @@ Route::get('location', function () {
 Route::post('location',[DeviceController::Class,'addloc'])->name('add.location');
 
 /*---------------------------------------------------------------------*/
+
 // Routes for Adding CABLES AND PERIPHERALS
 
 Route::get('/cablesandperipherals', [CPController::class,'index']);
 Route::post('add_cp',[CPController::Class,'add_cp']);
 /*---------------------------------------------------------------------*/
+
 /* Routes for VIEW TABLE Display Cables & Peripherals from DB*/
 // Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
 Route::get('cablesandperipherals', [CPController::class, 'show_cp'])->name('cablesandperipherals.show');
 /*---------------------------------------------------------------------*/
+
 /* SEARCH Cables & Peripherals */
 
 Route::get('search_cp',[CPController::Class, 'search_cp']);
 
 /*---------------------------------------------------------------------*/
+
 /* Routes for CPDETAILS.BLADE.PHP */
 Route::get('/cpdetails', function () {
     return view('cpdetails');
 })->middleware(['auth'])->name('cpdetails');
 /*---------------------------------------------------------------------*/
+
 /* Route for VIEW CPDETAILS MODAL DB SHOW*/
 // Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
 Route::get('cpdetails/{id}',[CPController::class,'cp_details']);
+/*---------------------------------------------------------------------*/
+
+/* Routes for CPEDIT.BLADE.PHP */
+Route::get('/cpedit', function () {
+    return view('cpedit');
+})->middleware(['auth'])->name('cpedit');
+/*---------------------------------------------------------------------*/
+
+/* Route for EDIT CABLES AND PERIPHERALS Details DB SHOW*/
+// Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
+Route::get('cpedit/{id}',[CPController::class,'cp_edit']);
+/*---------------------------------------------------------------------*/
+
+/* UPDATING CABLES AND PERIPHERALS DATA */
+// Route::post('ACTION',[CONTROLLER::class,'FUNCTION']);
+Route::put('update_cablesandperipherals/{id}',[CPController::class,'cp_update']);
+/*---------------------------------------------------------------------*/
+
+/* SOFT DELETE CABLES AND PERIPHERALS DATA */
+Route::delete('cablesandperipherals/{id}', [CPController::class, 'cp_softDelete'])->name('cp.soft-delete');
 /*---------------------------------------------------------------------*/
