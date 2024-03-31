@@ -6,18 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CPModel extends Model
+class ConsModel extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $table='consumables';
 
-    protected $table='cables_and_peripherals';
 }
 
-class CPModel1 extends Model
+class ConsModel1 extends Model
 {
     use SoftDeletes;
 
-    protected $table='cp_purchase_details';
+    protected $table='cons_purchase_details';
 
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\CPModel;
-use App\Models\CPModel2;
+use App\Models\CPModel1;
 
 class CPController extends Controller
 {
@@ -150,7 +150,7 @@ class CPController extends Controller
     public function cp_softDelete($id)
     {
         $cps = CPModel::findOrFail($id);
-        $cps_purchasedetails = CPModel::findOrFail($id);
+        $cps_purchasedetails = CPModel1::findOrFail($id);
 
         $cps->delete();
         $cps_purchasedetails->delete();

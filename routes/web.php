@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\CPController;
+use App\Http\Controllers\ConsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -213,4 +214,61 @@ Route::put('update_cablesandperipherals/{id}',[CPController::class,'cp_update'])
 
 /* SOFT DELETE CABLES AND PERIPHERALS DATA */
 Route::delete('cablesandperipherals/{id}', [CPController::class, 'cp_softDelete'])->name('cp.soft-delete');
+/*---------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+/*---------------------------------------------------------------------*/
+
+// Routes for Adding CONSUMABLES
+
+Route::get('/consumables', [ConsController::class,'index']);
+Route::post('add_cons',[ConsController::Class,'add_cons']);
+/*---------------------------------------------------------------------*/
+
+/* Routes for VIEW TABLE Display CONSUMABLES from DB*/
+// Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
+Route::get('consumables', [ConsController::class, 'show_cons'])->name('consumables.show');
+/*---------------------------------------------------------------------*/
+
+/* SEARCH CONSUMABLES */
+
+Route::get('search_cons',[ConsController::Class, 'search_cons']);
+
+/*---------------------------------------------------------------------*/
+
+/* Routes for ConsDETAILS.BLADE.PHP */
+Route::get('/consdetails', function () {
+    return view('consdetails');
+})->middleware(['auth'])->name('consdetails');
+/*---------------------------------------------------------------------*/
+
+/* Route for VIEW ConsDETAILS MODAL DB SHOW*/
+// Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
+Route::get('consdetails/{id}',[ConsController::class,'cons_details']);
+/*---------------------------------------------------------------------*/
+
+/* Routes for ConsEDIT.BLADE.PHP */
+Route::get('/consedit', function () {
+    return view('consedit');
+})->middleware(['auth'])->name('consedit');
+/*---------------------------------------------------------------------*/
+
+/* Route for EDIT CONSUMABLES Details DB SHOW*/
+// Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
+Route::get('consedit/{id}',[ConsController::class,'cons_edit']);
+/*---------------------------------------------------------------------*/
+
+/* UPDATING CONSUMABLES DATA */
+// Route::post('ACTION',[CONTROLLER::class,'FUNCTION']);
+Route::put('update_consumables/{id}',[ConsController::class,'cons_update']);
+/*---------------------------------------------------------------------*/
+
+/* SOFT DELETE CONSUMABLES DATA */
+Route::delete('consumables/{id}', [ConsController::class, 'cons_softDelete'])->name('cons.soft-delete');
 /*---------------------------------------------------------------------*/
