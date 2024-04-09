@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\CPModel;
+use App\Models\ConsModel;
 use App\Models\DeviceModel;
 use App\Models\DeviceModel1;
 use App\Models\DeviceModel2;
 use App\Models\DeviceModel3;
+use App\Models\Location;
 
 class DeviceController extends Controller
 {
@@ -19,7 +21,8 @@ class DeviceController extends Controller
     public function count(){
         $totaldevices = DeviceModel::count();
         $totalcp = CPModel::count();
-        return view('dashboard', ['totaldevices' => $totaldevices, 'totalcp' => $totalcp]);
+        $totalcons = ConsModel::count();
+        return view('dashboard', ['totaldevices' => $totaldevices, 'totalcp' => $totalcp, 'totalcons' => $totalcons]);
     }
 
     public function add(Request $request){
@@ -48,6 +51,7 @@ class DeviceController extends Controller
             'DeviceWarranty'
         ]);
 
+        // Insert device details into the database
         $query = DB::table('devices')->insert([
             'DeviceID'=>$request->input('DeviceID'),
             'DeviceType'=>$request->input('DeviceType'),
@@ -59,9 +63,9 @@ class DeviceController extends Controller
             'DeviceLocation'=>$request->input('DeviceLocation'),
             'DeviceStatus'=>$request->input('DeviceStatus'),
             'DeviceRemarks'=>$request->input('DeviceRemarks')
-
         ]);
 
+        // Insert device specifications into the database
         $query = DB::table('device_specs')->insert([
             'DeviceOperatingSys'=>$request->input('DeviceOperatingSys'),
             'DeviceProductKey'=>$request->input('DeviceProductKey'),
@@ -70,17 +74,17 @@ class DeviceController extends Controller
             'DeviceSize'=>$request->input('DeviceSize'),
             'DeviceStorage1'=>$request->input('DeviceStorage1'),
             'DeviceStorage2'=>$request->input('DeviceStorage2')
-
         ]);
 
+        // Insert device purchase details into the database
         $query = DB::table('device_purchase_details')->insert([
             'DevicePriceprunit'=>$request->input('DevicePriceprunit'),
             'DeviceSupplier'=>$request->input('DeviceSupplier'),
             'DeviceDateOfPurch'=>$request->input('DeviceDateOfPurch'),
             'DeviceWarranty'=>$request->input('DeviceWarranty')
-
         ]);
 
+        // This part of the code will never execute as the return statement above ends the function execution
         if($query){
             return back()->with('success',' ');
         }else{
@@ -89,27 +93,28 @@ class DeviceController extends Controller
     }
 
     public function show(Request $request){
-        $column = $request->get('column', 'DeviceID'); // Default column to sort
+        $column = $request->get('column', 'id'); // Default column to sort
         $direction = $request->get('direction', 'asc'); // Default sorting direction
-        $perPage = 8;
+        $perPage = 10;
 
         $data = DeviceModel::orderBy($column, $direction)->paginate($perPage);
 
         return view('device', [
             'deviceview' => $data,
             'column' => $column,
-            'direction' => $direction
+            'direction' => $direction,
         ]);
     }
 
     public function search_device(Request $request){
         $searchTerm = $request->input('search');
-        $perPage = 8;
-        $column = $request->get('column', 'DeviceID'); // Default column to sort
+        $perPage = 10;
+        $column = $request->get('column', 'id'); // Default column to sort
         $direction = $request->get('direction', 'asc'); // Default sorting direction
 
         $deviceview = DeviceModel::where(function ($query) use ($searchTerm) {
             $query->where('DeviceID', 'like', "%$searchTerm%")
+                  ->orWhere('id', 'like', "%$searchTerm%")
                   ->orWhere('DeviceType', 'like', "%$searchTerm%")
                   ->orWhere('DeviceName', 'like', "%$searchTerm%")
                   ->orWhere('DeviceBrand', 'like', "%$searchTerm%")
@@ -120,7 +125,6 @@ class DeviceController extends Controller
                   ->orWhere('DeviceStatus', 'like', "%$searchTerm%")
                   ->orWhere('DeviceRemarks', 'like', "%$searchTerm%");
         })->orderBy($column, $direction)->paginate($perPage);
-
         return view('device', compact('deviceview', 'searchTerm', 'column', 'direction'));
     }
 

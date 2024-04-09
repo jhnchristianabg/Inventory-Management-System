@@ -99,21 +99,33 @@
                     class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Devices</a>
 			</li>
 			<li>
-				<a href=""
+				<a href="itsemployeeaccountabilityemployee"
 					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Employees</a>
 			</li>
 		</ul>
 
         <!-- Report Generation -->
 
-        <x-sidebar-nav-link :href="route('report')" :active="request()->routeIs('report')">
-            <x-slot name="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 27 27" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 6.878V6a2.25 2.25 0 0 1 2.25-2.25h7.5A2.25 2.25 0 0 1 18 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 0 0 4.5 9v.878m13.5-3A2.25 2.25 0 0 1 19.5 9v.878m0 0a2.246 2.246 0 0 0-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0 1 21 12v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6c0-.98.626-1.813 1.5-2.122" />
-                </svg>
-            </x-slot>
-            <span class="ml-2">Report Generation</span>
-        </x-sidebar-nav-link>
+
+
+		<button type="button" class="flex items-center w-full p-2 text-black-600 transition duration-75 hover:bg-green-700 hover:text-gray-100 text-black-800 active:bg-green-700 focus:outline-none focus:ring focus:ring-green-700" aria-controls="ReportGeneration" data-collapse-toggle="ReportGeneration">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 27 27" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 6.878V6a2.25 2.25 0 0 1 2.25-2.25h7.5A2.25 2.25 0 0 1 18 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 0 0 4.5 9v.878m13.5-3A2.25 2.25 0 0 1 19.5 9v.878m0 0a2.246 2.246 0 0 0-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0 1 21 12v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6c0-.98.626-1.813 1.5-2.122" />
+            </svg>
+
+            <span class="flex-1 ml-3 text-left whitespace-nowrap text-lg md:text-sm" sidebar-toggle-item>Report Generation</span>
+            <svg sidebar-toggle-item class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+		<ul id="ReportGeneration" class="hidden py-2 space-y-2">
+			<li>
+				<a href="report"
+                    class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Devices</a>
+			</li>
+			<li>
+				<a href=""
+					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Cables & Peripherals</a>
+			</li>
+		</ul>
 
         <!-- Allied Health Inventory -->
 
@@ -201,10 +213,6 @@
 			<li>
 				<a href="location"
 					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Locations</a>
-			</li>
-			<li>
-				<a href=""
-					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">blank</a>
 			</li>
 		</ul>
 

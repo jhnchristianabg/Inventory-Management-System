@@ -13,16 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('device_purchase_details', function (Blueprint $table) {
-
-            // This Columns represents the field where the data of Device Purchase Details is being held
-
+        Schema::create('employee', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('DevicePriceprunit')->nullable();
-            $table->string('DeviceSupplier', 255)->nullable();
-            $table->string('DeviceDateOfPurch', 255)->nullable();
-            $table->string('DeviceWarranty', 255)->nullable();
-            $table->string('is_accountability')->nullable();
+            $table->string('EmployeeID');
+            $table->string('EmployeeFName', 255);
+            $table->string('EmployeeIName', 255);
+            $table->string('EmployeeLName', 255);
+            $table->string('Email', 255);
+            $table->string('Department', 255);
+            $table->string('Status', 255);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });
@@ -35,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('device_purchase_details');
+        Schema::dropIfExists('employee');
     }
 };

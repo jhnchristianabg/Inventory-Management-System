@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\CPController;
 use App\Http\Controllers\ConsController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\DeviceAccController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +20,7 @@ use App\Http\Controllers\ConsController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 /* ROUTE FOR DASHBOARD */
@@ -60,11 +63,18 @@ Route::get('/managementconsumables', function () {
 })->middleware(['auth'])->name('managementconsumables');
 /*---------------------------------------------------------------------*/
 
-/* ITS Employee Accountability Routes */
+/* ITS Employee Accountability DEVICE Routes */
 
 Route::get('/itsemployeeaccountabilitydevice', function () {
     return view('itsemployeeaccountabilitydevice');
 })->middleware(['auth'])->name('itsemployeeaccountabilitydevice');
+/*---------------------------------------------------------------------*/
+
+/* ITS Employee Accountability EMPLOYEE Routes */
+
+Route::get('/itsemployeeaccountabilityemployee', function () {
+    return view('itsemployeeaccountabilityemployee');
+})->middleware(['auth'])->name('itsemployeeaccountabilityemployee');
 /*---------------------------------------------------------------------*/
 
 /* AH Inventory Routes */
@@ -144,11 +154,7 @@ Route::delete('device/{id}', [DeviceController::class, 'softDelete'])->name('dev
 Route::get('search_device',[DeviceController::Class, 'search_device']);
 
 /*---------------------------------------------------------------------*/
-/* Report Generation */
 
-Route::get('report', function () {
-    return view('report');
-})->middleware(['auth'])->name('report');
 /*---------------------------------------------------------------------*/
 
 //
@@ -272,3 +278,42 @@ Route::put('update_consumables/{id}',[ConsController::class,'cons_update']);
 /* SOFT DELETE CONSUMABLES DATA */
 Route::delete('consumables/{id}', [ConsController::class, 'cons_softDelete'])->name('cons.soft-delete');
 /*---------------------------------------------------------------------*/
+
+
+/* Report Generation */
+
+Route::get('/report', [ReportController::class,'index']);
+
+/* Report Generation SEARCH DEVICE */
+
+Route::get('search_device_report',[ReportController::Class, 'search_device_report']);
+
+/* Routes for Report Generation VIEW TABLE Display Devices from DB*/
+// Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
+Route::get('report', [ReportController::class, 'show_report'])->name('report.show');
+
+/* Report Generation TABLE OF COUNTING DEVICES */
+Route::get('countDevices', [ReportController::class, 'countDevices'])->name('countDevices');
+/*---------------------------------------------------------------------*/
+
+// Routes for Adding EMPLOYEE
+
+Route::get('/itsemployeeaccountabilityemployee', [EmployeeController::class,'index']);
+Route::post('add_employee',[EmployeeController::Class,'add_employee']);
+
+/* VIEW TABLE in EMPLOYEE */
+// Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
+Route::get('itsemployeeaccountabilityemployee', [EmployeeController::class, 'show_employee'])->name('itsemployeeaccountabilityemployee.show');
+
+/* SEARCH Employee */
+
+Route::get('search_employee',[EmployeeController::Class, 'search_employee']);
+
+/*---------------------------------------------------------------------*/
+
+// Route for Device Assign
+Route::get('/itsemployeeaccountabilitydevice', [DeviceAccController::class, 'index']);
+
+Route::get('device_acc', [DeviceAccController::class, 'show_acc_device'])->name('device_acc.show');
+
+Route::post('/update-devices', [DeviceAccController::class,'update'])->name('update.devices');

@@ -68,7 +68,7 @@
 
                                     <div class="flex">
                                         <div class="col-span-2 sm:col-span-1 mt-3">
-                                            <label for="ConsID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">ID</label>
+                                            <label for="ConsID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">HOST ID</label>
                                             <input type="text" name="ConsID" id="ConsID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$cons->ConsID}}" placeholder="Input ID" required="">
                                         </div>
                                         <div class="ml-3">

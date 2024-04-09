@@ -28,8 +28,7 @@ return new class extends Migration
             $table->string('DeviceLocation', 255)->nullable();
             $table->string('DeviceStatus', 255)->nullable();
             $table->string('DeviceRemarks', 255)->nullable();
-            $table->integer('DeviceDisplay')->nullable();
-            $table->integer('DeviceNoOfPorts')->nullable();
+            $table->string('is_accountability')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

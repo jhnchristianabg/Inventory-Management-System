@@ -35,6 +35,6 @@ class DeviceModel3 extends Model
 {
     use SoftDeletes;
 
-    protected $table='location';
+    protected $table='locations';
 
 }

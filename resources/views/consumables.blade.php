@@ -2,6 +2,17 @@
     <html lang="en">
         <head>
             <title>ITS / Inventory</title>
+
+            <style>
+                #dataTable th{
+                    background-color: #e5e7eb;
+                    padding: 10px;
+                }
+                #dataTable td{
+                    padding: 10px;
+                }
+            </style>
+
         </head>
         <body>
             <x-app-layout>
@@ -21,11 +32,11 @@
                 </x-slot>
 
                 <!-- Modal Button toggle -->
-                <button class="relative overflow-x-auto inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:ring-yellow-500 float-right mx-1" data-modal-target="crud-modal" data-modal-toggle="crud-modal" type="button">
+                <button class="relative overflow-x-auto inline-flex items-center px-3 py-2 text-sm font-bold text-center text-black bg-blue-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:ring-yellow-500 float-right mx-1" data-modal-target="crud-modal" data-modal-toggle="crud-modal" type="button">
 
                     ADD
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="black" class="w-5 h-5 ml-1">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v2.5h-2.5a.75.75 0 0 0 0 1.5h2.5v2.5a.75.75 0 0 0 1.5 0v-2.5h2.5a.75.75 0 0 0 0-1.5h-2.5v-2.5Z" clip-rule="evenodd" />
                     </svg>
                 </button>
 
@@ -112,7 +123,7 @@
 
                 <!-- Main modal -->
                 <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full backdrop-blur-sm">
-                    <div class="relative p-4 w-full max-w-md max-h-full mr-64">
+                    <div class="relative p-4 w-full max-w-md max-h-full"  style="margin-right:500px">
                         <!-- Modal content -->
                         <div class="relative bg-white rounded-lg shadow-lg dark:bg-blueGray-100 px-4" style="width:900px">
                             <!-- Modal header -->
@@ -241,33 +252,48 @@
                     </div>
                 </div>
 
-                <!-- TABLE FOR Consumables VIEW-->
-                <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-1 gap-3">
-                    <div class="relative overflow-x-auto">
+                <!-- Search -->
+                <form action="search_cons" method="GET">
+                    <div class="pt-2 relative mx-auto text-gray-600">
+                        <input class="focus:ring-green-500 focus:border-green-500 dark:focus:ring-green-500 dark:focus:border-green-500 border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm float-right mb-3 mr-1" type="search" name="search" placeholder="Search">
+                            <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
+                                <svg class="text-gray-600 h-4 w-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
+                                    viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+                                    width="512px" height="512px">
+                                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                                </svg>
+                            </button>
+                    </div>
+                    </form>
 
-                        <!-- Search -->
-                        <form action="search_cons" method="GET">
-                        <div class="pt-2 relative mx-auto text-gray-600">
-                            <input class="focus:border-green-500 border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm float-right mb-3 mr-1" type="search" name="search" placeholder="Search">
-                                <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
-                                    <svg class="text-gray-600 h-4 w-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
-                                        viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
-                                        width="512px" height="512px">
-                                        <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
-                                    </svg>
-                                </button>
-                        </div>
-                        </form>
+                <!-- TABLE FOR Consumables VIEW-->
+                    <div class="relative overflow-x-auto mt-16">
 
                         <!-- COLUMN TABLE SORTING -->
 
-                        <table class="w-full text-xs text-left rtl:text-right font-light text-surface text-black ">
+                        <table id="dataTable" class="w-full text-xs text-left rtl:text-right font-light text-surface text-black ">
                             <thead class="text-xs uppercase bg-gray-200 font-bold">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
-                                        <a href="{{ route('consumables.show', ['column' => 'ConsID', 'direction' => ($column == 'ConsID' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                        <a href="{{ route('consumables.show', ['column' => 'id', 'direction' => ($column == 'id' && $direction == 'asc') ? 'desc' : 'asc']) }}">
                                             ID
+                                            @if($column == 'id')
+                                                @if($direction == 'asc')
+                                                <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                                </svg>
+                                                @else
+                                                <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                                @endif
+                                            @endif
+                                        </a>
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        <a href="{{ route('consumables.show', ['column' => 'ConsID', 'direction' => ($column == 'ConsID' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                            HOST ID
                                             @if($column == 'ConsID')
                                                 @if($direction == 'asc')
                                                 <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -393,7 +419,7 @@
                                             @endif
                                         </a>
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-6 py-3 text-center">
                                         Action
                                     </th>
                                 </tr>
@@ -406,6 +432,7 @@
                             <tbody>
                                 @foreach($consview as $consumables)
                                 <tr class="bg-white border-b dark:border-gray-300 text-black">
+                                    <td class="px-6 py-4">{{$consumables->id}}</td>
                                     <td class="px-6 py-4 font-bold uppercase">{{$consumables->ConsID}}</td>
                                     <td class="px-6 py-4">{{$consumables->ConsType}}</td>
                                     <td class="px-6 py-4">{{$consumables->ConsName}}</td>
@@ -417,13 +444,13 @@
                                     <td class="px-6 py-4">
                                         <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-3">
                                         <button type="button" onclick="location.href='{{ url('consdetails/'.$consumables->id) }}'">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="green" class="w-5 h-5">
                                                 <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
                                                 <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41ZM14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" clip-rule="evenodd" />
                                             </svg>
                                         </button>
                                         <button type="button" onclick="location.href='{{ url('consedit/'.$consumables->id) }}'">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="blue" class="w-5 h-5">
                                                 <path d="m5.433 13.917 1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
                                                 <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z" />
                                             </svg>
@@ -432,7 +459,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" onclick="return confirm('Are you sure you want to soft delete this data?')">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mt-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="red" class="w-5 h-5 mt-1">
                                                     <path d="M2 3a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H2Z" />
                                                     <path fill-rule="evenodd" d="M2 7.5h16l-.811 7.71a2 2 0 0 1-1.99 1.79H4.802a2 2 0 0 1-1.99-1.79L2 7.5Zm5.22 1.72a.75.75 0 0 1 1.06 0L10 10.94l1.72-1.72a.75.75 0 1 1 1.06 1.06L11.06 12l1.72 1.72a.75.75 0 1 1-1.06 1.06L10 13.06l-1.72 1.72a.75.75 0 0 1-1.06-1.06L8.94 12l-1.72-1.72a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
                                                 </svg>
@@ -454,8 +481,6 @@
 
                         <!-- PAGINATION Ends Here -->
                     </div>
-                    </div>
-
 
             </x-app-layout>
         </body>

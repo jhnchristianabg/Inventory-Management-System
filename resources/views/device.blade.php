@@ -3,6 +3,17 @@
         <head>
             <title>ITS / Inventory</title>
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+            <style>
+                #dataTable th{
+                    background-color: #e5e7eb;
+                    padding: 10px;
+                }
+                #dataTable td{
+                    padding: 10px;
+                }
+            </style>
+
         </head>
         <body>
             <x-app-layout>
@@ -24,11 +35,11 @@
 
 
                 <!-- Modal Button toggle -->
-                <button class="relative overflow-x-auto inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:ring-yellow-500 float-right mx-1" data-modal-target="crud-modal" data-modal-toggle="crud-modal" type="button">
+                <button class="relative overflow-x-auto inline-flex items-center px-3 py-2 text-sm font-bold text-center text-black bg-blue-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:ring-yellow-500 float-right mx-1" data-modal-target="crud-modal" data-modal-toggle="crud-modal" type="button">
 
                     ADD
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="black" class="w-5 h-5 ml-1">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v2.5h-2.5a.75.75 0 0 0 0 1.5h2.5v2.5a.75.75 0 0 0 1.5 0v-2.5h2.5a.75.75 0 0 0 0-1.5h-2.5v-2.5Z" clip-rule="evenodd" />
                     </svg>
                 </button>
 
@@ -115,7 +126,7 @@
 
                 <!-- Main modal -->
                 <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full backdrop-blur-sm">
-                    <div class="relative p-4 w-full max-w-md max-h-full mr-64">
+                    <div class="relative p-4 w-full max-w-md max-h-full" style="margin-right:500px">
                         <!-- Modal content -->
                         <div class="relative bg-white rounded-lg shadow-lg dark:bg-blueGray-100 px-4" style="width:900px">
                             <!-- Modal header -->
@@ -166,7 +177,7 @@
 
                                     <div class="flex">
                                         <div class="col-span-2 sm:col-span-1 mt-3">
-                                            <label for="DeviceID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device ID</label>
+                                            <label for="DeviceID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">HOST ID</label>
                                             <input type="text" name="DeviceID" id="DeviceID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Device ID" required="">
                                         </div>
                                         <div class="ml-3">
@@ -203,7 +214,7 @@
                                     <div class="flex">
                                         <div class="col-span-2 sm:col-span-1 mt-3">
                                             <label for="DeviceLocation" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase"style="width:181px">Location</label>
-                                            <select name="DeviceLocation" id="DeviceLocation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500"style="width:181px">
+                                            <select name="DeviceLocation" id="DeviceLocation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:181px">
                                                 <option name="DeviceLocation" value="Office">Office</option>
                                                 <option name="DeviceLocation" value="Storage">Storage</option>
                                             </select>
@@ -326,14 +337,10 @@
                     </div>
                 </div>
 
-                <!-- TABLE FOR DEVICE VIEW-->
-                <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-1 gap-3">
-                <div class="relative overflow-x-auto">
-
-                    <!-- Search -->
-                    <form action="search_device" method="GET">
+                <!-- Search -->
+                <form action="search_device" method="GET">
                     <div class="pt-2 relative mx-auto text-gray-600">
-                        <input class="focus:border-green-500 border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm float-right mb-3 mr-1" type="search" name="search" placeholder="Search">
+                        <input class="focus:ring-green-500 focus:border-green-500 dark:focus:ring-green-500 dark:focus:border-green-500 border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm float-right mb-3 mr-1" type="search" name="search" placeholder="Search">
                             <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
                                 <svg class="text-gray-600 h-4 w-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
@@ -343,16 +350,35 @@
                                 </svg>
                             </button>
                     </div>
-                    </form>
+                </form>
+
+                <!-- TABLE FOR DEVICE VIEW-->
+                <div class="relative overflow-x-auto mt-16">
 
                     <!-- COLUMN TABLE SORTING -->
 
-                    <table class="w-full text-xs text-left rtl:text-right font-light text-surface text-black ">
+                    <table id="dataTable" class="w-full text-xs text-left rtl:text-right font-light text-surface text-black ">
                         <thead class="text-xs uppercase bg-gray-200 font-bold">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
+                                    <a href="{{ route('device.show', ['column' => 'id', 'direction' => ($column == 'id' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                        ID
+                                        @if($column == 'id')
+                                            @if($direction == 'asc')
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                            </svg>
+                                            @else
+                                            <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                            @endif
+                                        @endif
+                                    </a>
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     <a href="{{ route('device.show', ['column' => 'DeviceID', 'direction' => ($column == 'DeviceID' && $direction == 'asc') ? 'desc' : 'asc']) }}">
-                                        Device ID
+                                        HOST ID
                                         @if($column == 'DeviceID')
                                             @if($direction == 'asc')
                                             <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -510,7 +536,7 @@
                                         @endif
                                     </a>
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" class="px-6 py-3 text-center">
                                     Action
                                 </th>
                             </tr>
@@ -523,6 +549,7 @@
                         <tbody>
                             @foreach($deviceview as $devices)
                             <tr class="bg-white border-b dark:border-gray-300 text-black">
+                                <td class="px-6 py-4">{{$devices->id}}</td>
                                 <td class="px-6 py-4 font-bold uppercase">{{$devices->DeviceID}}</td>
                                 <td class="px-6 py-4">{{$devices->DeviceType}}</td>
                                 <td class="px-6 py-4">{{$devices->DeviceName}}</td>
@@ -536,13 +563,13 @@
                                 <td class="px-6 py-4">
                                     <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-3">
                                     <button type="button" onclick="location.href='{{ url('devicedetails/'.$devices->id) }}'">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="green" class="w-5 h-5">
                                             <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
                                             <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41ZM14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" clip-rule="evenodd" />
                                         </svg>
                                     </button>
                                     <button type="button" onclick="location.href='{{ url('deviceedit/'.$devices->id) }}'">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="blue" class="w-5 h-5">
                                             <path d="m5.433 13.917 1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
                                             <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z" />
                                         </svg>
@@ -551,7 +578,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" onclick="return confirm('Are you sure you want to soft delete this data?')">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mt-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="red" class="w-5 h-5 mt-1">
                                                 <path d="M2 3a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H2Z" />
                                                 <path fill-rule="evenodd" d="M2 7.5h16l-.811 7.71a2 2 0 0 1-1.99 1.79H4.802a2 2 0 0 1-1.99-1.79L2 7.5Zm5.22 1.72a.75.75 0 0 1 1.06 0L10 10.94l1.72-1.72a.75.75 0 1 1 1.06 1.06L11.06 12l1.72 1.72a.75.75 0 1 1-1.06 1.06L10 13.06l-1.72 1.72a.75.75 0 0 1-1.06-1.06L8.94 12l-1.72-1.72a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
                                             </svg>
@@ -565,15 +592,15 @@
                         <!-- DISPLAYING OF DATA TABLE Ends Here -->
                     </table>
 
-                    <!-- PAGINATION -->
-
-                    <div class="mt-3">
-                        {{ $deviceview->appends(['column' => $column, 'direction' => $direction])->links() }}
-                    </div>
-
-                    <!-- PAGINATION Ends Here -->
                 </div>
+
+                <!-- PAGINATION -->
+
+                <div class="mt-3 font-bold">
+                    {{ $deviceview->appends(['column' => $column, 'direction' => $direction])->links() }}
                 </div>
+
+                <!-- PAGINATION Ends Here -->
 
                 <script>
                     document.getElementById('DeviceType').addEventListener('change', function() {

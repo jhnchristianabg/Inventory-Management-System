@@ -58,9 +58,9 @@ class CPController extends Controller
     }
 
     public function show_cp(Request $request){
-        $column = $request->get('column', 'CPID'); // Default column to sort
+        $column = $request->get('column', 'id'); // Default column to sort
         $direction = $request->get('direction', 'asc'); // Default sorting direction
-        $perPage = 8;
+        $perPage = 10;
 
         $data = CPModel::orderBy($column, $direction)->paginate($perPage);
 
@@ -73,12 +73,13 @@ class CPController extends Controller
 
     public function search_cp(Request $request){
         $searchTerm = $request->input('search');
-        $perPage = 8;
-        $column = $request->get('column', 'CPID'); // Default column to sort
+        $perPage = 10;
+        $column = $request->get('column', 'id'); // Default column to sort
         $direction = $request->get('direction', 'asc'); // Default sorting direction
 
         $cpview = CPModel::where(function ($query) use ($searchTerm) {
             $query->where('CPID', 'like', "%$searchTerm%")
+                  ->orWhere('id', 'like', "%$searchTerm%")
                   ->orWhere('CPType', 'like', "%$searchTerm%")
                   ->orWhere('CPName', 'like', "%$searchTerm%")
                   ->orWhere('CPBrand', 'like', "%$searchTerm%")

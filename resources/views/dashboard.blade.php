@@ -81,13 +81,13 @@
                                 <p class="ml-16 truncate text-sm font-medium text-black font-bold uppercase">Total Consumables</p>
                             </dt>
                             <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
-                                <p class="text-2xl font-semibold text-black font-bold uppercase">0</p>
+                                <p class="text-2xl font-semibold text-black font-bold uppercase">{{ $totalcons }}</p>
                                 <p class="ml-2 flex items-baseline text-sm font-semibold text-red-600">
                                     <svg class="h-5 w-5 flex-shrink-0 self-center text-red-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path fill-rule="evenodd" d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z" clip-rule="evenodd" />
                                     </svg>
                                     <span class="sr-only"> Decreased by </span>
-                                        0%
+                                    {{ $totalcons }}
                                 </p>
                                 <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                                     <div class="text-sm">

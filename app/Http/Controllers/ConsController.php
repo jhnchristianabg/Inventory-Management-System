@@ -58,9 +58,9 @@ class ConsController extends Controller
     }
 
     public function show_cons(Request $request){
-        $column = $request->get('column', 'ConsID'); // Default column to sort
+        $column = $request->get('column', 'id'); // Default column to sort
         $direction = $request->get('direction', 'asc'); // Default sorting direction
-        $perPage = 8;
+        $perPage = 10;
 
         $data = ConsModel::orderBy($column, $direction)->paginate($perPage);
 
@@ -73,12 +73,13 @@ class ConsController extends Controller
 
     public function search_cons(Request $request){
         $searchTerm = $request->input('search');
-        $perPage = 8;
-        $column = $request->get('column', 'ConsID'); // Default column to sort
+        $perPage = 10;
+        $column = $request->get('column', 'id'); // Default column to sort
         $direction = $request->get('direction', 'asc'); // Default sorting direction
 
         $consview = ConsModel::where(function ($query) use ($searchTerm) {
             $query->where('ConsID', 'like', "%$searchTerm%")
+                  ->orWhere('id', 'like', "%$searchTerm%")
                   ->orWhere('ConsType', 'like', "%$searchTerm%")
                   ->orWhere('ConsName', 'like', "%$searchTerm%")
                   ->orWhere('ConsBrand', 'like', "%$searchTerm%")
