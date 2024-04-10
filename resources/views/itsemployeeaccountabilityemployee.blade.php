@@ -7,7 +7,7 @@
             <x-app-layout>
                 <x-slot name="header">
                     <h2 class="text-lg text-blue-100 md:text-2xl">
-                        Employee Accountability
+                        Employees
                     </h2>
                 </x-slot>
                 <x-slot name="breadcrumb">
@@ -16,7 +16,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                             </svg>
                             ITS</li>
-                        <li class="breadcrumb-item">Employee Accountability</li>
+                        <li class="breadcrumb-item">Accountability</li>
                     </ol>
                 </x-slot>
                 <!-- Modal Button toggle -->
@@ -247,7 +247,7 @@
                     </form>
 
                 <!-- TABLE FOR CABLES AND PERIPHERALS VIEW-->
-                    <div class="relative overflow-x-auto mt-16">
+                    <div class="relative overflow-x-auto mt-14">
 
                         <!-- COLUMN TABLE SORTING -->
 
@@ -373,7 +373,7 @@
                                     <td class="px-6 py-4">{{$itsemployeeaccountabilityemployee->Status}}</td>
                                     <td class="px-6 py-4">
                                         <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-3">
-                                        <button type="button" onclick="location.href=''">
+                                        <button type="button" onclick="location.href='{{ url('empaccview/'.$itsemployeeaccountabilityemployee->id) }}'">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="green" class="w-5 h-5">
                                                 <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
                                                 <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41ZM14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" clip-rule="evenodd" />

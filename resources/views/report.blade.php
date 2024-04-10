@@ -18,7 +18,7 @@
             <x-app-layout>
                 <x-slot name="header">
                     <h2 class="text-lg text-blue-100 md:text-2xl">
-                        Report Generation
+                        Devices Report
                     </h2>
                 </x-slot>
                 <x-slot name="breadcrumb">

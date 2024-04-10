@@ -2,6 +2,15 @@
     <html lang="en">
         <head>
             <title>System / Locations</title>
+            <style>
+                #dataTable th{
+                    background-color: #e5e7eb;
+                    padding: 10px;
+                }
+                #dataTable td{
+                    padding: 10px;
+                }
+            </style>
         </head>
         <body>
             <x-app-layout>
@@ -129,7 +138,7 @@
                                 </div>
 
                             <!-- Modal body -->
-                            <form class="p-4 md:p-5" action="{{ route('add.location') }}" method="POST">
+                            <form class="p-4 md:p-5" action="add_loc" method="POST">
                                 {{ csrf_field() }}
                                 <div class="grid gap-4 mb-4 grid-cols-2">
                                     <!-- Location -->
@@ -193,6 +202,170 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Search -->
+                <form action="search_loc" method="GET">
+                    <div class="pt-2 relative mx-auto text-gray-600">
+                        <input class="focus:ring-green-500 focus:border-green-500 dark:focus:ring-green-500 dark:focus:border-green-500 border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm float-right mb-3 mr-1" type="search" name="search" placeholder="Search">
+                            <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
+                                <svg class="text-gray-600 h-4 w-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
+                                    viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+                                    width="512px" height="512px">
+                                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                                </svg>
+                            </button>
+                    </div>
+                </form>
+
+                <!-- TABLE FOR LOCATION VIEW-->
+                    <div class="relative overflow-x-auto mt-14">
+
+                        <!-- COLUMN TABLE SORTING -->
+
+                        <table id="dataTable" class="w-full text-xs text-left rtl:text-right font-light text-surface text-black">
+                            <thead class="text-xs uppercase bg-gray-200 font-bold">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">
+                                        <a href="{{ route('location.show', ['column' => 'id', 'direction' => ($column == 'id' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                            ID
+                                            @if($column == 'id')
+                                                @if($direction == 'asc')
+                                                <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                                </svg>
+                                                @else
+                                                <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                                @endif
+                                            @endif
+                                        </a>
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3">
+                                        <a href="{{ route('location.show', ['column' => 'Building', 'direction' => ($column == 'Building' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                            Building
+                                            @if($column == 'Building')
+                                                @if($direction == 'asc')
+                                                <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                                </svg>
+                                                @else
+                                                <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                                @endif
+                                            @endif
+                                        </a>
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        <a href="{{ route('location.show', ['column' => 'Floor', 'direction' => ($column == 'Floor' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                            Floor
+                                            @if($column == 'Floor')
+                                                @if($direction == 'asc')
+                                                <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                                </svg>
+                                                @else
+                                                <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                                @endif
+                                            @endif
+                                        </a>
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        <a href="{{ route('location.show', ['column' => 'RoomNo', 'direction' => ($column == 'RoomNo' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                            Room No.
+                                            @if($column == 'RoomNo')
+                                                @if($direction == 'asc')
+                                                <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                                </svg>
+                                                @else
+                                                <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                                @endif
+                                            @endif
+                                        </a>
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        <a href="{{ route('location.show', ['column' => 'RoomName', 'direction' => ($column == 'RoomName' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                            Room Name
+                                            @if($column == 'RoomName')
+                                                @if($direction == 'asc')
+                                                <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                                </svg>
+                                                @else
+                                                <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                                @endif
+                                            @endif
+                                        </a>
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3  text-center">
+                                        Action
+                                    </th>
+                                </tr>
+
+                                <!-- COLUMN TABLE SORTING Ends Here -->
+
+                                <!-- DISPLAYING OF DATA TABLE -->
+
+                            </thead>
+                            <tbody>
+                                @foreach($locview as $location)
+                                <tr class="bg-white border-b dark:border-gray-300 text-black">
+                                    <td class="px-6 py-4">{{$location->id}}</td>
+                                    <td class="px-6 py-4 font-bold uppercase">{{$location->Building}}</td>
+                                    <td class="px-6 py-4">{{$location->Floor}}</td>
+                                    <td class="px-6 py-4">{{$location->RoomNo}}</td>
+                                    <td class="px-6 py-4">{{$location->RoomName}}</td>
+                                    <td class="px-6 py-4">
+                                        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-1">
+                                        <button type="button" onclick="location.href=''">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="green" class="w-5 h-5">
+                                                <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+                                                <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41ZM14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                        <button type="button" onclick="location.href=''">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="blue" class="w-5 h-5">
+                                                <path d="m5.433 13.917 1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                                <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z" />
+                                            </svg>
+                                        </button>
+                                        <form method="POST" action="">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" onclick="return confirm('Are you sure you want to soft delete this data?')">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="red" class="w-5 h-5 mt-1">
+                                                    <path d="M2 3a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H2Z" />
+                                                    <path fill-rule="evenodd" d="M2 7.5h16l-.811 7.71a2 2 0 0 1-1.99 1.79H4.802a2 2 0 0 1-1.99-1.79L2 7.5Zm5.22 1.72a.75.75 0 0 1 1.06 0L10 10.94l1.72-1.72a.75.75 0 1 1 1.06 1.06L11.06 12l1.72 1.72a.75.75 0 1 1-1.06 1.06L10 13.06l-1.72 1.72a.75.75 0 0 1-1.06-1.06L8.94 12l-1.72-1.72a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                                                </svg>
+                                            </button>
+                                        </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                            <!-- DISPLAYING OF DATA TABLE Ends Here -->
+                        </table>
+
+                        <!-- PAGINATION -->
+
+                        <div class="mt-3">
+                            {{ $locview->appends(['column' => $column, 'direction' => $direction])->links() }}
+                        </div>
+
+                        <!-- PAGINATION Ends Here -->
+                    </div>
 
                 <script>
                     document.getElementById('Building').addEventListener('change', function() {

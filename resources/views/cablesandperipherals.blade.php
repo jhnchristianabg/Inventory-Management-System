@@ -273,10 +273,10 @@
                                 </svg>
                             </button>
                     </div>
-                    </form>
+                </form>
 
                 <!-- TABLE FOR CABLES AND PERIPHERALS VIEW-->
-                    <div class="relative overflow-x-auto mt-16">
+                    <div class="relative overflow-x-auto mt-14">
 
                         <!-- COLUMN TABLE SORTING -->
 

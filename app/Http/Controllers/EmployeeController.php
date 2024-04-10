@@ -75,4 +75,13 @@ class EmployeeController extends Controller
 
         return view('itsemployeeaccountabilityemployee', compact('employeeview', 'searchTerm', 'column', 'direction'));
     }
+
+    /* --------------THIS FIELD IS FOR TABLE ACTIONS -------------- */
+
+    public function details_empacc($id){
+        // Variable = DB::select('select * from "DB TABLE NAME" where "TABLE" = ?', [$"TABLE"]);
+        $empdetails= DB::select('select * from employee where id = ?', [$id]);
+        // return view('Blade', compact('Variable'));
+        return view('empaccview', ['empdetails'=>$empdetails]);
+    }
 }
