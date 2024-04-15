@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\EmployeeModel;
+use App\Models\DeviceModel;
 
 
 class EmployeeController extends Controller
@@ -81,7 +82,23 @@ class EmployeeController extends Controller
     public function details_empacc($id){
         // Variable = DB::select('select * from "DB TABLE NAME" where "TABLE" = ?', [$"TABLE"]);
         $empdetails= DB::select('select * from employee where id = ?', [$id]);
+
+        $emp_dev_acc = DeviceModel::select('id', 'DeviceID', 'DeviceType', 'DeviceBrand', 'updated_at', 'DeviceLocation', 'is_accountability')
+        ->whereIn('is_accountability', function($query) {
+            $query->select('EmployeeID')
+                ->from('employee');
+            })
+        ->paginate(1000);
+
         // return view('Blade', compact('Variable'));
-        return view('empaccview', ['empdetails'=>$empdetails]);
+        return view('empaccview', ['empdetails'=>$empdetails,'emp_dev_acc' => $emp_dev_acc]);
     }
+
+    public function edit_emp($id){
+        // $Variable = DB::table('table name')->find($id);
+       $employee = DB::table('employee')->find($id);
+       return view ('employeeedit',compact('employee'));
+    }
+
+    /* -------------- ENDS HERE  -------------- */
 }

@@ -91,7 +91,7 @@
                                 </p>
                                 <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                                     <div class="text-sm">
-                                        <a href="#" class="font-medium text-yellow-500 hover:text-yellow-300">View all<span class="sr-only"> Avg. Click Rate stats</span></a>
+                                        <a href="consumables" class="font-medium text-yellow-500 hover:text-yellow-300">View all<span class="sr-only"> Avg. Click Rate stats</span></a>
                                     </div>
                                 </div>
                             </dd>
@@ -99,24 +99,24 @@
                         <div class="relative overflow-hidden rounded-lg bg-gray-300 px-4 pb-12 pt-5 shadow sm:px-6 sm:pt-6">
                             <dt>
                                 <div class="absolute rounded-md bg-yellow-500 p-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6  text-white">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                                     </svg>
                                 </div>
-                                <p class="ml-16 truncate text-sm font-medium text-black font-bold uppercase">Users</p>
+                                <p class="ml-16 truncate text-sm font-medium text-black font-bold uppercase">TOTAL DEVICES ASSIGNED</p>
                             </dt>
                             <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
-                                <p class="text-2xl font-semibold text-black font-bold uppercase">0</p>
+                                <p class="text-2xl font-semibold text-black font-bold uppercase">{{ $totalaccountability }}</p>
                                 <p class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
                                     <svg class="h-5 w-5 flex-shrink-0 self-center text-green-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path fill-rule="evenodd" d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z" clip-rule="evenodd" />
                                     </svg>
                                     <span class="sr-only"> Increased by </span>
-                                        0%
+                                        {{ $totalaccountability }}
                                 </p>
                                 <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                                     <div class="text-sm">
-                                        <a href="#" class="font-medium text-yellow-500 hover:text-yellow-300">View all<span class="sr-only"> Avg. Open Rate stats</span></a>
+                                        <a href="itsemployeeaccountabilitydevice" class="font-medium text-yellow-500 hover:text-yellow-300">View all<span class="sr-only"> Avg. Open Rate stats</span></a>
                                     </div>
                                 </div>
                             </dd>

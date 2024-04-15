@@ -19,7 +19,7 @@
             <x-app-layout>
                 <x-slot name="header">
                     <h2 class="text-lg text-blue-100 md:text-2xl">
-                        Devices
+                        DEVICES
                     </h2>
                 </x-slot>
                 <x-slot name="breadcrumb">
@@ -178,11 +178,11 @@
                                     <div class="flex">
                                         <div class="col-span-2 sm:col-span-1 mt-3">
                                             <label for="DeviceID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">HOST ID</label>
-                                            <input type="text" name="DeviceID" id="DeviceID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Device ID" required="">
+                                            <input type="text" name="DeviceID" id="DeviceID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Host ID" required="">
                                         </div>
                                         <div class="ml-3">
                                             <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <label for="DeviceName" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device Name</label>
+                                                <label for="DeviceName" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Name</label>
                                                 <input type="text" name="DeviceName" id="DeviceName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Device Name" required="">
                                             </div>
                                         </div>
@@ -521,9 +521,9 @@
                                     </a>
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    <a href="{{ route('device.show', ['column' => 'DeviceRemarks', 'direction' => ($column == 'DeviceRemarks' && $direction == 'asc') ? 'desc' : 'asc']) }}">
-                                        Remarks
-                                        @if($column == 'DeviceRemarks')
+                                    <a href="{{ route('device.show', ['column' => 'is_accountability', 'direction' => ($column == 'is_accountability' && $direction == 'asc') ? 'desc' : 'asc']) }}">
+                                        Accountability
+                                        @if($column == 'is_accountability')
                                             @if($direction == 'asc')
                                             <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
@@ -559,7 +559,7 @@
                                 <td class="px-6 py-4">{{$devices->DeviceMacAdd}}</td>
                                 <td class="px-6 py-4">{{$devices->DeviceLocation}}</td>
                                 <td class="px-6 py-4 font-bold uppercase text-xs">{{$devices->DeviceStatus}}</td>
-                                <td class="px-6 py-4">{{$devices->DeviceRemarks}}</td>
+                                <td class="px-6 py-4">{{$devices->is_accountability}}</td>
                                 <td class="px-6 py-4">
                                     <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-3">
                                     <button type="button" onclick="location.href='{{ url('devicedetails/'.$devices->id) }}'">
@@ -596,8 +596,42 @@
 
                 <!-- PAGINATION -->
 
-                <div class="mt-3 font-bold">
-                    {{ $deviceview->appends(['column' => $column, 'direction' => $direction])->links() }}
+                <div class="mt-3 font-medium">
+                    <!-- Modify the pagination links here -->
+                    <div class="items-center mt-4 text-sm flex flex-wrap">
+
+                        @if($deviceview->total() > 0)
+                        <p class="mr-4 text-gray-700 text-sm">Showing <span class="font-bold">{{ $deviceview->firstItem() }}</span> to <span class="font-bold">{{ $deviceview->lastItem() }}</span> of <span class="font-bold">{{ $deviceview->total() }} Results</span></p>
+                        @else
+                            <p class="mr-4 text-gray-700">No entries found</p>
+                        @endif
+
+                        <div class="ml-auto"> <!-- Added ml-auto class here -->
+                            @if($deviceview->currentPage() > 1)
+                                <a href="{{ $deviceview->previousPageUrl() }}" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md mr-2 font-bold">&laquo; Previous</a>
+                            @endif
+
+                            @php
+                                // Calculate start and end page numbers for the loop
+                                $startPage = max(1, $deviceview->currentPage() - 1);
+                                $endPage = min($deviceview->lastPage(), $startPage + 2); // Show 5 links at a time
+
+                                // If there are fewer than 5 pages remaining, adjust the start page
+                                if ($endPage - $startPage < 1) {
+                                    $startPage = max(1, $endPage - 1);
+                                }
+                            @endphp
+
+                            @for($i = $startPage; $i <= $endPage; $i++)
+                                <a href="{{ $deviceview->url($i) }}" class="px-3 py-1 {{ $i == $deviceview->currentPage() ? 'bg-green-500 text-white font-bold' : 'bg-gray-200 text-gray-700' }} rounded-md mr-2">{{ $i }}</a>
+                            @endfor
+
+                            @if($deviceview->currentPage() < $deviceview->lastPage())
+                                <a href="{{ $deviceview->nextPageUrl() }}" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md ml-2 font-bold">Next &raquo;</a>
+                            @endif
+                        </div>
+
+                    </div>
                 </div>
 
                 <!-- PAGINATION Ends Here -->

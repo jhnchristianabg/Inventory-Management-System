@@ -18,7 +18,7 @@
             <x-app-layout>
                 <x-slot name="header">
                     <h2 class="text-lg text-blue-100 md:text-2xl">
-                        Devices Report
+                        Cables & Peripherals Report
                     </h2>
                 </x-slot>
                 <x-slot name="breadcrumb">
@@ -31,12 +31,12 @@
                     </ol>
                 </x-slot>
 
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 float-left mr-3">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 float-left mr-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 0 0 5.304 0l6.401-6.402M6.75 21A3.75 3.75 0 0 1 3 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 0 0 3.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008Z" />
                     </svg>
 
                     <h3 class="text-blueGray-900 text-lg font-bold uppercase mb-3">
-                        DEVICES
+                        CABLES & PERIPHERALS
                     </h3>
 
                     <div class="border-b-2 border-neutral-100 dark:border-black/20 mb-5">
@@ -44,7 +44,7 @@
 
                     <div class="mb-20">
                         <!-- Search -->
-                            <form action="search_device_report" method="GET" class="float-left">
+                            <form action="search_cp_report" method="GET" class="float-left">
                                 <div class="pt-2 relative mx-auto text-gray-600">
                                     <input class="focus:ring-green-500 focus:border-green-500 dark:focus:ring-green-500 dark:focus:border-green-500 border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm float-left mb-3 mr-1" type="search" name="search" placeholder="Search">
                                     <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
@@ -57,88 +57,70 @@
                                     </button>
                                 </div>
                             </form>
-                        <!-- Dropdown HED/BED -->
-                            <form class="float-left">
-                                <div class="pt-2 relative mx-auto text-gray-600">
-                                    <select name="Building" id="Building" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:181px">
-                                        <option value="HED">HED</option>
-                                        <option value="BED">BED</option>
-                                    </select>
-                                </div>
-                            </form>
+
                     </div>
 
-                    <div class=" grid sm:grid-cols-7 relative overflow-x-auto content-left float-left">
+                    <div class=" grid sm:grid-cols-6 relative overflow-x-auto content-left float-left">
                         <a  class=" w-32 p-4 bg-white border bg-gray-300 rounded-lg shadow hover:bg-gray-100 dark:bg-white dark:border-gray-300 dark:hover:bg-gray-200">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countsys'] }}</h5>
-                            <p class="font-normal text-gray-700 dark:text-black text-sm">System Unit</p>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countcable'] }}</h5>
+                            <p class="font-normal text-gray-700 dark:text-black text-sm">Cable</p>
                         </a>
 
                         <a  class="block w-32 p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-white dark:border-gray-300 dark:hover:bg-gray-200 ml-0.5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countlap'] }}</h5>
-                            <p class="font-normal text-gray-700 dark:text-black text-sm">Laptop</p>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countadapter'] }}</h5>
+                            <p class="font-normal text-gray-700 dark:text-black text-sm">Adapter</p>
                         </a>
 
                         <a  class="block w-32 p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-white dark:border-gray-300 dark:hover:bg-gray-200 ml-0.5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countaio'] }}</h5>
-                            <p class="font-normal text-gray-700 dark:text-black text-sm">AIO Desktop</p>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countconverter'] }}</h5>
+                            <p class="font-normal text-gray-700 dark:text-black text-sm">Converter</p>
                         </a>
 
                         <a  class="block w-32 p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-white dark:border-gray-300 dark:hover:bg-gray-200 ml-0.5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countimac'] }}</h5>
-                            <p class="font-normal text-gray-700 dark:text-black text-sm">IMAC</p>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countcharger'] }}</h5>
+                            <p class="font-normal text-gray-700 dark:text-black text-sm">Charger</p>
                         </a>
 
                         <a  class="block w-32 p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-white dark:border-gray-300 dark:hover:bg-gray-200 ml-0.5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countmon'] }}</h5>
-                            <p class="font-normal text-gray-700 dark:text-black text-sm">Monitor</p>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countkeyboard'] }}</h5>
+                            <p class="font-normal text-gray-700 dark:text-black text-sm">Keyboard</p>
                         </a>
 
                         <a  class="block w-32 p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-white dark:border-gray-300 dark:hover:bg-gray-200 ml-0.5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countspkr'] }}</h5>
-                            <p class="font-normal text-gray-700 dark:text-black text-sm">Speaker</p>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countmouse'] }}</h5>
+                            <p class="font-normal text-gray-700 dark:text-black text-sm">Mouse</p>
                         </a>
 
                         <a  class="block w-32 p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-white dark:border-gray-300 dark:hover:bg-gray-200 ml-0.5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countproj'] }}</h5>
-                            <p class="font-normal text-gray-700 dark:text-black text-sm">Projector</p>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countavr'] }}</h5>
+                            <p class="font-normal text-gray-700 dark:text-black text-sm">AVR</p>
                         </a>
 
                         <a  class="block w-32 p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-white dark:border-gray-300 dark:hover:bg-gray-200 ml-0.5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countprint'] }}</h5>
-                            <p class="font-normal text-gray-700 dark:text-black text-sm">Printer</p>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countwebcam'] }}</h5>
+                            <p class="font-normal text-gray-700 dark:text-black text-sm">Webcam</p>
                         </a>
 
                         <a  class="block w-32 p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-white dark:border-gray-300 dark:hover:bg-gray-200 ml-0.5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['counttv'] }}</h5>
-                            <p class="font-normal text-gray-700 dark:text-black text-sm">TV</p>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countscanner'] }}</h5>
+                            <p class="font-normal text-gray-700 dark:text-black text-sm">Barcode Scanner</p>
                         </a>
 
                         <a  class="block w-32 p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-white dark:border-gray-300 dark:hover:bg-gray-200 ml-0.5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countip'] }}</h5>
-                            <p class="font-normal text-gray-700 dark:text-black text-sm">IP Phone</p>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countmic'] }}</h5>
+                            <p class="font-normal text-gray-700 dark:text-black text-sm">Microphone</p>
                         </a>
 
                         </a>
 
                         <a  class="block w-32 p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-white dark:border-gray-300 dark:hover:bg-gray-200 ml-0.5 mt-1">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countswi'] }}</h5>
-                            <p class="font-normal text-gray-700 dark:text-black text-sm">Switch</p>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countheadset'] }}</h5>
+                            <p class="font-normal text-gray-700 dark:text-black text-sm">Headset</p>
                         </a>
 
                         <a class="block w-32 p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-white dark:border-gray-300 dark:hover:bg-gray-200 ml-0.5 mt-1">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countsvr'] }}</h5>
-                            <p class="font-normal text-gray-700 dark:text-black text-sm">Server</p>
-                        </a>
-
-                        <a  class="block w-32 p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-white dark:border-gray-300 dark:hover:bg-gray-200 ml-0.5 mt-1">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['countrtr'] }}</h5>
-                            <p class="font-normal text-gray-700 dark:text-black text-sm">Router</p>
-                        </a>
-
-                        <a  class="block w-32 p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-white dark:border-gray-300 dark:hover:bg-gray-200 ml-0.5 mt-1">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['counttblt'] }}</h5>
-                            <p class="font-normal text-gray-700 dark:text-black text-sm">Tablet</p>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{ $counts['counttripod'] }}</h5>
+                            <p class="font-normal text-gray-700 dark:text-black text-sm">Tripod</p>
                         </a>
                     </div>
 
@@ -178,30 +160,28 @@
                                     <th scope="col" class="px-6 py-3">ID</th>
                                     <th scope="col" class="px-6 py-3">HOST ID</th>
                                     <th scope="col" class="px-6 py-3">TYPE</th>
+                                    <th scope="col" class="px-6 py-3">NAME</th>
                                     <th scope="col" class="px-6 py-3">BRAND</th>
                                     <th scope="col" class="px-6 py-3">MODEL</th>
-                                    <th scope="col" class="px-6 py-3">SERIAL #</th>
-                                    <th scope="col" class="px-6 py-3">MAC ADDRESS</th>
-                                    <th scope="col" class="px-6 py-3">LOCATION</th>
+                                    <th scope="col" class="px-6 py-3">QUANTITY</th>
                                     <th scope="col" class="px-6 py-3">STATUS</th>
-                                    <th scope="col" class="px-6 py-3">ACCOUNTABILITY</th>
+                                    <th scope="col" class="px-6 py-3">REMARKS</th>
                                     <th scope="col" class="px-6 py-3">ACTION</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @isset($devicereport)
-                                @foreach($devicereport as $reports)
+                                @isset($cpreport)
+                                @foreach($cpreport as $reports)
                                 <tr class="bg-white border-b dark:border-gray-300 text-black">
                                     <td class="px-6 py-4">{{$reports->id}}</td>
-                                    <td class="px-6 py-4 font-bold uppercase">{{$reports->DeviceID}}</td>
-                                    <td class="px-6 py-4">{{$reports->DeviceType}}</td>
-                                    <td class="px-6 py-4">{{$reports->DeviceBrand}}</td>
-                                    <td class="px-6 py-4">{{$reports->DeviceModel}}</td>
-                                    <td class="px-6 py-4">{{$reports->DeviceSerialNo}}</td>
-                                    <td class="px-6 py-4">{{$reports->DeviceMacAdd}}</td>
-                                    <td class="px-6 py-4">{{$reports->DeviceLocation}}</td>
-                                    <td class="px-6 py-4 font-bold uppercase text-xs">{{$reports->DeviceStatus}}</td>
-                                    <td class="px-6 py-4">{{$reports->is_accountability}}</td>
+                                    <td class="px-6 py-4 font-bold uppercase">{{$reports->CPID}}</td>
+                                    <td class="px-6 py-4">{{$reports->CPType}}</td>
+                                    <td class="px-6 py-4">{{$reports->CPName}}</td>
+                                    <td class="px-6 py-4">{{$reports->CPBrand}}</td>
+                                    <td class="px-6 py-4">{{$reports->CPModel}}</td>
+                                    <td class="px-6 py-4">{{$reports->CPQuantity}}</td>
+                                    <td class="px-6 py-4">{{$reports->CPStatus}}</td>
+                                    <td class="px-6 py-4">{{$reports->CPRemarks}}</td>
                                     <td class="px-6 py-4">
                                         <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-3">
                                             <button type="button" onclick="location.href=''">

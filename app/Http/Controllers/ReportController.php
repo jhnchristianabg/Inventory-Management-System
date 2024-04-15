@@ -45,13 +45,13 @@ class ReportController extends Controller
         $countip = DB::table('devices')->where('DeviceType', 'IP Phone')
                                         ->whereNull('deleted_at')
                                         ->count();
-        $countswi = DB::table('devices')->where('DeviceType', 'Switch')
+        $countswi = DB::table('devices')->where('DeviceType', 'Network Switch')
                                         ->whereNull('deleted_at')
                                         ->count();
         $countsvr = DB::table('devices')->where('DeviceType', 'Server')
                                         ->whereNull('deleted_at')
                                         ->count();
-        $countrtr = DB::table('devices')->where('DeviceType', 'Router')
+        $countrtr = DB::table('devices')->where('DeviceType', 'Wireless Router')
                                         ->whereNull('deleted_at')
                                         ->count();
         $counttblt = DB::table('devices')->where('DeviceType', 'Tablet')
@@ -133,7 +133,7 @@ class ReportController extends Controller
                       ->orWhere('DeviceMacAdd', 'like', "%$searchTerm%")
                       ->orWhere('DeviceLocation', 'like', "%$searchTerm%")
                       ->orWhere('DeviceStatus', 'like', "%$searchTerm%")
-                      ->orWhere('DeviceRemarks', 'like', "%$searchTerm%");
+                      ->orWhere('is_accountability', 'like', "%$searchTerm%");
             });
         } else {
             // If search term is empty, return empty result set

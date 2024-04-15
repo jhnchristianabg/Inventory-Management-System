@@ -47,15 +47,15 @@
         </button>
 		<ul id="ItsInventory" class="hidden py-2 space-y-2">
 			<li>
-				<a href="device"
+				<a href="/device"
                     class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Devices</a>
 			</li>
 			<li>
-				<a href="cablesandperipherals"
+				<a href="/cablesandperipherals"
 					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Cables & Peripherals</a>
 			</li>
 			<li>
-				<a href="consumables"
+				<a href="/consumables"
 					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Consumables</a>
 			</li>
 		</ul>
@@ -70,15 +70,15 @@
         </button>
 		<ul id="ItsManagement" class="hidden py-2 space-y-2">
 			<li>
-				<a href="managementdevice"
+				<a href="/managementdevice"
                     class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Devices</a>
 			</li>
 			<li>
-				<a href="managementcablesandperipherals"
+				<a href="/managementcablesandperipherals"
 					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Cables & Peripherals</a>
 			</li>
 			<li>
-				<a href="managementconsumables"
+				<a href="/managementconsumables"
 					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Consumables</a>
 			</li>
 		</ul>
@@ -95,11 +95,11 @@
         </button>
 		<ul id="ItsEmployeeAccount" class="hidden py-2 space-y-2">
 			<li>
-				<a href="itsemployeeaccountabilitydevice"
+				<a href="/itsemployeeaccountabilitydevice"
                     class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Devices</a>
 			</li>
 			<li>
-				<a href="itsemployeeaccountabilityemployee"
+				<a href="/itsemployeeaccountabilityemployee"
 					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Employees</a>
 			</li>
 		</ul>
@@ -118,11 +118,11 @@
         </button>
 		<ul id="ReportGeneration" class="hidden py-2 space-y-2">
 			<li>
-				<a href="report"
+				<a href="/report"
                     class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Devices</a>
 			</li>
 			<li>
-				<a href=""
+				<a href="/cpreport"
 					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Cables & Peripherals</a>
 			</li>
 		</ul>
@@ -150,15 +150,15 @@
 
 		<ul id="AhInventory" class="hidden py-2 space-y-2">
 			<li>
-				<a href="equipments"
+				<a href="/equipments"
                     class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Equipments</a>
 			</li>
 			<li>
-				<a href="reagents"
+				<a href="/reagents"
 					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Reagents</a>
 			</li>
 			<li>
-				<a href="ahconsumables"
+				<a href="/ahconsumables"
 					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Consumables</a>
 			</li>
 		</ul>
@@ -175,15 +175,15 @@
         </button>
 		<ul id="AhManagement" class="hidden py-2 space-y-2">
 			<li>
-				<a href="managementequipments"
+				<a href="/managementequipments"
                     class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Equipments</a>
 			</li>
 			<li>
-				<a href="managementreagents"
+				<a href="/managementreagents"
 					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Reagents</a>
 			</li>
 			<li>
-				<a href="ahmanagementconsumables"
+				<a href="/ahmanagementconsumables"
 					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Consumables</a>
 			</li>
 		</ul>
@@ -211,7 +211,7 @@
                     class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Users</a>
 			</li>
 			<li>
-				<a href="location"
+				<a href="/location"
 					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Locations</a>
 			</li>
 		</ul>

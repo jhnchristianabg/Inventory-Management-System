@@ -5,6 +5,7 @@ use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\CPController;
 use App\Http\Controllers\ConsController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\CPReportController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DeviceAccController;
 use App\Http\Controllers\LocationController;
@@ -268,6 +269,22 @@ Route::get('report', [ReportController::class, 'show_report'])->name('report.sho
 Route::get('countDevices', [ReportController::class, 'countDevices'])->name('countDevices');
 /*---------------------------------------------------------------------*/
 
+/*---------------------------------------------------------------------*/
+
+Route::get('/cpreport', [CPReportController::class,'index']);
+
+/* Report Generation SEARCH CABLES & PERIPHERALS */
+
+Route::get('search_cp_report',[CPReportController::Class, 'search_cp_report']);
+
+/* Routes for Report Generation VIEW TABLE Display CABLES & PERIPHERALS from DB*/
+// Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
+Route::get('cpreport', [CPReportController::class, 'show_cpreport'])->name('cpreport.show');
+
+/* Report Generation TABLE OF COUNTING CABLES & PERIPHERALS */
+Route::get('countCP', [CPReportController::class, 'countCP'])->name('countCP');
+/*---------------------------------------------------------------------*/
+
 
 
 
@@ -298,6 +315,15 @@ Route::get('/empaccview', function () {
 // Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
 Route::get('empaccview/{id}',[EmployeeController::class,'details_empacc'])->name('empaccview');
 
+/* Route for EDIT EMPLOYEE*/
+Route::get('/employeeedit', function () {
+    return view('employeeedit');
+})->middleware(['auth'])->name('employeeedit');
+
+/* Route for EDIT EMPLOYEE Details DB SHOW*/
+// Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
+Route::get('employeeedit/{id}',[EmployeeController::class,'edit_emp']);
+
 /*---------------------------------------------------------------------*/
 
 
@@ -309,12 +335,18 @@ Route::get('empaccview/{id}',[EmployeeController::class,'details_empacc'])->name
 
 /*---------------------------------------------------------------------*/
 // Route for Device Assign
-Route::get('/itsemployeeaccountabilitydevice', [DeviceAccController::class, 'index']);
+Route::get('/itsemployeeaccountabilitydevice', [DeviceAccController::class, 'search_acc_device'])->name('itsemployeeaccountabilitydevice.show');
 
-Route::get('device_acc', [DeviceAccController::class, 'show_acc_device'])->name('device_acc.show');
+Route::get('/itsemployeeaccountabilitydevicemodal', [DeviceAccController::class, 'search_acc_device_modal'])->name('itsemployeeaccountabilitydevicemodal.show');
 
-Route::post('/update-devices', [DeviceAccController::class,'update'])->name('update.devices');
+// UPDATE
+Route::post('/update/devices', [DeviceAccController::class,'update'])->name('update.devices');
 
+// SEARCH OUTSIDE THE MODAL
+Route::get('/search_acc_device', [DeviceAccController::class, 'search_acc_device'])->name('search_acc_device');
+
+// SEARCH INSIDE MODAL
+Route::get('search_acc_device_modal', [DeviceAccController::class, 'search_acc_device_modal'])->name('search_acc_device_modal');
 
 /*---------------------------------------------------------------------*/
 

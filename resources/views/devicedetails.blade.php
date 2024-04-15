@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="ml-3">
                                             <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <label for="DeviceName" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device Name</label>
+                                                <label for="DeviceName" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Name</label>
                                                 <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$devdetails[0]->DeviceName}}" disabled readonly>
                                             </div>
                                         </div>

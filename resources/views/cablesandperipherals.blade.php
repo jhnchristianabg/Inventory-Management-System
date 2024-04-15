@@ -16,7 +16,7 @@
             <x-app-layout>
                 <x-slot name="header">
                     <h2 class="text-lg text-blue-100 md:text-2xl">
-                        Cables and Peripherals
+                        CABLES AND PERIPHERALS
                     </h2>
                 </x-slot>
                 <x-slot name="breadcrumb">

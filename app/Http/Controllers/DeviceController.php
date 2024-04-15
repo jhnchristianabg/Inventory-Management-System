@@ -22,7 +22,8 @@ class DeviceController extends Controller
         $totaldevices = DeviceModel::count();
         $totalcp = CPModel::count();
         $totalcons = ConsModel::count();
-        return view('dashboard', ['totaldevices' => $totaldevices, 'totalcp' => $totalcp, 'totalcons' => $totalcons]);
+        $totalaccountability = DB::table('devices')->whereNotNull('is_accountability')->count();
+        return view('dashboard', ['totaldevices' => $totaldevices, 'totalcp' => $totalcp, 'totalcons' => $totalcons, 'totalaccountability' => $totalaccountability]);
     }
 
     public function add(Request $request){
@@ -123,8 +124,12 @@ class DeviceController extends Controller
                   ->orWhere('DeviceMacAdd', 'like', "%$searchTerm%")
                   ->orWhere('DeviceLocation', 'like', "%$searchTerm%")
                   ->orWhere('DeviceStatus', 'like', "%$searchTerm%")
-                  ->orWhere('DeviceRemarks', 'like', "%$searchTerm%");
+                  ->orWhere('is_accountability', 'like', "%$searchTerm%");
         })->orderBy($column, $direction)->paginate($perPage);
+
+        // Append search term to pagination links
+        $deviceview->appends(['search' => $searchTerm]);
+
         return view('device', compact('deviceview', 'searchTerm', 'column', 'direction'));
     }
 

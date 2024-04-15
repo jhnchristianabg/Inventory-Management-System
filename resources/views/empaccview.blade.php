@@ -83,7 +83,7 @@
                         <thead class="text-xs uppercase bg-gray-200 font-bold">
                             <tr>
                                 <th scope="col" class="px-6 py-3">ID</th>
-                                <th scope="col" class="px-6 py-3">DEVICE ID</th>
+                                <th scope="col" class="px-6 py-3">HOST ID</th>
                                 <th scope="col" class="px-6 py-3">TYPE</th>
                                 <th scope="col" class="px-6 py-3">BRAND</th>
                                 <th scope="col" class="px-6 py-3">ISSUE DATE</th>
@@ -93,7 +93,22 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            @foreach($emp_dev_acc as $empdevacc)
+                                @if(!empty($empdetails) && $empdevacc->is_accountability == $empdetails[0]->EmployeeID)
+                                    <tr class="bg-white border-b dark:border-gray-300 text-black">
+                                        <td class="px-6 py-4">
+                                            {{$empdevacc->id}}
+                                        </td>
+                                        <td class="px-6 py-4 font-bold uppercase">{{$empdevacc->DeviceID}}</td>
+                                        <td class="px-6 py-4">{{$empdevacc->DeviceType}}</td>
+                                        <td class="px-6 py-4">{{$empdevacc->DeviceBrand}}</td>
+                                        <td class="px-6 py-4 font-bold uppercase">{{$empdevacc->updated_at}}</td>
+                                        <td class="px-6 py-4"></td>
+                                        <td class="px-6 py-4">{{$empdevacc->DeviceLocation}}</td>
+                                        <td class="px-6 py-4"></td>
+                                    </tr>
+                                @endif
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
