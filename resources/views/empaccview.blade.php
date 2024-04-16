@@ -42,7 +42,7 @@
 
                 <div class=" grid sm:grid-cols-3 relative overflow-x-auto">
 
-                    <div class="max-w-sm p-6 bg-white border border-gray-300 rounded-lg shadow dark:border-gray-200 dark:hover:bg-gray-200 text-center h-28">
+                    <div class="max-w-sm p-6 bg-white border border-gray-300 rounded-lg shadow dark:border-gray-200 dark:hover:bg-gray-200 text-center h-28 ml-5">
                         <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-black align">EMPLOYEE NAME</h5>
                         @if(count($empdetails) > 0)
                             <p class="mb-3 text-sm font-normal text-gray-700 dark:text-black">{{$empdetails[0]->EmployeeFName}} <span class="ml-1"> {{$empdetails[0]->EmployeeIName}}. {{$empdetails[0]->EmployeeLName}}</span></p>
@@ -51,7 +51,7 @@
                         @endif
                     </div>
 
-                    <div class="max-w-sm p-6 bg-white border border-gray-300 rounded-lg shadow dark:border-gray-200 dark:hover:bg-gray-200 text-center h-28">
+                    <div class="max-w-sm p-6 bg-white border border-gray-300 rounded-lg shadow dark:border-gray-200 dark:hover:bg-gray-200 text-center h-28 ml-5">
                         <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-black align">EMPLOYEE ID NUMBER</h5>
                         @if(count($empdetails) > 0)
                             <p class="mb-3 text-sm font-normal text-gray-700 dark:text-black">{{$empdetails[0]->EmployeeID}}</p>
@@ -60,7 +60,7 @@
                         @endif
                     </div>
 
-                    <div class="max-w-sm p-6 bg-white border border-gray-300 rounded-lg shadow dark:border-gray-200 dark:hover:bg-gray-200 text-center h-28">
+                    <div class="max-w-sm p-6 bg-white border border-gray-300 rounded-lg shadow dark:border-gray-200 dark:hover:bg-gray-200 text-center h-28 ml-5">
                         <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-black align">DEPARTMENT</h5>
                         @if(count($empdetails) > 0)
                             <p class="mb-3 text-sm font-normal text-gray-700 dark:text-black">{{$empdetails[0]->Department}}</p>
@@ -73,11 +73,24 @@
                 </div>
 
                 <!-- TABLE FOR Consumables VIEW-->
-                <div class="relative overflow-x-auto mt-8">
+                <div class="relative overflow-x-auto mt-3">
 
                     <!-- COLUMN TABLE SORTING -->
 
-
+                    <!-- Search -->
+                    <form action="" method="GET">
+                        <div class="pt-2 relative mx-auto text-gray-600">
+                            <input class="focus:ring-green-500 focus:border-green-500 dark:focus:ring-green-500 dark:focus:border-green-500 border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm float-right mb-3 mr-1" type="search" name="search_emp_details" placeholder="Search">
+                                <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
+                                    <svg class="text-gray-600 h-4 w-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
+                                        viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+                                        width="512px" height="512px">
+                                        <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                                    </svg>
+                                </button>
+                        </div>
+                    </form>
 
                     <table id="dataTable" class="w-full text-xs text-left rtl:text-right font-light text-surface text-black border-collapse">
                         <thead class="text-xs uppercase bg-gray-200 font-bold">
@@ -105,7 +118,16 @@
                                         <td class="px-6 py-4 font-bold uppercase">{{$empdevacc->updated_at}}</td>
                                         <td class="px-6 py-4"></td>
                                         <td class="px-6 py-4">{{$empdevacc->DeviceLocation}}</td>
-                                        <td class="px-6 py-4"></td>
+                                        <td class="px-6 py-4">
+                                            <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 gap-1 ml-3">
+                                                <button type="button" onclick="location.href=''">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="green" class="w-5 h-5">
+                                                        <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+                                                        <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41ZM14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endif
                         @endforeach

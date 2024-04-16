@@ -617,9 +617,13 @@
                             sessionStorage.removeItem('updateSuccess');
                         }
                     });
-
+                    // Dropdown with search of Employee ID
                     $(document).ready(function() {
                         $('#is_accountability').select2();
+                    });
+                    // Dropdown with search of Location
+                    $(document).ready(function() {
+                        $('#newLocation').select2();
                     });
                 </script>
 

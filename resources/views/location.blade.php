@@ -181,7 +181,7 @@
                                         <div class="col-span-2 sm:col-span-1 mt-3" id="RoomNo">
                                             <div class="ml-12">
                                                 <label for="RoomNo" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Room No.</label>
-                                                <input type="text" name="RoomNo" id="RoomNo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-80 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Room No." required="">
+                                                <input type="text" name="RoomNo" id="RoomNo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-80 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Room No.">
                                             </div>
                                         </div>
 

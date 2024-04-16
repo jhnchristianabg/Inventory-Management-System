@@ -59,7 +59,7 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function search_employee(Request $request){
+    public function search_employee($id,Request $request){
         $searchTerm = $request->input('search');
         $perPage = 10;
         $column = $request->get('column', 'id'); // Default column to sort
@@ -79,7 +79,13 @@ class EmployeeController extends Controller
 
     /* --------------THIS FIELD IS FOR TABLE ACTIONS -------------- */
 
-    public function details_empacc($id){
+    public function details_empacc($id,Request $request){
+
+        $searchTerm = $request->input('search_emp_details');
+        $perPage = 1000;
+        $column = $request->get('column', 'id'); // Default column to sort
+        $direction = $request->get('direction', 'asc'); // Default sorting direction
+
         // Variable = DB::select('select * from "DB TABLE NAME" where "TABLE" = ?', [$"TABLE"]);
         $empdetails= DB::select('select * from employee where id = ?', [$id]);
 
@@ -89,6 +95,25 @@ class EmployeeController extends Controller
                 ->from('employee');
             })
         ->paginate(1000);
+
+        $emp_dev_acc = DB::table('devices')
+            ->where(function ($query) use ($searchTerm) {
+                $query->where('DeviceID', 'like', "%$searchTerm%")
+                    ->orWhere('id', 'like', "%$searchTerm%")
+                    ->orWhere('DeviceType', 'like', "%$searchTerm%")
+                    ->orWhere('DeviceBrand', 'like', "%$searchTerm%")
+                    ->orWhere('updated_at', 'like', "%$searchTerm%")
+                    ->orWhere('DeviceLocation', 'like', "%$searchTerm%");
+            })
+            ->whereIn('is_accountability', function($query) {
+                $query->select('EmployeeID')
+                      ->from('employee');
+            })
+            ->orderBy($column, $direction)
+            ->paginate($perPage);
+
+        // Append search term to pagination links
+        $emp_dev_acc->appends(['search' => $searchTerm]);
 
         // return view('Blade', compact('Variable'));
         return view('empaccview', ['empdetails'=>$empdetails,'emp_dev_acc' => $emp_dev_acc]);
@@ -101,4 +126,6 @@ class EmployeeController extends Controller
     }
 
     /* -------------- ENDS HERE  -------------- */
+
+
 }
