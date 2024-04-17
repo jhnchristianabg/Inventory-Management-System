@@ -1,7 +1,7 @@
 <!doctype html>
     <html lang="en">
         <head>
-            <title>ITS / Report Generation</title>
+            <title>Cables & Peripherals Report</title>
 
             <style>
                 #dataTable th{

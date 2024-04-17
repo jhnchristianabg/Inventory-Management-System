@@ -324,6 +324,20 @@ Route::get('/employeeedit', function () {
 // Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
 Route::get('employeeedit/{id}',[EmployeeController::class,'edit_emp']);
 
+// UPDATE THE EMPLOYEE
+Route::put('update_employee/{id}',[EmployeeController::class,'update_emp']);
+
+// VIEW INSIDE EMPLOYEE
+Route::get('/empaccdevice', function () {
+    return view('empaccdevice');
+})->middleware(['auth'])->name('empaccdevice');
+
+// ROUTE FOR OPENNING empaccdevice.blade.php
+Route::get('empaccdevice/{id}',[EmployeeController::class,'details_emp']);
+
+// RETURNING DEVICE
+Route::put('return_device/{id}',[EmployeeController::class,'return']);
+
 /*---------------------------------------------------------------------*/
 
 
@@ -347,6 +361,8 @@ Route::get('/search_acc_device', [DeviceAccController::class, 'search_acc_device
 
 // SEARCH INSIDE MODAL
 Route::get('search_acc_device_modal', [DeviceAccController::class, 'search_acc_device_modal'])->name('search_acc_device_modal');
+
+
 
 /*---------------------------------------------------------------------*/
 
@@ -376,3 +392,14 @@ Route::get('location', [LocationController::class, 'show_loc'])->name('location.
 /* SEARCH LOCATION */
 
 Route::get('search_loc',[LocationController::Class, 'search_loc']);
+
+// ACTION FOR LOCATION
+
+Route::get('locationedit', function () {
+    return view('locationedit');
+})->middleware(['auth'])->name('locationedit');
+
+// Edit location
+Route::get('locationedit/{id}',[LocationController::class,'edit_loc']);
+
+Route::put('update_location/{id}',[LocationController::class,'update_loc']);

@@ -1,7 +1,7 @@
 <!doctype html>
     <html lang="en">
         <head>
-            <title>ITS / Inventory</title>
+            <title>Inventory / Consumables</title>
 
             <style>
                 #dataTable th{

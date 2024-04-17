@@ -1,7 +1,7 @@
 <!doctype html>
     <html lang="en">
         <head>
-            <title>ITS / Inventory </title>
+            <title>Inventory / Cables & Peripherals</title>
             <style>
                 #dataTable th{
                     background-color: #e5e7eb;

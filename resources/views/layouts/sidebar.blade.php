@@ -98,6 +98,14 @@
 				<a href="/itsemployeeaccountabilitydevice"
                     class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Devices</a>
 			</li>
+            <li>
+				<a href="/"
+                    class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Cables & Peripherals</a>
+			</li>
+            <li>
+				<a href="/"
+                    class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Consumables</a>
+			</li>
 			<li>
 				<a href="/itsemployeeaccountabilityemployee"
 					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Employees</a>
@@ -129,7 +137,7 @@
 
         <!-- Allied Health Inventory -->
 
-        <div class="border-b-2 border-neutral-100 px-6 py-1 dark:border-black/20 mb-2"></div>
+        {{-- <div class="border-b-2 border-neutral-100 px-6 py-1 dark:border-black/20 mb-2"></div>
 
         <b><div class="flex justify-between">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -186,7 +194,7 @@
 				<a href="/ahmanagementconsumables"
 					class="flex items-center w-full p-2 text-lg md:text-sm text-black-900 transition duration-75  hover:bg-green-700 hover:text-gray-100 text-black-800 pl-11">Consumables</a>
 			</li>
-		</ul>
+		</ul> --}}
 
         <!-- SYSTEM -->
 

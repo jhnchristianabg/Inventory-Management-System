@@ -1,7 +1,7 @@
 <!doctype html>
     <html lang="en">
         <head>
-            <title>ITS / Accountability</title>
+            <title>Accountability / Edit Employee</title>
         </head>
         <body>
             <x-app-layout>
@@ -21,9 +21,9 @@
                 </x-slot>
 
                 <div id="" tabindex="-1" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full backdrop-blur-sm">
-                    <div class="relative p-4 w-full max-w-md max-h-full mr-64">
+                    <div class="relative p-4 w-full max-w-md max-h-full mr-64" style="margin-right:250px">
                         <!-- Modal content -->
-                        <div class="relative bg-white rounded-lg shadow-lg dark:bg-blueGray-100 px-4" style="width:900px">
+                        <div class="relative bg-white rounded-lg shadow-lg dark:bg-blueGray-100 px-4" style="width:650px">
                             <!-- Modal header -->
                                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                     <h3 class="text-blueGray-700 text-xl font-bold">
@@ -38,103 +38,104 @@
                                 </div>
 
                             <!-- Modal body -->
-                            <form class="p-4 md:p-5" action="" method="POST">
+                            <form class="p-4 md:p-5" action="{{ url('update_employee/'.$employee->id)}}" method="POST">
                                 {{ csrf_field() }}
                                 @method('PUT')
                                 <div class="grid gap-4 mb-4 grid-cols-2">
                                     <!-- Device Requirements -->
                                     <div class="float-left">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 float-left mr-3">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
-                                            </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 float-left mr-3">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                                        </svg>
                                         <h3 class="text-blueGray-900 text-lg font-bold uppercase mb-3">
-                                            DEVICE
+                                            EMPLOYEE
                                         </h3>
 
-                                        <div class="col-span-2 mt-5">
-                                            <label for="DeviceType" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device Type</label>
-                                            <select name="DeviceType" id="DeviceType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500"style="width:181px">
-                                                <option name="DeviceType" value="System Unit" >System Unit</option>
-                                                <option name="DeviceType" value="Laptop" >Laptop</option>
-                                                <option name="DeviceType" value="AIO Desktop" >AIO Desktop</option>
-                                                <option name="DeviceType" value="IMAC" >IMAC</option>
-                                                <option name="DeviceType" value="Monitor" >Monitor</option>
-                                                <option name="DeviceType" value="Speaker" >Speaker</option>
-                                                <option name="DeviceType" value="Projector" >Projector</option>
-                                                <option name="DeviceType" value="Printer" >Printer</option>
-                                                <option name="DeviceType" value="TV" >TV</option>
-                                                <option name="DeviceType" value="IP Phone" >IP Phone</option>
-                                                <option name="DeviceType" value="Network Switch" >Network Switch</option>
-                                                <option name="DeviceType" value="Server">Server</option>
-                                                <option name="DeviceType" value="Wireless Router" >Wireless Router</option>
-                                                <option name="DeviceType" value="Tablet" >Tablet</option>
-                                            </select>
-                                        </div>
+                                        <div class="flex">
+                                            <div class="col-span-2 sm:col-span-1 mt-3">
+                                                <label for="EmployeeID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Employee ID</label>
+                                                <input type="text" name="EmployeeID" id="EmployeeID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$employee->EmployeeID}}" placeholder="Input Employee ID" required="">
+                                            </div>
 
-                                        <div class="flex">
-                                            <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <label for="DeviceID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">HOST ID</label>
-                                                <input type="text" name="DeviceID" id="DeviceID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="" placeholder="Input Device ID" required="">
-                                            </div>
-                                            <div class="ml-3">
-                                                <div class="col-span-2 sm:col-span-1 mt-3">
-                                                    <label for="DeviceName" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Name</label>
-                                                    <input type="text" name="DeviceName" id="DeviceName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="" placeholder="Input Device Name" required="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="flex">
-                                            <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <label for="DeviceBrand" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Brand</label>
-                                                <input type="text" name="DeviceBrand" id="DeviceBrand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="" placeholder="Input Device Brand" required="">
-                                            </div>
-                                            <div class="ml-3">
-                                                <div class="col-span-2 sm:col-span-1 mt-3">
-                                                    <label for="DeviceModel" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Model</label>
-                                                    <input type="text" name="DeviceModel" id="DeviceModel" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="" placeholder="Input Device Model" required="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="flex">
-                                            <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <label for="DeviceSerialNo" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Serial Number</label>
-                                                <input type="text" name="DeviceSerialNo" id="DeviceSerialNo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="" placeholder="Input Device Serial No" required="">
-                                            </div>
-                                            <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <div class="ml-3">
-                                                    <label for="DeviceMacAdd" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">MAC Address</label>
-                                                    <input type="text" name="DeviceMacAdd" id="DeviceMacAdd" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="" placeholder="Input Device MAC Address" required="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="flex">
-                                            <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <label for="DeviceLocation" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase"style="width:181px">Location</label>
-                                                <select name="DeviceLocation" id="DeviceLocation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500"style="width:181px">
-                                                    <option name="DeviceLocation" value="Office" >Office</option>
-                                                    <option name="DeviceLocation" value="Storage" >Storage</option>
+                                            <div class="col-span-2 sm:col-span-1 mt-3 ml-3">
+                                                <label for="Department" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Department</label>
+                                                <select name="Department" id="Department" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:181px">
+                                                    <option name="Department" value="HED - ACCOUNTING" @if ($employee->Department == 'HED - ACCOUNTING') selected @endif>HED - ACCOUNTING</option>
+                                                    <option name="Department" value="HED - ADMIN" @if ($employee->Department == 'HED - ADMIN') selected @endif>HED - ADMIN</option>
+                                                    <option name="Department" value="HED - AFA" @if ($employee->Department == 'HED - AFA') selected @endif>HED - AFA</option>
+                                                    <option name="Department" value="HED - CASHIER" @if ($employee->Department == 'HED - CASHIER') selected @endif>HED - CASHIER</option>
+                                                    <option name="Department" value="HED - CLINIC" @if ($employee->Department == 'HED - CLINIC') selected @endif>HED - CLINIC</option>
+                                                    <option name="Department" value="HED - CS" @if ($employee->Department == 'HED - CS') selected @endif>HED - CS</option>
+                                                    <option name="Department" value="HED - DEAN" @if ($employee->Department == 'HED - DEAN') selected @endif>HED - DEAN</option>
+                                                    <option name="Department" value="HED - FACULTY" @if ($employee->Department == 'HED - FACULTY') selected @endif>HED - FACULTY</option>
+                                                    <option name="Department" value="HED - FTS" @if ($employee->Department == 'HED - FTS') selected @endif>HED - FTS</option>
+                                                    <option name="Department" value="HED - GCCO" @if ($employee->Department == 'HED - GCCO') selected @endif>HED - GCCO</option>
+                                                    <option name="Department" value="HED - HR" @if ($employee->Department == 'HED - HR') selected @endif>HED - HR</option>
+                                                    <option name="Department" value="HED - IT" @if ($employee->Department == 'HED - IT') selected @endif>HED - IT</option>
+                                                    <option name="Department" value="HED - LIBRARY" @if ($employee->Department == 'HED - LIBRARY') selected @endif>HED - LIBRARY</option>
+                                                    <option name="Department" value="HED - MCO" @if ($employee->Department == 'HED - MCO') selected @endif>HED - MCO</option>
+                                                    <option name="Department" value="HED - PURCHASING" @if ($employee->Department == 'HED - PURCHASING') selected @endif>HED - PURCHASING</option>
+                                                    <option name="Department" value="HED - REGISTRAR" @if ($employee->Department == 'HED - REGISTRAR') selected @endif>HED - REGISTRAR</option>
+                                                    <option name="Department" value="HED - SAO" @if ($employee->Department == 'HED - SAO') selected @endif>HED - SAO</option>
+                                                    <option name="Department" value="BED - ADMIN" @if ($employee->Department == 'BED - ADMIN') selected @endif>BED - ADMIN</option>
+                                                    <option name="Department" value="BED - CASHIER" @if ($employee->Department == 'BED - CASHIER') selected @endif>BED - CASHIER</option>
+                                                    <option name="Department" value="BED - CLINIC" @if ($employee->Department == 'BED - CLINIC') selected @endif>BED - CLINIC</option>
+                                                    <option name="Department" value="BED - COORDINATOR" @if ($employee->Department == 'BED - COORDINATOR') selected @endif>BED - COORDINATOR</option>
+                                                    <option name="Department" value="BED - FACULTY" @if ($employee->Department == 'BED - FACULTY') selected @endif>BED - FACULTY</option>
+                                                    <option name="Department" value="BED - GCCO" @if ($employee->Department == 'BED - GCCO') selected @endif>BED - GCCO</option>
+                                                    <option name="Department" value="BED - K-10" @if ($employee->Department == 'BED - K-10') selected @endif>BED - K-10</option>
+                                                    <option name="Department" value="BED - LIBRARY" @if ($employee->Department == 'BED - LIBRARY') selected @endif>BED - LIBRARY</option>
+                                                    <option name="Department" value="BED - REGISTRAR" @if ($employee->Department == 'BED - REGISTRAR') selected @endif>BED - REGISTRAR</option>
+                                                    <option name="Department" value="BED - SENIOR HIGH SCHOOL" @if ($employee->Department == 'BED - SENIOR HIGH SCHOOL') selected @endif>BED - SENIOR HIGH SCHOOL</option>
+                                                    <option name="Department" value="SHS - CLINIC" @if ($employee->Department == 'SHS - CLINIC') selected @endif>SHS - CLINIC</option>
+                                                    <option name="Department" value="SHS - COORDINATOR" @if ($employee->Department == 'SHS - COORDINATOR') selected @endif>SHS - COORDINATOR</option>
+                                                    <option name="Department" value="SHS - FACULTY" @if ($employee->Department == 'SHS - FACULTY') selected @endif>SHS - FACULTY</option>
+                                                    <option name="Department" value="SHS - GCCO" @if ($employee->Department == 'SHS - GCCO') selected @endif>SHS - GCCO</option>
+                                                    <option name="Department" value="SHS - REGISTRAR" @if ($employee->Department == 'SHS - REGISTRAR') selected @endif>SHS - REGISTRAR</option>
                                                 </select>
                                             </div>
+
+                                            <div class="col-span-2 sm:col-span-1 mt-3 ml-3">
+                                                <label for="Status" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase"style="width:181px">Status</label>
+                                                <select name="Status" id="Status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:181px">
+                                                    <option name="Status" value="Employed" @if ($employee->Status == 'Employed') selected @endif>Employed</option>
+                                                    <option name="Status" value="Resigned" @if ($employee->Status == 'Resigned') selected @endif>Resigned</option>
+                                                    <option name="Status" value="Unemployed" @if ($employee->Status == 'Unemployed') selected @endif>Unemployed</option>
+                                                </select>
+                                        </div>
+
+                                    </div>
+                                        <div class="flex">
                                             <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <div class="ml-3">
-                                                    <label for="DeviceStatus" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Status</label>
-                                                    <select name="DeviceStatus" id="DeviceStatus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500"style="width:181px" value="">
-                                                        <option name="DeviceStatus" value="Working" >Working</option>
-                                                        <option name="DeviceStatus" value="Not Working" >Not Working</option>
-                                                    </select>
-                                                </div>
+                                                <label for="EmployeeFName" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">First Name</label>
+                                                <input type="text" name="EmployeeFName" id="EmployeeFName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$employee->EmployeeFName}}" placeholder="Input First Name" required="">
+                                            </div>
+
+                                            <div class="col-span-2 sm:col-span-1 mt-3 ml-3">
+                                                <label for="EmployeeIName" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Middle Initial</label>
+                                                <input type="text" name="EmployeeIName" id="EmployeeIName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$employee->EmployeeIName}}" placeholder="Input Middle Initial" required="">
+                                            </div>
+
+                                            <div class="col-span-2 sm:col-span-1 mt-3 ml-3">
+                                                <label for="EmployeeLName" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Last Name</label>
+                                                <input type="text" name="EmployeeLName" id="EmployeeLName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$employee->EmployeeLName}}" placeholder="Input Last Name" required="">
                                             </div>
                                         </div>
-                                        <div class="col-span-2">
-                                            <label for="DeviceRemarks" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase mt-3">Remarks</label>
-                                            <input type="text" name="DeviceRemarks" id="DeviceRemarks" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="height:100px; width:375px"  value="" placeholder="Write Device Remarks here">
+
+                                        <div class="col-span-2 sm:col-span-1 mt-3">
+                                            <label for="Email" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Email</label>
+                                            <input type="text" name="Email" id="Email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:565px" value="{{$employee->Email}}" placeholder="Input Email" required="">
                                         </div>
+
                                     </div>
+
                                 </div>
-                                <button type="submit" class="inline-flex text-white inline-flex items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" style="margin-left:687px">
-                                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                                        Update
-                                </button>
+                                <div class="mt-10">
+                                    <button type="submit" class="inline-flex text-white inline-flex items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" style="margin-left:390px">
+                                        <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                                            Update employee
+                                    </button>
+                                </div>
                             </form>
                         </div>
                     </div>

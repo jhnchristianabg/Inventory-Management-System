@@ -1,7 +1,7 @@
 <!doctype html>
     <html lang="en">
         <head>
-            <title>ITS / Accountability</title>
+            <title>Accountability / Employees</title>
         </head>
         <body>
             <x-app-layout>
@@ -42,7 +42,7 @@
                         </div>
                         <div>
                             <p class="font-bold">Inventory Management System</p>
-                            <p class="text-sm">Success! Your Device details have been Saved.</p>
+                            <p class="text-sm">Success! The Employee details has been saved.</p>
                         </div>
                     </div>
                 </div>
@@ -62,12 +62,32 @@
                         </div>
                         <div>
                             <p class="font-bold">Inventory Management System</p>
-                            <p class="text-sm">Success! Your Device has been Updated.</p>
+                            <p class="text-sm">Success! The Employee details has been Updated.</p>
                         </div>
                     </div>
                 </div>
 
                 {{ Session::get('update')}}
+
+                @endif
+
+                <!-- Notification for RETURN -->
+
+                @if(Session::get('return'))
+
+                <div class="mb-3 bg-green-100 border-t-4 border-green-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                    <div class="flex">
+                        <div class="py-1">
+                            <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
+                        </div>
+                        <div>
+                            <p class="font-bold">Inventory Management System</p>
+                            <p class="text-sm">Success! The Device has been returned.</p>
+                        </div>
+                    </div>
+                </div>
+
+                {{ Session::get('return')}}
 
                 @endif
 
@@ -352,7 +372,7 @@
                                         </a>
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3  text-center">
+                                    <th scope="col" class="px-6 py-3 text-center">
                                         Action
                                     </th>
                                 </tr>
@@ -372,29 +392,19 @@
                                     <td class="px-6 py-4">{{$itsemployeeaccountabilityemployee->Email}}</td>
                                     <td class="px-6 py-4">{{$itsemployeeaccountabilityemployee->Status}}</td>
                                     <td class="px-6 py-4">
-                                        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-3">
-                                        <button type="button" onclick="location.href='{{ url('empaccview/'.$itsemployeeaccountabilityemployee->id) }}'">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="green" class="w-5 h-5">
-                                                <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
-                                                <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41ZM14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" clip-rule="evenodd" />
-                                            </svg>
-                                        </button>
-                                        <button type="button" onclick="location.href='{{ url('employeeedit/'.$itsemployeeaccountabilityemployee->id) }}'">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="blue" class="w-5 h-5">
-                                                <path d="m5.433 13.917 1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
-                                                <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z" />
-                                            </svg>
-                                        </button>
-                                        <form method="POST" action="">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" onclick="return confirm('Are you sure you want to soft delete this data?')">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="red" class="w-5 h-5 mt-1">
-                                                    <path d="M2 3a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H2Z" />
-                                                    <path fill-rule="evenodd" d="M2 7.5h16l-.811 7.71a2 2 0 0 1-1.99 1.79H4.802a2 2 0 0 1-1.99-1.79L2 7.5Zm5.22 1.72a.75.75 0 0 1 1.06 0L10 10.94l1.72-1.72a.75.75 0 1 1 1.06 1.06L11.06 12l1.72 1.72a.75.75 0 1 1-1.06 1.06L10 13.06l-1.72 1.72a.75.75 0 0 1-1.06-1.06L8.94 12l-1.72-1.72a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                                        <div class="flex justify-center gap-2">
+                                            <button type="button" onclick="location.href='{{ url('empaccview/'.$itsemployeeaccountabilityemployee->id) }}'">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="green" class="w-5 h-5">
+                                                    <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+                                                    <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41ZM14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" clip-rule="evenodd" />
                                                 </svg>
                                             </button>
-                                        </form>
+                                            <button type="button" onclick="location.href='{{ url('employeeedit/'.$itsemployeeaccountabilityemployee->id) }}'">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="blue" class="w-5 h-5">
+                                                    <path d="m5.433 13.917 1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                                    <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z" />
+                                                </svg>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>

@@ -1,7 +1,7 @@
 <!doctype html>
     <html lang="en">
         <head>
-            <title>ITS / Inventory</title>
+            <title>Inventory / Edit Consumables</title>
         </head>
         <body>
             <x-app-layout>

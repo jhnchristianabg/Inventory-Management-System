@@ -123,7 +123,7 @@
                 <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full backdrop-blur-sm">
                     <div class="relative p-4 w-full max-w-md max-h-full mr-20">
                         <!-- Modal content -->
-                        <div class="relative bg-white rounded-lg shadow-lg dark:bg-blueGray-100 px-4" style="width:500px">
+                        <div class="relative bg-white rounded-lg shadow-lg dark:bg-blueGray-100 px-4" style="width:490px">
                             <!-- Modal header -->
                                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                     <h3 class="text-blueGray-700 text-xl font-bold">
@@ -154,27 +154,10 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-span-2 sm:col-span-1 mt-3" id="floorDropdown">
+                                        <div class="col-span-2 sm:col-span-1 mt-3" id="Floor">
                                             <div class="ml-12">
-                                                <label for="Floor" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase" style="width:181px">Floor</label>
-                                                <select name="Floor" id="Floor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:181px">
-                                                    <option value="Basement">Basement</option>
-                                                    <option value="Ground Floor">Ground Floor</option>
-                                                    <option value="2nd Floor">2nd Floor</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-span-2 sm:col-span-1 mt-3" id="floorDropdown1" style="display: none;">
-                                            <div class="ml-12">
-                                                <label for="Floor" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase" style="width:181px">Floor</label>
-                                                <select name="Floor" id="Floor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:181px">
-                                                    <option value="Ground Floor">Ground Floor</option>
-                                                    <option value="2nd Floor">2nd Floor</option>
-                                                    <option value="3rd Floor">3rd Floor</option>
-                                                    <option value="4th Floor">4th Floor</option>
-                                                    <option value="5th Floor">5th Floor</option>
-                                                </select>
+                                                <label for="Floor" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Floor</label>
+                                                <input type="text" name="Floor" id="Floor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-80 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Floor (E.g. 1st Floor)" required="">
                                             </div>
                                         </div>
 
@@ -194,7 +177,7 @@
 
                                     </div>
                                 </div>
-                                <button type="submit" class="inline-flex text-white inline-flex items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 mt-3" style="margin-left:250px">
+                                <button type="submit" class="inline-flex text-white inline-flex items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 mt-3" style="margin-left:195px">
                                     <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                                         Add new location
                                 </button>
@@ -308,7 +291,7 @@
                                         </a>
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3  text-center">
+                                    <th scope="col" class="px-6 py-3">
                                         Action
                                     </th>
                                 </tr>
@@ -327,14 +310,8 @@
                                     <td class="px-6 py-4">{{$location->RoomNo}}</td>
                                     <td class="px-6 py-4">{{$location->RoomName}}</td>
                                     <td class="px-6 py-4">
-                                        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-1">
-                                        <button type="button" onclick="location.href=''">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="green" class="w-5 h-5">
-                                                <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
-                                                <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41ZM14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" clip-rule="evenodd" />
-                                            </svg>
-                                        </button>
-                                        <button type="button" onclick="location.href=''">
+                                        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-1">
+                                        <button type="button" onclick="location.href='{{ url('locationedit/'.$location->id) }}'">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="blue" class="w-5 h-5">
                                                 <path d="m5.433 13.917 1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
                                                 <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z" />
@@ -358,34 +335,48 @@
                             <!-- DISPLAYING OF DATA TABLE Ends Here -->
                         </table>
 
-                        <!-- PAGINATION -->
+                    </div>
+                    <!-- PAGINATION -->
 
-                        <div class="mt-3">
-                            {{ $locview->appends(['column' => $column, 'direction' => $direction])->links() }}
+                    <div class="mt-3 font-medium">
+                        <!-- Modify the pagination links here -->
+                        <div class="items-center mt-4 text-sm flex flex-wrap">
+
+                            @if($locview->total() > 0)
+                                <p class="mr-4 text-gray-700 text-sm font-bold">Showing {{ $locview->firstItem() }} to {{ $locview->lastItem() }} of {{ $locview->total() }} results</p>
+                            @else
+                                <p class="mr-4 text-gray-700">No entries found</p>
+                            @endif
+
+                            <div class="ml-auto"> <!-- Added ml-auto class here -->
+                                @if($locview->currentPage() > 1)
+                                    <a href="{{ $locview->previousPageUrl() }}" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md mr-2 font-bold">&laquo; Previous</a>
+                                @endif
+
+                                @php
+                                    // Calculate start and end page numbers for the loop
+                                    $startPage = max(1, $locview->currentPage() - 1);
+                                    $endPage = min($locview->lastPage(), $startPage + 2); // Show 5 links at a time
+
+                                    // If there are fewer than 5 pages remaining, adjust the start page
+                                    if ($endPage - $startPage < 1) {
+                                        $startPage = max(1, $endPage - 1);
+                                    }
+                                @endphp
+
+                                @for($i = $startPage; $i <= $endPage; $i++)
+                                    <a href="{{ $locview->url($i) }}" class="px-3 py-1 {{ $i == $locview->currentPage() ? 'bg-green-500 text-white font-bold' : 'bg-gray-200 text-gray-700' }} rounded-md mr-2">{{ $i }}</a>
+                                @endfor
+
+                                @if($locview->currentPage() < $locview->lastPage())
+                                    <a href="{{ $locview->nextPageUrl() }}" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md ml-2 font-bold">Next &raquo;</a>
+                                @endif
+                            </div>
+
                         </div>
-
-                        <!-- PAGINATION Ends Here -->
                     </div>
 
-                <script>
-                    document.getElementById('Building').addEventListener('change', function() {
-                        var floorDropdown = document.getElementById('floorDropdown');
-                        if (this.value === 'HED') {
-                            floorDropdown.style.display = 'block';
-                        } else {
-                            floorDropdown.style.display = 'none';
-                        }
-                    });
-
-                    document.getElementById('Building').addEventListener('change', function() {
-                        var floorDropdown = document.getElementById('floorDropdown1');
-                        if (this.value === 'BED') {
-                            floorDropdown.style.display = 'block';
-                        } else {
-                            floorDropdown.style.display = 'none';
-                        }
-                    });
-                </script>
+                    <!-- PAGINATION Ends Here -->
 
             </x-app-layout>
         </body>

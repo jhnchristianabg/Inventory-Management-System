@@ -1,7 +1,7 @@
 <!doctype html>
     <html lang="en">
         <head>
-            <title>ITS / Accountability</title>
+            <title>Accountability / Devices</title>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <!-- Select2 CSS -->
             <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />

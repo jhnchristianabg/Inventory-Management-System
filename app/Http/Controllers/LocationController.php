@@ -65,4 +65,29 @@ class LocationController extends Controller
 
         return view('location', compact('locview', 'searchTerm', 'column', 'direction'));
     }
+
+    public function edit_loc($id){
+        // $Variable = DB::table('table name')->find($id);
+       $location = DB::table('locations')->find($id);
+       return view ('locationedit',compact('location'));
+    }
+
+    public function update_loc(Request $request, $id){
+        //
+        $request->validate([
+            'Building'=> 'required',
+            'Floor'=> 'required',
+            'RoomNo',
+            'RoomName'=> 'required'
+        ]);
+
+        $location = DB::table('locations')->where('id',$id)->update([
+            'Building' => $request['Building'],
+            'Floor' => $request['Floor'],
+            'RoomNo' => $request['RoomNo'],
+            'RoomName' => $request['RoomName']
+        ]);
+
+        return redirect('/location')->with('update',' ');
+    }
 }
