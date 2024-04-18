@@ -25,6 +25,7 @@ class DeviceAccController extends Controller
 
         $data = DeviceAccModel::all();
         $data_location = DB::table('locations')->get();
+        $data_student = DB::table('student')->get();
 
         $dev_acc_query = DeviceModel::select('id', 'DeviceID', 'DeviceType', 'DeviceBrand', 'updated_at', 'DeviceLocation', 'is_accountability')
             ->whereNotNull('is_accountability')
@@ -69,7 +70,7 @@ class DeviceAccController extends Controller
         // Append search term to pagination links inside modal
         $deviceview_acc->appends(['search_devicemodal' => $searchTerm1]);
 
-        return view('itsemployeeaccountabilitydevice', compact('dev_acc', 'searchTerm2', 'dev_acc_perPage', 'column_acc_dev', 'direction_acc_dev', 'data', 'data_location',
+        return view('itsemployeeaccountabilitydevice', compact('dev_acc', 'searchTerm2', 'dev_acc_perPage', 'column_acc_dev', 'direction_acc_dev', 'data', 'data_location', 'data_student',
             'searchTerm1', 'deviceview_acc_perPage', 'column_acc_dev_modal', 'direction_acc_dev_modal', 'deviceview_acc'));
     }
 

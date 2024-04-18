@@ -6,6 +6,7 @@ use App\Http\Controllers\CPController;
 use App\Http\Controllers\ConsController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\CPReportController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DeviceAccController;
 use App\Http\Controllers\LocationController;
@@ -72,6 +73,12 @@ Route::get('/itsemployeeaccountabilitydevice', function () {
 })->middleware(['auth'])->name('itsemployeeaccountabilitydevice');
 /*---------------------------------------------------------------------*/
 
+/* ITS Employee Accountability EMPLOYEE Routes */
+
+Route::get('/itsaccountabilitystudent', function () {
+    return view('itsaccountabilitystudent');
+})->middleware(['auth'])->name('itsaccountabilitystudent');
+/*---------------------------------------------------------------------*/
 /* ITS Employee Accountability EMPLOYEE Routes */
 
 Route::get('/itsemployeeaccountabilityemployee', function () {
@@ -283,6 +290,39 @@ Route::get('cpreport', [CPReportController::class, 'show_cpreport'])->name('cpre
 
 /* Report Generation TABLE OF COUNTING CABLES & PERIPHERALS */
 Route::get('countCP', [CPReportController::class, 'countCP'])->name('countCP');
+/*---------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+/*---------------------------------------------------------------------*/
+// Routes for Adding STUDENT
+
+Route::get('/itsaccountabilitystudent', [StudentController::class,'index']);
+Route::post('add_student',[StudentController::Class,'add_student']);
+
+/* VIEW TABLE in Student */
+// Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
+Route::get('/itsaccountabilitystudent', [StudentController::class, 'show_student'])->name('itsaccountabilitystudent.show');
+
+/* SEARCH Student */
+Route::get('search_student',[StudentController::Class, 'search_student']);
+
+/* Route for EDIT STUDENT*/
+Route::get('/studentedit', function () {
+    return view('studentedit');
+})->middleware(['auth'])->name('studentedit');
+
+/* Route for EDIT STUDENT Details DB SHOW*/
+// Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
+Route::get('studentedit/{id}',[StudentController::class,'edit_stud']);
+
+// UPDATE THE EMPLOYEE
+Route::put('update_student/{id}',[StudentController::class,'update_stud']);
 /*---------------------------------------------------------------------*/
 
 

@@ -264,9 +264,9 @@
                                 </svg>
                             </button>
                     </div>
-                    </form>
+                </form>
 
-                <!-- TABLE FOR CABLES AND PERIPHERALS VIEW-->
+                <!-- TABLE FOR VIEW-->
                     <div class="relative overflow-x-auto mt-14">
 
                         <!-- COLUMN TABLE SORTING -->

@@ -1,7 +1,7 @@
 <!doctype html>
     <html lang="en">
         <head>
-            <title>Accountability / Devices</title>
+            <title>Devices Management</title>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <!-- Select2 CSS -->
             <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
@@ -47,7 +47,7 @@
             <x-app-layout>
                 <x-slot name="header">
                     <h2 class="text-lg text-blue-100 md:text-2xl">
-                        ASSIGNED DEVICES
+                        DEVICES MANAGEMENT
                     </h2>
                 </x-slot>
                 <x-slot name="breadcrumb">
@@ -56,7 +56,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                             </svg>
                             ITS</li>
-                        <li class="breadcrumb-item">Accountability</li>
+                        <li class="breadcrumb-item">Management</li>
                     </ol>
                 </x-slot>
 
@@ -66,6 +66,22 @@
                     ASSIGN
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="black" class="w-5 h-5 ml-1">
                         <path fill-rule="evenodd" d="M2 4.25A2.25 2.25 0 0 1 4.25 2h11.5A2.25 2.25 0 0 1 18 4.25v8.5A2.25 2.25 0 0 1 15.75 15h-3.105a3.501 3.501 0 0 0 1.1 1.677A.75.75 0 0 1 13.26 18H6.74a.75.75 0 0 1-.484-1.323A3.501 3.501 0 0 0 7.355 15H4.25A2.25 2.25 0 0 1 2 12.75v-8.5Zm1.5 0a.75.75 0 0 1 .75-.75h11.5a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-.75.75H4.25a.75.75 0 0 1-.75-.75v-7.5Z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+                <button class="relative overflow-x-auto inline-flex items-center px-3 py-2 text-sm font-bold text-center text-black bg-blue-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:ring-yellow-500 float-right mx-1" data-modal-target="crud-modal-deploy" data-modal-toggle="crud-modal-deploy" type="button">
+
+                    PULLOUT
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
+                    </svg>
+                </button>
+
+                <button class="relative overflow-x-auto inline-flex items-center px-3 py-2 text-sm font-bold text-center text-black bg-blue-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:ring-yellow-500 float-right mx-1" data-modal-target="crud-modal-pullout" data-modal-toggle="crud-modal-pullout" type="button">
+
+                    DEPLOY
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
                     </svg>
                 </button>
 
@@ -170,7 +186,7 @@
                                 </div>
 
                                 <form action="search_acc_device" method="GET">
-                                    <div class="pt-2 relative mx-auto text-gray-600 mr-6">
+                                    <div class="pt-2 relative mx-auto text-gray-600 mr-6 mt-3">
                                         <input class="focus:ring-green-500 focus:border-green-500 dark:focus:ring-green-500 dark:focus:border-green-500 border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm float-right mb-3 mr-1" type="search" name="search_devicemodal" placeholder="Search">
                                         <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
                                             <svg class="text-gray-600 h-4 w-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg"
@@ -298,13 +314,25 @@
                                             </svg>
 
                                             <h3 class="text-blueGray-900 text-lg font-bold uppercase mb-3">
-                                                EMPLOYEE
+                                                ACCOUNTABLE USER
                                             </h3>
 
+                                            <!-- Dropdown Selection -->
+                                            <div class="col-span-2 mt-5">
+                                                <label for="Type" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Type</label>
+                                                <select name="Type" id="Type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500"style="width:181px" required="">
+                                                    <option value="">Choose Type</option>
+                                                    <option value="Student">Student</option>
+                                                    <option value="Employee">Employee</option>
+                                                </select>
+                                            </div>
+
                                             <div class="flex">
-                                                <div class="col-span-2 sm:col-span-1 mt-3">
+
+                                                <!-- DROPDOWN LIST -->
+                                                <div class="col-span-2 sm:col-span-1 mt-3 mr-3" id="employeeDropdown" style="display:none;">
                                                     <label for="is_accountability" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Employee ID</label>
-                                                    <select name="is_accountability" id="is_accountability" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:181px">
+                                                    <select name="is_accountability" id="employee" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:181px" disabled>
                                                         @if(isset($data))
                                                             @foreach ($data as $row)
                                                                 <option value="{{ $row->EmployeeID }}">{{ $row->EmployeeID }}</option>
@@ -313,7 +341,18 @@
                                                     </select>
                                                 </div>
 
-                                                <div class="col-span-2 sm:col-span-1 mt-3 ml-3">
+                                                <div class="col-span-2 sm:col-span-1 mt-3 mr-3" id="studentDropdown" style="display:none;">
+                                                    <label for="is_accountability" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Student ID</label>
+                                                    <select name="is_accountability" id="student" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:181px" disabled>
+                                                        @if(isset($data_student))
+                                                            @foreach ($data_student as $row_student)
+                                                                <option value="{{ $row_student->StudentID }}">{{ $row_student->StudentID }}</option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-span-2 sm:col-span-1 mt-3">
                                                     <label for="newDeviceID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">HOST ID</label>
                                                     <input type="text" name="newDeviceID" id="newDeviceID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Host ID" required="">
                                                 </div>
@@ -619,11 +658,49 @@
                     });
                     // Dropdown with search of Employee ID
                     $(document).ready(function() {
-                        $('#is_accountability').select2();
+                        $('#employee').select2();
                     });
                     // Dropdown with search of Location
                     $(document).ready(function() {
                         $('#newLocation').select2();
+                    });
+
+                    // STUDENT DROPDOWN
+                    // Dropdown with search of Student ID
+                    $(document).ready(function() {
+                        $('#student').select2();
+                    });
+
+                    // ---------------------------------------------------------------
+
+                    // DROPDOWN FOR TYPE either Employee or Student
+                    const typeDropdown = document.getElementById('Type');
+                    const employeeDropdown = document.getElementById('employeeDropdown');
+                    const studentDropdown = document.getElementById('studentDropdown');
+                    const employeeSelect = document.getElementById('employee');
+                    const studentSelect = document.getElementById('student');
+
+                    // Add event listener to the type dropdown
+                    typeDropdown.addEventListener('change', function () {
+                        if (typeDropdown.value === '') {
+                            // If "Choose Type" is selected, hide and disable both dropdowns
+                            employeeDropdown.style.display = 'none';
+                            studentDropdown.style.display = 'none';
+                            employeeSelect.disabled = true;
+                            studentSelect.disabled = true;
+                        } else if (typeDropdown.value === 'Employee') {
+                            // If "Employee" is selected, show and enable the employee dropdown, and hide and disable the student dropdown
+                            employeeDropdown.style.display = 'block';
+                            studentDropdown.style.display = 'none';
+                            employeeSelect.disabled = false;
+                            studentSelect.disabled = true;
+                        } else if (typeDropdown.value === 'Student') {
+                            // If "Student" is selected, show and enable the student dropdown, and hide and disable the employee dropdown
+                            studentDropdown.style.display = 'block';
+                            employeeDropdown.style.display = 'none';
+                            studentSelect.disabled = false;
+                            employeeSelect.disabled = true;
+                        }
                     });
                 </script>
 
