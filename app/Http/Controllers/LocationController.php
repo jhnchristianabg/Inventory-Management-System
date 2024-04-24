@@ -16,7 +16,7 @@ class LocationController extends Controller
         $request->validate([
             'Building' => 'required',
             'Floor' => 'required',
-            'RoomNo' => 'required',
+            'RoomNo',
             'RoomName'=> 'required'
         ]);
 
@@ -85,7 +85,8 @@ class LocationController extends Controller
             'Building' => $request['Building'],
             'Floor' => $request['Floor'],
             'RoomNo' => $request['RoomNo'],
-            'RoomName' => $request['RoomName']
+            'RoomName' => $request['RoomName'],
+            'updated_at' => now()
         ]);
 
         return redirect('/location')->with('update',' ');

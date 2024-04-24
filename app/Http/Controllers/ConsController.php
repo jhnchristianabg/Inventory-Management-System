@@ -134,7 +134,8 @@ class ConsController extends Controller
             'ConsModel' => $request['ConsModel'],
             'ConsQuantity' => $request['ConsQuantity'],
             'ConsStatus' => $request['ConsStatus'],
-            'ConsRemarks' => $request['ConsRemarks']
+            'ConsRemarks' => $request['ConsRemarks'],
+            'updated_at' => now()
         ]);
 
         $cons_purchasedetails = DB::table('cons_purchase_details')->where('id',$id)->update([

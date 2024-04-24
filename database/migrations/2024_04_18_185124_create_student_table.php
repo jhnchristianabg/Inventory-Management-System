@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('Department', 255);
             $table->string('Year', 255);
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

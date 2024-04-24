@@ -52,7 +52,7 @@
                         </div>
                         <div>
                             <p class="font-bold">Inventory Management System</p>
-                            <p class="text-sm">Success! Your Device details have been Saved.</p>
+                            <p class="text-sm">Success! Your Location details have been Saved.</p>
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                         </div>
                         <div>
                             <p class="font-bold">Inventory Management System</p>
-                            <p class="text-sm">Success! Your Device has been Updated.</p>
+                            <p class="text-sm">Success! The selected location has been Updated.</p>
                         </div>
                     </div>
                 </div>

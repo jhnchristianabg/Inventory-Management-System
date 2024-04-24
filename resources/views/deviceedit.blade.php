@@ -2,6 +2,50 @@
     <html lang="en">
         <head>
             <title>Inventory / Edit Device</title>
+            <!-- Select2 CSS -->
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+            <style>
+                #dataTable th{
+                    background-color: #e5e7eb;
+                    padding: 10px;
+                }
+                #dataTable td{
+                    padding: 10px;
+                }
+                .select2 {
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    font-size: 0.875rem;
+                    border-radius: 0.375rem;
+                    width: 181px;
+                    text-align: center; /* Center the text */
+                    margin: auto;
+                }
+
+                .select2-container .select2-selection--single {
+                    box-sizing: border-box;
+                    cursor: pointer;
+                    display: block;
+                    height: 40px;
+                    user-select: none;
+                    -webkit-user-select: none;
+                    text-align: center; /* Center the text */
+                    padding-top:5px;
+                }
+                .select2-container--default .select2-results__option--highlighted[aria-selected] {
+                    font-size: 0.875rem;
+                    color: white
+                    text-align: center; /* Center the text */
+                }
+                .select2-results__options {
+                    font-size: 0.800rem;
+                    text-align: center; /* Center the text */
+                }
+
+                .select2-search--dropdown .select2-search__field {
+                    font-size: 0.800rem;
+                }
+            </style>
         </head>
         <body>
             <x-app-layout>
@@ -110,16 +154,19 @@
                                     </div>
                                     <div class="flex">
                                         <div class="col-span-2 sm:col-span-1 mt-3">
-                                            <label for="DeviceLocation" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase"style="width:181px">Location</label>
-                                            <select name="DeviceLocation" id="DeviceLocation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500"style="width:181px">
-                                                <option name="DeviceLocation" value="Office" @if ($devices->DeviceLocation == 'Office') selected @endif>Office</option>
-                                                <option name="DeviceLocation" value="Storage" @if ($devices->DeviceLocation == 'Storage') selected @endif>Storage</option>
+                                            <label for="DeviceLocation" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase" style="width:181px">Location</label>
+                                            <select name="DeviceLocation" id="DeviceLocation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:230px">
+                                                @if(isset($data_location))
+                                                    @foreach ($data_location as $row_location)
+                                                        <option value="{{ $row_location->Building }} | {{ $row_location->Floor }}  | {{ $row_location->RoomNo }}  | {{ $row_location->RoomName }}" @if($currentLocation == $row_location->Building . ' | ' . $row_location->Floor . ' | ' . $row_location->RoomNo . ' | ' . $row_location->RoomName) selected @endif>{{ $row_location->Building }} | {{ $row_location->Floor }} | {{ $row_location->RoomNo }} | {{ $row_location->RoomName }}</option>
+                                                    @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                         <div class="col-span-2 sm:col-span-1 mt-3">
                                             <div class="ml-3">
                                                 <label for="DeviceStatus" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Status</label>
-                                                <select name="DeviceStatus" id="DeviceStatus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500"style="width:181px" value="{{$devices->DeviceStatus}}">
+                                                <select name="DeviceStatus" id="DeviceStatus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:130px" value="{{$devices->DeviceStatus}}">
                                                     <option name="DeviceStatus" value="Working" @if ($devices->DeviceStatus == 'Working') selected @endif>Working</option>
                                                     <option name="DeviceStatus" value="Not Working" @if ($devices->DeviceStatus == 'Not Working') selected @endif>Not Working</option>
                                                 </select>
@@ -234,6 +281,11 @@
                     </div>
                 </div>
 
+                <!-- JavaScript -->
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+                <!-- JavaScript ENDS HERE -->
+
                 <script>
                     document.getElementById('DeviceType').addEventListener('change', function() {
                         var floorDropdown = document.getElementById('floorDropdown');
@@ -242,6 +294,11 @@
                         } else {
                             floorDropdown.style.display = 'none';
                         }
+                    });
+
+                    // Dropdown with search of Location
+                    $(document).ready(function() {
+                        $('#DeviceLocation').select2();
                     });
                 </script>
 

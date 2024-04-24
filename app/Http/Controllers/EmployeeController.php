@@ -16,32 +16,26 @@ class EmployeeController extends Controller
 
     public function add_employee(Request $request){
 
-        $request->validate([
-            'EmployeeID'=> 'required',
-            'EmployeeFName'=> 'required',
-            'EmployeeIName'=> 'required',
-            'EmployeeLName'=> 'required',
-            'Email'=> 'required',
-            'Department'=> 'required',
-            'Status'=>'required',
-        ]);
+        $emp = array();
+        $emp = DB::table('employee')->where('EmployeeID', $request->input('EmployeeID'))->exists();
 
-        // Insert device details into the database
-        $query = DB::table('employee')->insert([
-            'EmployeeID'=>$request->input('EmployeeID'),
-            'EmployeeFName'=>$request->input('EmployeeFName'),
-            'EmployeeIName'=>$request->input('EmployeeIName'),
-            'EmployeeLName'=>$request->input('EmployeeLName'),
-            'Email'=>$request->input('Email'),
-            'Department'=>$request->input('Department'),
-            'Status'=>$request->input('Status')
-        ]);
+        // Check if the employee id already exists
+        if ($emp) {
+            return redirect('/itsemployeeaccountabilityemployee')->with('failed', ' ');
+        } else {
 
-        // This part of the code will never execute as the return statement above ends the function execution
-        if($query){
-            return back()->with('success',' ');
-        }else{
-            return back()->with('failed',' ');
+            // Insert device details into the database
+            $query = DB::table('employee')->insert([
+                'EmployeeID'=>$request->input('EmployeeID'),
+                'EmployeeFName'=>$request->input('EmployeeFName'),
+                'EmployeeIName'=>$request->input('EmployeeIName'),
+                'EmployeeLName'=>$request->input('EmployeeLName'),
+                'Email'=>$request->input('Email'),
+                'Department'=>$request->input('Department'),
+                'Status'=>$request->input('Status')
+            ]);
+
+            return redirect('/itsemployeeaccountabilityemployee')->with('success',' ');
         }
     }
 
@@ -81,43 +75,82 @@ class EmployeeController extends Controller
 
     // VIEW OF ALL ACCOUNTABILITY DEVICES ON SPECIFIC EMPLOYEE
     public function details_empacc($id,Request $request){
+        // This is for Borrowed
+            $searchTerm = $request->input('search_emp_details');
+            $perPage = 1000;
+            $column = $request->get('column', 'id'); // Default column to sort
+            $direction = $request->get('direction', 'asc'); // Default sorting direction
 
-        $searchTerm = $request->input('search_emp_details');
-        $perPage = 1000;
-        $column = $request->get('column', 'id'); // Default column to sort
-        $direction = $request->get('direction', 'asc'); // Default sorting direction
+            // Variable = DB::select('select * from "DB TABLE NAME" where "TABLE" = ?', [$"TABLE"]);
+            $empdetails= DB::select('select * from employee where id = ?', [$id]);
 
-        // Variable = DB::select('select * from "DB TABLE NAME" where "TABLE" = ?', [$"TABLE"]);
-        $empdetails= DB::select('select * from employee where id = ?', [$id]);
-
-        $emp_dev_acc = DeviceModel::select('id', 'DeviceID', 'DeviceType', 'DeviceBrand', 'updated_at', 'DeviceLocation', 'is_accountability')
-        ->whereIn('is_accountability', function($query) {
-            $query->select('EmployeeID')
-                ->from('employee');
-            })
-        ->paginate(1000);
-
-        $emp_dev_acc = DB::table('devices')
-            ->where(function ($query) use ($searchTerm) {
-                $query->where('DeviceID', 'like', "%$searchTerm%")
-                    ->orWhere('id', 'like', "%$searchTerm%")
-                    ->orWhere('DeviceType', 'like', "%$searchTerm%")
-                    ->orWhere('DeviceBrand', 'like', "%$searchTerm%")
-                    ->orWhere('updated_at', 'like', "%$searchTerm%")
-                    ->orWhere('DeviceLocation', 'like', "%$searchTerm%");
-            })
+            $emp_dev_acc = DeviceModel::select('id', 'DeviceID', 'DeviceType', 'DeviceBrand', 'issue_date', 'DeviceLocation', 'is_accountability')
             ->whereIn('is_accountability', function($query) {
                 $query->select('EmployeeID')
-                      ->from('employee');
-            })
-            ->orderBy($column, $direction)
-            ->paginate($perPage);
+                    ->from('employee');
+                })
+            ->paginate(1000);
 
-        // Append search term to pagination links
-        $emp_dev_acc->appends(['search' => $searchTerm]);
+            $emp_dev_acc = DB::table('devices')
+                ->where(function ($query) use ($searchTerm) {
+                    $query->where('DeviceID', 'like', "%$searchTerm%")
+                        ->orWhere('id', 'like', "%$searchTerm%")
+                        ->orWhere('DeviceType', 'like', "%$searchTerm%")
+                        ->orWhere('DeviceBrand', 'like', "%$searchTerm%")
+                        ->orWhere('issue_date', 'like', "%$searchTerm%")
+                        ->orWhere('DeviceLocation', 'like', "%$searchTerm%");
+                })
+                ->whereIn('is_accountability', function($query) {
+                    $query->select('EmployeeID')
+                        ->from('employee');
+                })
+                ->orderBy($column, $direction)
+                ->paginate($perPage);
+
+            // Append search term to pagination links
+            $emp_dev_acc->appends(['search' => $searchTerm]);
+        // Borrowed Ends Here
+
+        // This is for Returned
+            $searchTerm_returned = $request->input('search_emp_details_returned');
+            $perPage = 1000;
+            $column = $request->get('column', 'id'); // Default column to sort
+            $direction = $request->get('direction', 'asc'); // Default sorting direction
+
+            // Variable = DB::select('select * from "DB TABLE NAME" where "TABLE" = ?', [$"TABLE"]);
+            $empdetails= DB::select('select * from employee where id = ?', [$id]);
+
+            $emp_dev_acc_returned = DB::table('accountability_logs')->select('id', 'HostID', 'Type', 'Brand', 'Location', 'issue_date', 'return_date', 'is_accountability')
+            ->whereIn('is_accountability', function($query) {
+                $query->select('EmployeeID')
+                    ->from('employee');
+                })
+            ->paginate(1000);
+
+            $emp_dev_acc_returned = DB::table('accountability_logs')
+                ->where(function ($query) use ($searchTerm_returned) {
+                    $query->where('id', 'like', "%$searchTerm_returned%")
+                        ->orWhere('HostID', 'like', "%$searchTerm_returned%")
+                        ->orWhere('Type', 'like', "%$searchTerm_returned%")
+                        ->orWhere('Brand', 'like', "%$searchTerm_returned%")
+                        ->orWhere('Location', 'like', "%$searchTerm_returned%")
+                        ->orWhere('issue_date', 'like', "%$searchTerm_returned%")
+                        ->orWhere('return_date', 'like', "%$searchTerm_returned%");
+                })
+                ->whereIn('is_accountability', function($query) {
+                    $query->select('EmployeeID')
+                        ->from('employee');
+                })
+                ->orderBy($column, $direction)
+                ->paginate($perPage);
+
+            // Append search term to pagination links
+            $emp_dev_acc_returned->appends(['search' => $searchTerm_returned]);
+        // Returned Ends Here
 
         // return view('Blade', compact('Variable'));
-        return view('empaccview', ['empdetails'=>$empdetails,'emp_dev_acc' => $emp_dev_acc]);
+        return view('empaccview', ['empdetails'=>$empdetails,'emp_dev_acc' => $emp_dev_acc,
+        'searchTerm_returned' => $searchTerm_returned, 'emp_dev_acc_returned' => $emp_dev_acc_returned]);
     }
 
     // EDITING EMPLOYEE DETAILS
@@ -129,37 +162,36 @@ class EmployeeController extends Controller
 
     // UPDATING EMPLOYEE DETAILS
     public function update_emp(Request $request, $id){
-        //
-        $request->validate([
-            'EmployeeID'=> 'required',
-            'Department',
-            'Status'=> 'required',
-            'EmployeeFName'=> 'required',
-            'EmployeeIName'=> 'required',
-            'EmployeeLName'=> 'required',
-            'Email'=> 'required'
-        ]);
+        $emp_edit = array();
+        // Check if the device with the given serial number already exists
+        $emp_edit = DB::table('employee')->where('EmployeeID', $request->input('EmployeeID'))->first();
 
-        $employee = DB::table('employee')->where('id',$id)->update([
-            'EmployeeID'=> $request['EmployeeID'],
-            'Department'=> $request['Department'],
-            'Status'=> $request['Status'],
-            'EmployeeFName'=> $request['EmployeeFName'],
-            'EmployeeIName'=> $request['EmployeeIName'],
-            'EmployeeLName'=> $request['EmployeeLName'],
-            'Email'=> $request['Email']
-        ]);
+        // If the device with the given serial number exists and it's not the device being edited
+        if ($emp_edit && $emp_edit->id != $id) {
+            return redirect('/itsemployeeaccountabilityemployee')->with('failed_update', ' ');
+        } else {
+            $employee = DB::table('employee')->where('id',$id)->update([
+                'EmployeeID'=> $request['EmployeeID'],
+                'Department'=> $request['Department'],
+                'Status'=> $request['Status'],
+                'EmployeeFName'=> $request['EmployeeFName'],
+                'EmployeeIName'=> $request['EmployeeIName'],
+                'EmployeeLName'=> $request['EmployeeLName'],
+                'Email'=> $request['Email'],
+                'updated_at' => now()
+            ]);
 
-
-        return redirect('/itsemployeeaccountabilityemployee')->with('update',' ');
+            return redirect('/itsemployeeaccountabilityemployee')->with('update',' ');
+        }
     }
 
     // VIEW INSIDE EMPLOYEE ABOUT THE DEVICE DETAILS
     public function details_emp($id){
+        $data_location = DB::table('locations')->get();
         $empaccdev_details = DB::table('devices')->find($id);
         $empaccdev_specs = DB::table('device_specs')->find($id);
         $empaccdev_pd = DB::table('device_purchase_details')->find($id);
-        return view ('empaccdevice',compact('empaccdev_details','empaccdev_specs','empaccdev_pd'));
+        return view ('empaccdevice',compact('empaccdev_details','empaccdev_specs','empaccdev_pd', 'data_location'));
     }
 
     public function return(Request $request, $id){
@@ -185,7 +217,20 @@ class EmployeeController extends Controller
             'DevicePriceprunit'=> 'required',
             'DeviceSupplier'=> 'required',
             'DeviceDateOfPurch'=> 'required',
-            'DeviceWarranty'
+            'DeviceWarranty',
+            'issue_date',
+            'is_accountability'
+        ]);
+
+        DB::table('accountability_logs')->where('id',$id)->insert([
+            'HostID' => $request['DeviceID'],
+            'Type' => $request['DeviceType'],
+            'Brand' => $request['DeviceBrand'],
+            'issue_date' => $request['issue_date'],
+            'return_date' => now(),
+            'Location' => $request['DeviceLocation'],
+            'is_accountability' => $request['is_accountability']
+
         ]);
 
         $empaccdev_details = DB::table('devices')->where('id',$id)->update([
@@ -199,7 +244,8 @@ class EmployeeController extends Controller
             'DeviceLocation' => 'Storage',
             'DeviceStatus' => $request['DeviceStatus'],
             'DeviceRemarks' => $request['DeviceRemarks'],
-            'is_accountability' => NULL
+            'is_accountability' => NULL,
+            'issue_date' => NULL
         ]);
 
         $empaccdev_specs = DB::table('device_specs')->where('id',$id)->update([
@@ -218,7 +264,6 @@ class EmployeeController extends Controller
             'DeviceDateOfPurch' => $request['DeviceDateOfPurch'],
             'DeviceWarranty' => $request['DeviceWarranty']
         ]);
-
 
         return redirect('itsemployeeaccountabilityemployee')->with('return', ' ');
     }

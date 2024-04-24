@@ -25,8 +25,6 @@ return new class extends Migration
             $table->string('DeviceSize')->nullable();
             $table->integer('DeviceStorage1')->nullable();
             $table->integer('DeviceStorage2')->nullable();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
 
         });
     }

@@ -3,7 +3,8 @@
         <head>
             <title>Inventory / Devices</title>
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
+            <!-- Select2 CSS -->
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
             <style>
                 #dataTable th{
                     background-color: #e5e7eb;
@@ -11,6 +12,39 @@
                 }
                 #dataTable td{
                     padding: 10px;
+                }
+                .select2 {
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    font-size: 0.875rem;
+                    border-radius: 0.375rem;
+                    width: 181px;
+                    text-align: center; /* Center the text */
+                    margin: auto;
+                }
+
+                .select2-container .select2-selection--single {
+                    box-sizing: border-box;
+                    cursor: pointer;
+                    display: block;
+                    height: 40px;
+                    user-select: none;
+                    -webkit-user-select: none;
+                    text-align: center; /* Center the text */
+                    padding-top:5px;
+                }
+                .select2-container--default .select2-results__option--highlighted[aria-selected] {
+                    font-size: 0.875rem;
+                    color: white
+                    text-align: center; /* Center the text */
+                }
+                .select2-results__options {
+                    font-size: 0.800rem;
+                    text-align: center; /* Center the text */
+                }
+
+                .select2-search--dropdown .select2-search__field {
+                    font-size: 0.800rem;
                 }
             </style>
 
@@ -45,82 +79,90 @@
 
                 <div class="border-b-2 border-neutral-100 px-6 py-3 dark:border-black/20 my-6">
                 </div>
+
                 <!-- Notification -->
 
-                <!-- Notification for SUCCESS -->
-                @if(Session::get('success'))
-
-                <div class="mb-3 bg-green-100 border-t-4 border-green-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
-                    <div class="flex">
-                        <div class="py-1">
-                            <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
+                    <!-- Notification for SUCCESS -->
+                    @if(Session::get('success'))
+                        <div class="mb-3 bg-green-100 border-t-4 border-green-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                            <div class="flex">
+                                <div class="py-1">
+                                    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Inventory Management System</p>
+                                    <p class="text-sm">Success! Your device details have been saved.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <p class="font-bold">Inventory Management System</p>
-                            <p class="text-sm">Success! Your Device details have been Saved.</p>
+                        {{ Session::get('success')}}
+                    @endif
+
+                    <!-- Notification for FAILED -->
+                    @if(Session::get('failed'))
+                        <div class="mb-3 bg-red-100 border-t-4 border-red-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                            <div class="flex">
+                                <div class="py-1">
+                                    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Inventory Management System</p>
+                                    <p class="text-sm">Failed! The device you entered is already exist.</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                        {{ Session::get('failed')}}
+                    @endif
 
-                {{ Session::get('success')}}
-
-                @endif
-
-                <!-- Notification for UPDATE -->
-
-                @if(Session::get('update'))
-
-                <div class="mb-3 bg-green-100 border-t-4 border-green-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
-                    <div class="flex">
-                        <div class="py-1">
-                            <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
+                    <!-- Notification for UPDATE -->
+                    @if(Session::get('update'))
+                        <div class="mb-3 bg-green-100 border-t-4 border-green-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                            <div class="flex">
+                                <div class="py-1">
+                                    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Inventory Management System</p>
+                                    <p class="text-sm">Success! The device has been updated.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <p class="font-bold">Inventory Management System</p>
-                            <p class="text-sm">Success! Your Device has been Updated.</p>
+                        {{ Session::get('update')}}
+                    @endif
+
+                    <!-- Notification for FAILED UPDATE-->
+                    @if(Session::get('failed_update'))
+                        <div class="mb-3 bg-red-100 border-t-4 border-red-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                            <div class="flex">
+                                <div class="py-1">
+                                    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Inventory Management System</p>
+                                    <p class="text-sm">Failed to update! Change a few things up and try submitting again.</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                        {{ Session::get('failed_update')}}
+                    @endif
 
-                {{ Session::get('update')}}
-
-                @endif
-
-                <!-- Notification for DELETE -->
-
-                @if(Session::get('delete'))
-
-                <div class="mb-3 bg-green-100 border-t-4 border-green-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
-                    <div class="flex">
-                        <div class="py-1">
-                            <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
+                    <!-- Notification for DELETE -->
+                    @if(Session::get('delete'))
+                        <div class="mb-3 bg-green-100 border-t-4 border-green-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                            <div class="flex">
+                                <div class="py-1">
+                                    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Inventory Management System</p>
+                                    <p class="text-sm">Success! The selected data has been deleted.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <p class="font-bold">Inventory Management System</p>
-                            <p class="text-sm">Success! The selected data has been Deleted.</p>
-                        </div>
-                    </div>
-                </div>
+                        {{ Session::get('delete')}}
+                    @endif
 
-                {{ Session::get('delete')}}
-
-                @endif
-
-                <!-- Notification for FAILED -->
-
-                @if(Session::get('fail'))
-                <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
-                    <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                    </svg>
-                    <span class="sr-only">Info</span>
-                    <div>
-                      <span class="font-medium">Danger alert!</span> Change a few things up and try submitting again.
-                    </div>
-                </div>
-                        {{ Session::get('fail')}}
-
-                @endif
+                <!-- Notification Ends here-->
 
                 <!-- MODAL FOR ADD BUTTON (CREATING DATA) -->
 
@@ -178,7 +220,7 @@
                                     <div class="flex">
                                         <div class="col-span-2 sm:col-span-1 mt-3">
                                             <label for="DeviceID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">HOST ID</label>
-                                            <input type="text" name="DeviceID" id="DeviceID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Host ID" required="">
+                                            <input type="text" name="DeviceID" id="DeviceID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Host ID">
                                         </div>
                                         <div class="ml-3">
                                             <div class="col-span-2 sm:col-span-1 mt-3">
@@ -202,7 +244,7 @@
                                     <div class="flex">
                                         <div class="col-span-2 sm:col-span-1 mt-3">
                                             <label for="DeviceSerialNo" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Serial Number</label>
-                                            <input type="text" name="DeviceSerialNo" id="DeviceSerialNo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Device Serial No.">
+                                            <input type="text" name="DeviceSerialNo" id="DeviceSerialNo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Device Serial No." required="">
                                         </div>
                                         <div class="col-span-2 sm:col-span-1 mt-3">
                                             <div class="ml-3">
@@ -213,16 +255,19 @@
                                     </div>
                                     <div class="flex">
                                         <div class="col-span-2 sm:col-span-1 mt-3">
-                                            <label for="DeviceLocation" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase"style="width:181px">Location</label>
-                                            <select name="DeviceLocation" id="DeviceLocation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:181px">
-                                                <option name="DeviceLocation" value="Office">Office</option>
-                                                <option name="DeviceLocation" value="Storage">Storage</option>
+                                            <label for="DeviceLocation" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase" style="width:181px">Location</label>
+                                            <select name="DeviceLocation" id="DeviceLocation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:230px">
+                                                @if(isset($data_location))
+                                                    @foreach ($data_location as $row_location)
+                                                        <option value="{{ $row_location->Building }} | {{ $row_location->Floor }}  | {{ $row_location->RoomNo }}  | {{ $row_location->RoomName }}">{{ $row_location->Building }} <a class="ml-1"> | {{ $row_location->Floor }} <a class="ml-1"> | {{ $row_location->RoomNo }} <a class="ml-1"> | {{ $row_location->RoomName }}</option>
+                                                    @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                         <div class="col-span-2 sm:col-span-1 mt-3">
                                             <div class="ml-3">
                                                 <label for="DeviceStatus" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Status</label>
-                                                <select name="DeviceStatus" id="DeviceStatus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500"style="width:181px">
+                                                <select name="DeviceStatus" id="DeviceStatus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:130px">
                                                     <option name="DeviceStatus" value="Working">Working</option>
                                                     <option name="DeviceStatus" value="Not Working">Not Working</option>
                                                 </select>
@@ -304,19 +349,19 @@
                                         <div class="flex">
                                             <div class="col-span-2 sm:col-span-1 mt-3">
                                                 <label for="DevicePriceprunit" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Price per unit</label>
-                                                <input type="text" name="DevicePriceprunit" id="DevicePriceprunit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Price per unit" required="">
+                                                <input type="text" name="DevicePriceprunit" id="DevicePriceprunit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Price per unit">
                                             </div>
                                             <div class="ml-3">
                                                 <div class="col-span-2 sm:col-span-1 mt-3">
                                                     <label for="DeviceSupplier" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Supplier</label>
-                                                    <input type="text" name="DeviceSupplier" id="DeviceSupplier" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Supplier" required="">
+                                                    <input type="text" name="DeviceSupplier" id="DeviceSupplier" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Supplier">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="flex">
                                             <div class="col-span-2 sm:col-span-1 mt-3">
                                                 <label for="DeviceDateOfPurch" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Date of Purchase</label>
-                                                <input type="text" name="DeviceDateOfPurch" id="DeviceDateOfPurch" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Date of Purchase" required="">
+                                                <input type="text" name="DeviceDateOfPurch" id="DeviceDateOfPurch" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Date of Purchase">
                                             </div>
                                             <div class="ml-3">
                                                 <div class="col-span-2 sm:col-span-1 mt-3">
@@ -636,6 +681,11 @@
 
                 <!-- PAGINATION Ends Here -->
 
+                <!-- JavaScript -->
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+                <!-- JavaScript ENDS HERE -->
+
                 <script>
                     document.getElementById('DeviceType').addEventListener('change', function() {
                         var floorDropdown = document.getElementById('floorDropdown');
@@ -644,6 +694,11 @@
                         } else {
                             floorDropdown.style.display = 'none';
                         }
+                    });
+
+                     // Dropdown with search of Location
+                     $(document).ready(function() {
+                        $('#DeviceLocation').select2();
                     });
                 </script>
 

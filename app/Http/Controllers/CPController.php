@@ -134,7 +134,8 @@ class CPController extends Controller
             'CPModel' => $request['CPModel'],
             'CPQuantity' => $request['CPQuantity'],
             'CPStatus' => $request['CPStatus'],
-            'CPRemarks' => $request['CPRemarks']
+            'CPRemarks' => $request['CPRemarks'],
+            'updated_at' => now()
         ]);
 
         $cps_purchasedetails = DB::table('cp_purchase_details')->where('id',$id)->update([

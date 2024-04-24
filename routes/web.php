@@ -312,6 +312,15 @@ Route::get('/itsaccountabilitystudent', [StudentController::class, 'show_student
 /* SEARCH Student */
 Route::get('search_student',[StudentController::Class, 'search_student']);
 
+/* Routes for Student */
+Route::get('/studaccview', function () {
+    return view('studaccview');
+})->middleware(['auth'])->name('studaccview');
+
+/* Route for VIEW Student*/
+// Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
+Route::get('studaccview/{id}',[StudentController::class,'details_studacc'])->name('studaccview');
+
 /* Route for EDIT STUDENT*/
 Route::get('/studentedit', function () {
     return view('studentedit');
@@ -321,8 +330,19 @@ Route::get('/studentedit', function () {
 // Route::get('BLADE NAME',[CONTROLLER::class,'FUNCTION']);
 Route::get('studentedit/{id}',[StudentController::class,'edit_stud']);
 
-// UPDATE THE EMPLOYEE
+// UPDATE THE STUDENT
 Route::put('update_student/{id}',[StudentController::class,'update_stud']);
+
+// VIEW INSIDE STUDENT
+Route::get('/studaccdevice', function () {
+    return view('studaccdevice');
+})->middleware(['auth'])->name('studaccdevice');
+
+// ROUTE FOR OPENNING studaccdevice.blade.php
+Route::get('studaccdevice/{id}',[StudentController::class,'details_stud']);
+
+// RETURNING DEVICE
+Route::put('return_device_stud/{id}',[StudentController::class,'return_stud']);
 /*---------------------------------------------------------------------*/
 
 
@@ -393,8 +413,14 @@ Route::get('/itsemployeeaccountabilitydevice', [DeviceAccController::class, 'sea
 
 Route::get('/itsemployeeaccountabilitydevicemodal', [DeviceAccController::class, 'search_acc_device_modal'])->name('itsemployeeaccountabilitydevicemodal.show');
 
-// UPDATE
+// UPDATE TO ASSIGN DEVICES
 Route::post('/update/devices', [DeviceAccController::class,'update'])->name('update.devices');
+
+// UPDATE TO DEPLOY DEVICES
+Route::post('/update/deploy', [DeviceAccController::class,'update_deploy'])->name('update.deploy');
+
+// UPDATE TO PULLOUT DEVICES
+Route::post('/update/pullout', [DeviceAccController::class,'update_pullout'])->name('update.pullout');
 
 // SEARCH OUTSIDE THE MODAL
 Route::get('/search_acc_device', [DeviceAccController::class, 'search_acc_device'])->name('search_acc_device');

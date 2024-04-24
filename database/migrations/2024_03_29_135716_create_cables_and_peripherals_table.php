@@ -25,8 +25,10 @@ return new class extends Migration
             $table->string('CPQuantity', 255)->nullable();
             $table->string('CPStatus', 255)->nullable();
             $table->string('CPRemarks', 255)->nullable();
+            $table->string('is_accountability')->nullable();
+            $table->string('issue_date')->nullable();
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
