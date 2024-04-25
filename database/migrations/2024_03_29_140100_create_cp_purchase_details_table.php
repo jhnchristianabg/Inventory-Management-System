@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('CPSupplier', 255)->nullable();
             $table->string('CPDateOfPurch', 255)->nullable();
             $table->string('CPWarranty', 255)->nullable();
+            $table->timestamp('updated_at')->nullable();
 
         });
     }

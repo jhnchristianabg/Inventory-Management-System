@@ -315,7 +315,7 @@
                                                             @foreach($deviceview_acc as $devices)
                                                                 <tr class="bg-white border-b dark:border-gray-300 text-black">
                                                                     <td class="px-6 py-4 font-bold uppercase">
-                                                                        <input type="checkbox" name="selected_device" value="{{ $devices->id }}">
+                                                                        <input type="checkbox" name="selected_device[]" value="{{ $devices->id }}">
                                                                     </td>
                                                                     <td class="px-6 py-4 font-bold uppercase">{{$devices->DeviceID}}</td>
                                                                     <td class="px-6 py-4">{{$devices->DeviceType}}</td>
@@ -491,7 +491,7 @@
                                                             @foreach($dev_acc_pull as $devices_pull)
                                                                 <tr class="bg-white border-b dark:border-gray-300 text-black">
                                                                     <td class="px-6 py-4 font-bold uppercase">
-                                                                        <input type="checkbox" name="selected_device" value="{{ $devices_pull->id }}">
+                                                                        <input type="checkbox" name="selected_device[]" value="{{ $devices_pull->id }}">
                                                                     </td>
                                                                     <td class="px-6 py-4 font-bold uppercase">{{$devices_pull->DeviceID}}</td>
                                                                     <td class="px-6 py-4">{{$devices_pull->DeviceType}}</td>
@@ -1227,111 +1227,115 @@
                 <!-- JS Ends here -->
 
                 <script>
-                    // Function to gather selected device IDs
-                    function getSelectedDevices() {
-                        const selectedDevices = [];
-                        const checkboxes = document.querySelectorAll('input[type="checkbox"][name="selected_device[]"]:checked');
-                        checkboxes.forEach(checkbox => {
-                            selectedDevices.push(checkbox.value);
+                    // ASSIGN
+                        // Function to gather selected device IDs
+                        function getSelectedDevices() {
+                            const selectedDevices = [];
+                            const checkboxes = document.querySelectorAll('input[type="checkbox"][name="selected_device[]"]:checked');
+                            checkboxes.forEach(checkbox => {
+                                selectedDevices.push(checkbox.value);
+                            });
+                            return selectedDevices;
+                        }
+
+                        // Function to update selected devices
+                        function updateSelectedDevices() {
+                            const selectedDevices = getSelectedDevices();
+                            const newAcc = document.getElementById('is_accountability').value;
+                            const newDeviceID = document.getElementById('newDeviceID').value;
+                            const newLocation = document.getElementById('newLocation').value;
+
+                            // Send AJAX request to update devices
+                            $.ajax({
+                                url: '{{ route("update.devices") }}',
+                                method: 'POST',
+                                data: {
+                                    selected_device: selectedDevices,
+                                    is_accountability: newAcc,
+                                    newDeviceID: newDeviceID,
+                                    newLocation: newLocation,
+                                    _token: '{{ csrf_token() }}'
+                                },
+                                success: function(response) {
+                                    // Handle success response
+                                    console.log(response);
+                                    // Store a flag indicating success in session storage
+                                    sessionStorage.setItem('updateSuccess', 'true');
+                                    // Reload the page
+                                    location.reload();
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error response
+                                    console.error(error);
+                                    // You can show an error message here
+                                }
+                            });
+                        }
+                    // END OF ASSIGN
+
+                    // SELECT 2
+                        // Dropdown with search of Employee ID
+                        $(document).ready(function() {
+                            $('#employee').select2();
                         });
-                        return selectedDevices;
-                    }
+                        // Dropdown with search of Location
+                        $(document).ready(function() {
+                            $('#newLocation').select2();
+                        });
 
-                    // Function to update selected devices
-                    function updateSelectedDevices() {
-                        const selectedDevices = getSelectedDevices();
-                        const newAcc = document.getElementById('is_accountability').value;
-                        const newDeviceID = document.getElementById('newDeviceID').value;
-                        const newLocation = document.getElementById('newLocation').value;
+                        // Dropdown with search of Location for DEPLOY
+                        $(document).ready(function() {
+                            $('#newLocation_Deploy').select2();
+                        });
 
-                        // Send AJAX request to update devices
-                        $.ajax({
-                            url: '{{ route("update.devices") }}',
-                            method: 'POST',
-                            data: {
-                                selected_device: selectedDevices,
-                                is_accountability: newAcc,
-                                newDeviceID: newDeviceID,
-                                newLocation: newLocation,
-                                _token: '{{ csrf_token() }}'
-                            },
-                            success: function(response) {
-                                // Handle success response
-                                console.log(response);
-                                // Store a flag indicating success in session storage
-                                sessionStorage.setItem('updateSuccess', 'true');
-                                // Reload the page
-                                location.reload();
-                            },
-                            error: function(xhr, status, error) {
-                                // Handle error response
-                                console.error(error);
-                                // You can show an error message here
+                        $(document).ready(function() {
+                            $('#newLocation_Pullout').select2();
+                        });
+
+                        // STUDENT DROPDOWN
+                        // Dropdown with search of Student ID
+                        $(document).ready(function() {
+                            $('#student').select2();
+                        });
+
+                        // ---------------------------------------------------------------
+
+                        // DROPDOWN FOR TYPE either Employee or Student
+                        const typeDropdown = document.getElementById('Type');
+                        const employeeDropdown = document.getElementById('employeeDropdown');
+                        const studentDropdown = document.getElementById('studentDropdown');
+                        const employeeSelect = document.getElementById('employee');
+                        const studentSelect = document.getElementById('student');
+
+                        // Add event listener to the type dropdown
+                        typeDropdown.addEventListener('change', function () {
+                            if (typeDropdown.value === '') {
+                                // If "Choose Type" is selected, hide and disable both dropdowns
+                                employeeDropdown.style.display = 'none';
+                                studentDropdown.style.display = 'none';
+                                DeviceIDDropdown.style.display = 'none';
+                                LocationDropdown.style.display = 'none';
+                                employeeSelect.disabled = true;
+                                studentSelect.disabled = true;
+                            } else if (typeDropdown.value === 'Employee') {
+                                // If "Employee" is selected, show and enable the employee dropdown, and hide and disable the student dropdown
+                                employeeDropdown.style.display = 'block';
+                                studentDropdown.style.display = 'none';
+                                DeviceIDDropdown.style.display = 'block';
+                                LocationDropdown.style.display = 'block';
+                                employeeSelect.disabled = false;
+                                studentSelect.disabled = true;
+                            } else if (typeDropdown.value === 'Student') {
+                                // If "Student" is selected, show and enable the student dropdown, and hide and disable the employee dropdown
+                                studentDropdown.style.display = 'block';
+                                employeeDropdown.style.display = 'none';
+                                DeviceIDDropdown.style.display = 'block';
+                                LocationDropdown.style.display = 'block';
+                                studentSelect.disabled = false;
+                                employeeSelect.disabled = true;
                             }
                         });
-                    }
-
-                    // Dropdown with search of Employee ID
-                    $(document).ready(function() {
-                        $('#employee').select2();
-                    });
-                    // Dropdown with search of Location
-                    $(document).ready(function() {
-                        $('#newLocation').select2();
-                    });
-
-                    // Dropdown with search of Location for DEPLOY
-                    $(document).ready(function() {
-                        $('#newLocation_Deploy').select2();
-                    });
-
-                    $(document).ready(function() {
-                        $('#newLocation_Pullout').select2();
-                    });
-
-                    // STUDENT DROPDOWN
-                    // Dropdown with search of Student ID
-                    $(document).ready(function() {
-                        $('#student').select2();
-                    });
-
-                    // ---------------------------------------------------------------
-
-                    // DROPDOWN FOR TYPE either Employee or Student
-                    const typeDropdown = document.getElementById('Type');
-                    const employeeDropdown = document.getElementById('employeeDropdown');
-                    const studentDropdown = document.getElementById('studentDropdown');
-                    const employeeSelect = document.getElementById('employee');
-                    const studentSelect = document.getElementById('student');
-
-                    // Add event listener to the type dropdown
-                    typeDropdown.addEventListener('change', function () {
-                        if (typeDropdown.value === '') {
-                            // If "Choose Type" is selected, hide and disable both dropdowns
-                            employeeDropdown.style.display = 'none';
-                            studentDropdown.style.display = 'none';
-                            DeviceIDDropdown.style.display = 'none';
-                            LocationDropdown.style.display = 'none';
-                            employeeSelect.disabled = true;
-                            studentSelect.disabled = true;
-                        } else if (typeDropdown.value === 'Employee') {
-                            // If "Employee" is selected, show and enable the employee dropdown, and hide and disable the student dropdown
-                            employeeDropdown.style.display = 'block';
-                            studentDropdown.style.display = 'none';
-                            DeviceIDDropdown.style.display = 'block';
-                            LocationDropdown.style.display = 'block';
-                            employeeSelect.disabled = false;
-                            studentSelect.disabled = true;
-                        } else if (typeDropdown.value === 'Student') {
-                            // If "Student" is selected, show and enable the student dropdown, and hide and disable the employee dropdown
-                            studentDropdown.style.display = 'block';
-                            employeeDropdown.style.display = 'none';
-                            DeviceIDDropdown.style.display = 'block';
-                            LocationDropdown.style.display = 'block';
-                            studentSelect.disabled = false;
-                            employeeSelect.disabled = true;
-                        }
-                    });
+                    // END OF SELECT 2
 
                     // THIS IS FOR TABS OF ASSIGNED AND DEPLOYED
                         document.addEventListener('DOMContentLoaded', () => {

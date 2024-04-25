@@ -196,32 +196,6 @@ class EmployeeController extends Controller
 
     public function return(Request $request, $id){
 
-        $request->validate([
-            'DeviceID'=> 'required',
-            'DeviceType',
-            'DeviceName'=> 'required',
-            'DeviceBrand'=> 'required',
-            'DeviceModel'=> 'required',
-            'DeviceSerialNo',
-            'DeviceMacAdd',
-            'DeviceLocation'=> 'required',
-            'DeviceStatus',
-            'DeviceRemarks',
-            'DeviceOperatingSys',
-            'DeviceProductKey',
-            'DeviceProcessor',
-            'DeviceMemory',
-            'DeviceSize',
-            'DeviceStorage1',
-            'DeviceStorage2',
-            'DevicePriceprunit'=> 'required',
-            'DeviceSupplier'=> 'required',
-            'DeviceDateOfPurch'=> 'required',
-            'DeviceWarranty',
-            'issue_date',
-            'is_accountability'
-        ]);
-
         DB::table('accountability_logs')->where('id',$id)->insert([
             'HostID' => $request['DeviceID'],
             'Type' => $request['DeviceType'],
@@ -234,7 +208,7 @@ class EmployeeController extends Controller
         ]);
 
         $empaccdev_details = DB::table('devices')->where('id',$id)->update([
-            'DeviceID' => 'STRG',
+            'DeviceID' => NULL,
             'DeviceType' => $request['DeviceType'],
             'DeviceName' => $request['DeviceName'],
             'DeviceBrand' => $request['DeviceBrand'],

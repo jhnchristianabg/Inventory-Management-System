@@ -10,6 +10,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DeviceAccController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\RemoveInventory;
 
 /*
 |--------------------------------------------------------------------------
@@ -469,3 +470,37 @@ Route::get('locationedit', function () {
 Route::get('locationedit/{id}',[LocationController::class,'edit_loc']);
 
 Route::put('update_location/{id}',[LocationController::class,'update_loc']);
+/*---------------------------------------------------------------------*/
+
+
+
+/*---------------------------------------------------------------------*/
+/* REMOVE DEVICES */
+Route::get('/removedevice', function () {
+    return view('removedevice');
+})->middleware(['auth'])->name('removedevice');
+
+// Route for view table of removed devices
+Route::get('removedevice', [RemoveInventory::class, 'show'])->name('removedevice.show');
+
+// Route for searching removed devices
+Route::get('search_remove_device',[RemoveInventory::class, 'search_remove_device']);
+/*---------------------------------------------------------------------*/
+
+
+/*---------------------------------------------------------------------*/
+/* REMOVE CABLES AND PERIPHERALS */
+Route::get('/removecp', function () {
+    return view('removecp');
+})->middleware(['auth'])->name('removecp');
+
+/*---------------------------------------------------------------------*/
+
+
+/*---------------------------------------------------------------------*/
+/* REMOVE CONSUMABLES */
+Route::get('/removecons', function () {
+    return view('removecons');
+})->middleware(['auth'])->name('removecons');
+
+/*---------------------------------------------------------------------*/

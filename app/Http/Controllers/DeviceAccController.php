@@ -16,7 +16,7 @@ class DeviceAccController extends Controller
     }
 
     public function search_acc_device(Request $request){
-        // OUTSIDE MODAL
+        // OUTSIDE MODAL ASSIGNED
             $searchTerm2 = $request->input('search_device');
             $dev_acc_perPage = 10;
             $column_acc_dev = $request->get('column_acc_dev', 'id');
@@ -26,7 +26,7 @@ class DeviceAccController extends Controller
             $data_location = DB::table('locations')->get();
             $data_student = DB::table('student')->get();
 
-            $dev_acc_query = DeviceModel::select('id', 'DeviceID', 'DeviceType', 'DeviceBrand', 'issue_date', 'DeviceLocation', 'is_accountability')
+            $dev_acc_query = DeviceModel::select('id', 'DeviceID', 'DeviceType', 'DeviceBrand', 'issue_date', 'DeviceLocation', 'is_accountability', 'deleted_at')
                 ->whereNotNull('is_accountability')
                 ->where('DeviceID', '!=', 'FEU-Cavite') // Exclude rows with DeviceID equal to "FEU-Cavite"
                 ->where(function ($query) use ($searchTerm2) {
@@ -44,15 +44,15 @@ class DeviceAccController extends Controller
 
             // Append search term to pagination links outside modal
             $dev_acc->appends(['search_device' => $searchTerm2]);
-        // END OF OUTSIDE MODAL
+        // END OF OUTSIDE MODAL ASSIGNED
 
-        // MODAL DEPLOYED
+        // OUTSIDE MODAL DEPLOYED
             $searchTerm2_dep = $request->input('search_dep');
             $dev_acc_perPage_dep = 10;
             $column_acc_dep = $request->get('column_acc_dep', 'id');
             $direction_acc_dep = $request->get('direction_acc_dep', 'asc');
 
-            $dev_acc_query_dep = DeviceModel::select('id', 'DeviceID', 'DeviceType', 'DeviceBrand', 'issue_date', 'DeviceLocation', 'is_accountability')
+            $dev_acc_query_dep = DeviceModel::select('id', 'DeviceID', 'DeviceType', 'DeviceBrand', 'issue_date', 'DeviceLocation', 'is_accountability', 'deleted_at')
                 ->whereNotNull('is_accountability')
                 ->where('DeviceID', '=', 'FEU-Cavite') // Exclude rows with DeviceID equal to "FEU-Cavite"
                 ->where(function ($query) use ($searchTerm2_dep) {
@@ -70,7 +70,7 @@ class DeviceAccController extends Controller
 
             // Append search term to pagination links outside modal
             $dev_acc_dep->appends(['search_dep' => $searchTerm2_dep]);
-        // END OF MODAL DEPLOYED
+        // END OF OUTSIDE MODAL DEPLOYED
 
         // MODAL PULLOUT
             $searchTerm2_pull = $request->input('search_pull');
@@ -99,7 +99,7 @@ class DeviceAccController extends Controller
             $dev_acc_pull->appends(['search_pull' => $searchTerm2_pull]);
         // END OF MODAL PULLOUT
 
-        //  MODAL ASSIGNED
+        //  MODAL ASSIGN and DEPLOY
             $searchTerm1 = $request->input('search_devicemodal');
             $deviceview_acc_perPage = 5;
             $column_acc_dev_modal = $request->get('column', 'id');
@@ -107,6 +107,7 @@ class DeviceAccController extends Controller
 
             $deviceview_acc_query = DB::table('devices')->select('id', 'DeviceID', 'DeviceType', 'DeviceName', 'DeviceBrand', 'DeviceModel', 'DeviceSerialNo', 'DeviceLocation')
                 ->whereNull('is_accountability')
+                ->whereNull('deleted_at')
                 ->where(function ($query) use ($searchTerm1) {
                     $query->where('DeviceID', 'like', "%$searchTerm1%")
                         ->orWhere('id', 'like', "%$searchTerm1%")
@@ -153,36 +154,54 @@ class DeviceAccController extends Controller
     }
 
     public function update_deploy(Request $request){
-        $deviceId = $request->input('selected_device');
-        $newAcc = 'FEU-Cavite';
-        $newDeviceID_Deploy = 'FEU-Cavite';
-        $newLocation_Deploy = $request->input('newLocation_Deploy');
+        $selectedDevices = $request->input('selected_device');
 
-        // Update the selected device
-        DB::table('devices')->where('id', $deviceId)->update([
-            'DeviceID' => $newDeviceID_Deploy,
-            'DeviceLocation' => $newLocation_Deploy,
-            'is_accountability' => $newAcc,
-            'issue_date' => now() // Set the updated_at column to current timestamp
-        ]);
+        // Check if $selectedDevices is an array, if not, convert it to an array
+        if (!is_array($selectedDevices)) {
+            $selectedDevices = [$selectedDevices];
+        }
+
+        $newAcc = 'FEU-Cavite';
+        $newDeviceId = 'FEU-Cavite';
+        $newLocation = $request->input('newLocation_Deploy');
+
+        // Loop through each selected device and update
+        foreach ($selectedDevices as $deviceId) {
+            // Update each selected device
+            DB::table('devices')->where('id', $deviceId)->update([
+                'DeviceID' => $newDeviceId,
+                'DeviceLocation' => $newLocation,
+                'is_accountability' => $newAcc,
+                'issue_date' => now() // Set the updated_at column to current timestamp
+            ]);
+        }
 
         // Set session flash data for update notification
         return redirect('/itsemployeeaccountabilitydevice')->with('deploy', ' ');
     }
 
     public function update_pullout(Request $request){
-        $deviceId = $request->input('selected_device');
-        $newAcc = NULL;
-        $newDeviceID_Pullout = 'STRG';
-        $newLocation_Pullout = $request->input('newLocation_Pullout');
+        $selectedDevices = $request->input('selected_device');
 
-        // Update the selected device
-        DB::table('devices')->where('id', $deviceId)->update([
-            'DeviceID' => $newDeviceID_Pullout,
-            'DeviceLocation' => $newLocation_Pullout,
-            'is_accountability' => $newAcc,
-            'issue_date' => NULL // Set the updated_at column to current timestamp
-        ]);
+        // Check if $selectedDevices is an array, if not, convert it to an array
+        if (!is_array($selectedDevices)) {
+            $selectedDevices = [$selectedDevices];
+        }
+
+        $newAcc = NULL;
+        $newDeviceId = NULL;
+        $newLocation = $request->input('newLocation_Pullout');
+
+        // Loop through each selected device and update
+        foreach ($selectedDevices as $deviceId) {
+            // Update each selected device
+            DB::table('devices')->where('id', $deviceId)->update([
+                'DeviceID' => $newDeviceId,
+                'DeviceLocation' => $newLocation,
+                'is_accountability' => $newAcc,
+                'issue_date' => NULL
+            ]);
+        }
 
         // Set session flash data for update notification
         return redirect('/itsemployeeaccountabilitydevice')->with('pullout', ' ');

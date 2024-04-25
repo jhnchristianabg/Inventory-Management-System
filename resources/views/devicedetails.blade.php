@@ -52,7 +52,7 @@
                                         </h3>
                                     <div class="col-span-2 mt-5">
                                         <label for="DeviceType" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device Type</label>
-                                        <input type="text" id="DeviceType" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$devdetails[0]->DeviceType}}" disabled readonly>
+                                        <input type="text" id="DeviceType" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" onchange="toggleInput()" value="{{$devdetails[0]->DeviceType}}" disabled readonly>
                                     </div>
                                     <div class="flex">
                                         <div class="col-span-2 sm:col-span-1 mt-3">
@@ -61,7 +61,7 @@
                                             <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$devdetails[0]->DeviceID}}" disabled readonly>
                                         </div>
                                         <div class="ml-3">
-                                            <div class="col-span-2 sm:col-span-1 mt-3">
+                                            <div class="col-span-2 sm:col-span-1 mt-3" id="DeviceNameContainer">
                                                 <label for="DeviceName" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Name</label>
                                                 <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$devdetails[0]->DeviceName}}" disabled readonly>
                                             </div>
@@ -110,101 +110,135 @@
                                     </div>
                                     <!-- Device Requirements End Here! -->
 
-                                    <!-- Device Specs -->
                                     <div class="float-right">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 float-left mr-3">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
-                                        </svg>
-                                        <h3 class="text-blueGray-900 text-lg font-bold uppercase mb-3">
-                                            DEVICE SPECIFICATION
-                                        </h3>
-                                        <div class="flex">
-                                            <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <label for="DeviceOperatingSys" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Operating System</label>
-                                                <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$specs[0]->DeviceOperatingSys}}" disabled readonly>
-                                            </div>
-                                            <div class="ml-3">
+
+                                        <!-- Device Specs -->
+                                            <div id="floorDropdown">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 float-left mr-3">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
+                                            </svg>
+                                            <h3 class="text-blueGray-900 text-lg font-bold uppercase mb-3">
+                                                DEVICE SPECIFICATION
+                                            </h3>
+                                            <div class="flex">
                                                 <div class="col-span-2 sm:col-span-1 mt-3">
-                                                    <label for="DeviceProductKey" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Product Key</label>
-                                                    <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$specs[0]->DeviceProductKey}}" disabled readonly>
+                                                    <label for="DeviceOperatingSys" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Operating System</label>
+                                                    <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$specs[0]->DeviceOperatingSys}}" disabled readonly>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <div class="col-span-2 sm:col-span-1 mt-3">
+                                                        <label for="DeviceProductKey" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Product Key</label>
+                                                        <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$specs[0]->DeviceProductKey}}" disabled readonly>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="flex">
-                                            <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <label for="DeviceProcessor" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Processor</label>
-                                                <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$specs[0]->DeviceProcessor}}" disabled readonly>
-                                            </div>
+                                            <div class="flex">
+                                                <div class="col-span-2 sm:col-span-1 mt-3">
+                                                    <label for="DeviceProcessor" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Processor</label>
+                                                    <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$specs[0]->DeviceProcessor}}" disabled readonly>
+                                                </div>
 
-                                            <div class="flex h-15 w-10">
-                                                <div class="ml-3 mt-3">
-                                                    <div>
-                                                        <label for="DeviceMemory" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Memory</label>
-                                                        <div class="relative mt-2 rounded-md shadow-sm"style="width:180px">
-                                                            <input type="text" name="DeviceMemory" id="DeviceMemory" class="cursor-not-allowed block w-full h-10 rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6 dark:bg-green-50" value="{{$specs[0]->DeviceMemory}}" disabled readonly>
-                                                            <div class="absolute inset-y-0 right-0 flex items-center">
-                                                                <select name="DeviceSize" id="DeviceSize" class="font-semibold cursor-not-allowed h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-7 text-black focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm" disabled readonly>
-                                                                    <option name="DeviceSize" value="TB"  @if ($specs[0]->DeviceSize == 'TB') selected @endif >TB</option>
-                                                                    <option name="DeviceSize" value="GB" @if ($specs[0]->DeviceSize == 'GB') selected @endif >GB</option>
-                                                                </select>
+                                                <div class="flex h-15 w-10">
+                                                    <div class="ml-3 mt-3">
+                                                        <div>
+                                                            <label for="DeviceMemory" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Memory</label>
+                                                            <div class="relative mt-2 rounded-md shadow-sm"style="width:180px">
+                                                                <input type="text" name="DeviceMemory" id="DeviceMemory" class="cursor-not-allowed block w-full h-10 rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6 dark:bg-green-50" value="{{$specs[0]->DeviceMemory}}" disabled readonly>
+                                                                <div class="absolute inset-y-0 right-0 flex items-center">
+                                                                    <select name="DeviceSize" id="DeviceSize" class="font-semibold cursor-not-allowed h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-7 text-black focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm" disabled readonly>
+                                                                        <option name="DeviceSize" value="TB"  @if ($specs[0]->DeviceSize == 'TB') selected @endif >TB</option>
+                                                                        <option name="DeviceSize" value="GB" @if ($specs[0]->DeviceSize == 'GB') selected @endif >GB</option>
+                                                                    </select>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="flex">
-                                            <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <label for="DeviceStorage1" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Storage 1</label>
-                                                <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$specs[0]->DeviceStorage1}}" disabled readonly>
-                                            </div>
-                                            <div class="ml-3">
-                                                <div class="col-span-2 sm:col-span-1 mt-3 mb-7">
-                                                    <label for="DeviceStorage2" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Storage 2</label>
-                                                    <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$specs[0]->DeviceStorage2}}" disabled readonly>
+                                            <div class="flex">
+                                                <div class="col-span-2 sm:col-span-1 mt-3">
+                                                    <label for="DeviceStorage1" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Storage 1</label>
+                                                    <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$specs[0]->DeviceStorage1}}" disabled readonly>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <div class="col-span-2 sm:col-span-1 mt-3 mb-7">
+                                                        <label for="DeviceStorage2" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Storage 2</label>
+                                                        <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$specs[0]->DeviceStorage2}}" disabled readonly>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            </div>
                                         <!-- Device Specs Ends Here!-->
 
                                         <!-- Device Purchase Details -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 float-left mr-3">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                        </svg>
-                                        <h3 class="text-blueGray-900 text-lg font-bold uppercase mb-3">
-                                            DEVICE PURCHASE DETAILS
-                                        </h3>
-                                        <div class="flex">
-                                            <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <label for="DevicePriceprunit" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Price per unit</label>
-                                                <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$purchasedetails[0]->DevicePriceprunit}}" disabled readonly>
-                                            </div>
-                                            <div class="ml-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 float-left mr-3">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                            </svg>
+                                            <h3 class="text-blueGray-900 text-lg font-bold uppercase mb-3">
+                                                DEVICE PURCHASE DETAILS
+                                            </h3>
+                                            <div class="flex">
                                                 <div class="col-span-2 sm:col-span-1 mt-3">
-                                                    <label for="DeviceSupplier" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Supplier</label>
-                                                    <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$purchasedetails[0]->DeviceSupplier}}" disabled readonly>
+                                                    <label for="DevicePriceprunit" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Price per unit</label>
+                                                    <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$purchasedetails[0]->DevicePriceprunit}}" disabled readonly>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <div class="col-span-2 sm:col-span-1 mt-3">
+                                                        <label for="DeviceSupplier" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Supplier</label>
+                                                        <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$purchasedetails[0]->DeviceSupplier}}" disabled readonly>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="flex">
-                                            <div class="col-span-2 sm:col-span-1 mt-3">
-                                                <label for="DeviceDateOfPurch" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Date of Purchase</label>
-                                                <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$purchasedetails[0]->DeviceDateOfPurch}}" disabled readonly>
-                                            </div>
-                                            <div class="ml-3">
+                                            <div class="flex">
                                                 <div class="col-span-2 sm:col-span-1 mt-3">
-                                                    <label for="DeviceWarranty" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Warranty</label>
-                                                    <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$purchasedetails[0]->DeviceWarranty}}" disabled readonly>
+                                                    <label for="DeviceDateOfPurch" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Date of Purchase</label>
+                                                    <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$purchasedetails[0]->DeviceDateOfPurch}}" disabled readonly>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <div class="col-span-2 sm:col-span-1 mt-3">
+                                                        <label for="DeviceWarranty" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Warranty</label>
+                                                        <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 cursor-not-allowed dark:bg-green-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$purchasedetails[0]->DeviceWarranty}}" disabled readonly>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <!-- Device Purchase Details ENDS HERE-->
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
+
+                <script>
+                    function toggleInput() {
+                        var deviceType = document.getElementById("DeviceType").value;
+                        var deviceNameContainer = document.getElementById("DeviceNameContainer");
+
+                        if (deviceType === "Monitor" || deviceType === "Speaker" || deviceType === "Projector" || deviceType === "Printer" || deviceType === "TV" || deviceType === "IP Phone" || deviceType === "Network Switch" || deviceType === "Server" || deviceType === "Wireless Router" || deviceType === "Tablet") {
+                            deviceNameContainer.style.display = "none";
+                        } else {
+                            deviceNameContainer.style.display = "block";
+                        }
+                    }
+
+                    // Call toggleInput initially to set the initial state
+                    toggleInput();
+
+                    function updateFloorDropdown() {
+                        var deviceTypeValue = document.getElementById('DeviceType').value;
+                        var floorDropdown = document.getElementById('floorDropdown');
+
+                        if (deviceTypeValue === 'System Unit' || deviceTypeValue === 'Laptop' || deviceTypeValue === 'AIO Desktop' || deviceTypeValue === 'IMAC') {
+                            floorDropdown.style.display = 'block';
+                        } else {
+                            floorDropdown.style.display = 'none';
+                        }
+                    }
+
+                    // Call the function once to initialize the state
+                    updateFloorDropdown();
+                </script>
 
             </x-app-layout>
         </body>

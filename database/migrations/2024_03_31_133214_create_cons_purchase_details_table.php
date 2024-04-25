@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('ConsSupplier', 255)->nullable();
             $table->string('ConsDateOfPurch', 255)->nullable();
             $table->string('ConsWarranty', 255)->nullable();
+            $table->timestamp('updated_at')->nullable();
 
         });
     }

@@ -98,7 +98,7 @@
 
                                     <div class="col-span-2 mt-5">
                                         <label for="DeviceType" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device Type</label>
-                                        <select name="DeviceType" id="DeviceType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500"style="width:181px">
+                                        <select name="DeviceType" id="DeviceType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:181px" onchange="toggleInput()">
                                             <option name="DeviceType" value="System Unit" @if ($devices->DeviceType == 'System Unit') selected @endif>System Unit</option>
                                             <option name="DeviceType" value="Laptop" @if ($devices->DeviceType == 'Laptop') selected @endif>Laptop</option>
                                             <option name="DeviceType" value="AIO Desktop" @if ($devices->DeviceType == 'AIO Desktop') selected @endif>AIO Desktop</option>
@@ -119,12 +119,12 @@
                                     <div class="flex">
                                         <div class="col-span-2 sm:col-span-1 mt-3">
                                             <label for="DeviceID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">HOST ID</label>
-                                            <input type="text" name="DeviceID" id="DeviceID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$devices->DeviceID}}" placeholder="Input Device ID" required="">
+                                            <input type="text" name="DeviceID" id="DeviceID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$devices->DeviceID}}" placeholder="Input Device ID">
                                         </div>
                                         <div class="ml-3">
-                                            <div class="col-span-2 sm:col-span-1 mt-3">
+                                            <div class="col-span-2 sm:col-span-1 mt-3" id="DeviceNameContainer">
                                                 <label for="DeviceName" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Name</label>
-                                                <input type="text" name="DeviceName" id="DeviceName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$devices->DeviceName}}" placeholder="Input Device Name" required="">
+                                                <input type="text" name="DeviceName" id="DeviceName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$devices->DeviceName}}" placeholder="Input Device Name">
                                             </div>
                                         </div>
                                     </div>
@@ -148,7 +148,7 @@
                                         <div class="col-span-2 sm:col-span-1 mt-3">
                                             <div class="ml-3">
                                                 <label for="DeviceMacAdd" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">MAC Address</label>
-                                                <input type="text" name="DeviceMacAdd" id="DeviceMacAdd" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$devices->DeviceMacAdd}}" placeholder="Input Device MAC Address" required="">
+                                                <input type="text" name="DeviceMacAdd" id="DeviceMacAdd" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$devices->DeviceMacAdd}}" placeholder="Input Device MAC Address">
                                             </div>
                                         </div>
                                     </div>
@@ -249,19 +249,19 @@
                                         <div class="flex">
                                             <div class="col-span-2 sm:col-span-1 mt-3">
                                                 <label for="DevicePriceprunit" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Price per unit</label>
-                                                <input type="text" name="DevicePriceprunit" id="DevicePriceprunit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$device_purchase_details->DevicePriceprunit}}" placeholder="Input Price per unit" required="">
+                                                <input type="text" name="DevicePriceprunit" id="DevicePriceprunit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$device_purchase_details->DevicePriceprunit}}" placeholder="Input Price per unit">
                                             </div>
                                             <div class="ml-3">
                                                 <div class="col-span-2 sm:col-span-1 mt-3">
                                                     <label for="DeviceSupplier" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Supplier</label>
-                                                    <input type="text" name="DeviceSupplier" id="DeviceSupplier" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$device_purchase_details->DeviceSupplier}}" placeholder="Input Supplier" required="">
+                                                    <input type="text" name="DeviceSupplier" id="DeviceSupplier" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$device_purchase_details->DeviceSupplier}}" placeholder="Input Supplier">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="flex">
                                             <div class="col-span-2 sm:col-span-1 mt-3">
                                                 <label for="DeviceDateOfPurch" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Date of Purchase</label>
-                                                <input type="text" name="DeviceDateOfPurch" id="DeviceDateOfPurch" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$device_purchase_details->DeviceDateOfPurch}}" placeholder="Input Date of Purchase" required="">
+                                                <input type="text" name="DeviceDateOfPurch" id="DeviceDateOfPurch" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$device_purchase_details->DeviceDateOfPurch}}" placeholder="Input Date of Purchase">
                                             </div>
                                             <div class="ml-3">
                                                 <div class="col-span-2 sm:col-span-1 mt-3">
@@ -287,14 +287,33 @@
                 <!-- JavaScript ENDS HERE -->
 
                 <script>
-                    document.getElementById('DeviceType').addEventListener('change', function() {
+                    function toggleInput() {
+                        var deviceType = document.getElementById("DeviceType").value;
+                        var deviceNameContainer = document.getElementById("DeviceNameContainer");
+
+                        if (deviceType === "Monitor" || deviceType === "Speaker" || deviceType === "Projector" || deviceType === "Printer" || deviceType === "TV" || deviceType === "IP Phone" || deviceType === "Network Switch" || deviceType === "Server" || deviceType === "Wireless Router" || deviceType === "Tablet") {
+                            deviceNameContainer.style.display = "none";
+                        } else {
+                            deviceNameContainer.style.display = "block";
+                        }
+                    }
+
+                    // Call toggleInput initially to set the initial state
+                    toggleInput();
+
+                    function updateFloorDropdown() {
+                        var deviceTypeValue = document.getElementById('DeviceType').value;
                         var floorDropdown = document.getElementById('floorDropdown');
-                        if (this.value === 'System Unit' || this.value === 'Laptop' || this.value === 'AIO Desktop' || this.value === 'IMAC') {
+
+                        if (deviceTypeValue === 'System Unit' || deviceTypeValue === 'Laptop' || deviceTypeValue === 'AIO Desktop' || deviceTypeValue === 'IMAC') {
                             floorDropdown.style.display = 'block';
                         } else {
                             floorDropdown.style.display = 'none';
                         }
-                    });
+                    }
+
+                    // Call the function once to initialize the state
+                    updateFloorDropdown();
 
                     // Dropdown with search of Location
                     $(document).ready(function() {

@@ -199,7 +199,7 @@
 
                                     <div class="col-span-2 mt-5">
                                         <label for="DeviceType" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Device Type</label>
-                                        <select name="DeviceType" id="DeviceType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500"style="width:181px">
+                                        <select name="DeviceType" id="DeviceType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500"style="width:181px" onchange="toggleInput()">
                                             <option name="DeviceType" value="System Unit">System Unit</option>
                                             <option name="DeviceType" value="Laptop">Laptop</option>
                                             <option name="DeviceType" value="AIO Desktop">AIO Desktop</option>
@@ -218,14 +218,10 @@
                                     </div>
 
                                     <div class="flex">
-                                        <div class="col-span-2 sm:col-span-1 mt-3">
-                                            <label for="DeviceID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">HOST ID</label>
-                                            <input type="text" name="DeviceID" id="DeviceID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Host ID">
-                                        </div>
-                                        <div class="ml-3">
-                                            <div class="col-span-2 sm:col-span-1 mt-3">
+                                        <div class="">
+                                            <div class="col-span-2 sm:col-span-1 mt-3" id="DeviceNameContainer">
                                                 <label for="DeviceName" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Name</label>
-                                                <input type="text" name="DeviceName" id="DeviceName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Device Name" required="">
+                                                <input type="text" name="DeviceName" id="DeviceName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Input Device Name">
                                             </div>
                                         </div>
                                     </div>
@@ -687,6 +683,17 @@
                 <!-- JavaScript ENDS HERE -->
 
                 <script>
+                    function toggleInput() {
+                        var deviceType = document.getElementById("DeviceType").value;
+                        var deviceNameContainer = document.getElementById("DeviceNameContainer");
+
+                        if (deviceType === "Monitor" || deviceType === "Speaker" || deviceType === "Projector" || deviceType === "Printer" || deviceType === "TV" || deviceType === "IP Phone" || deviceType === "Network Switch" || deviceType === "Server" || deviceType === "Wireless Router" || deviceType === "Tablet") {
+                            deviceNameContainer.style.display = "none";
+                        } else {
+                            deviceNameContainer.style.display = "block";
+                        }
+                    }
+
                     document.getElementById('DeviceType').addEventListener('change', function() {
                         var floorDropdown = document.getElementById('floorDropdown');
                         if (this.value === 'System Unit' || this.value === 'Laptop' || this.value === 'AIO Desktop' || this.value === 'IMAC') {
