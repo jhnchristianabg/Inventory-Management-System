@@ -265,7 +265,10 @@
                                                 <label for="DeviceStatus" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Status</label>
                                                 <select name="DeviceStatus" id="DeviceStatus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:130px">
                                                     <option name="DeviceStatus" value="Working">Working</option>
-                                                    <option name="DeviceStatus" value="Not Working">Not Working</option>
+                                                    <option name="DeviceStatus" value="Under Repair">Under Repair</option>
+                                                    <option name="DeviceStatus" value="Defective">Defective</option>
+                                                    <option name="DeviceStatus" value="Missing">Missing</option>
+                                                    <option name="DeviceStatus" value="Disposed">Disposed</option>
                                                 </select>
                                             </div>
                                         </div>

@@ -200,34 +200,12 @@ class StudentController extends Controller
 
     public function return_stud(Request $request, $id){
 
-        $request->validate([
-            'DeviceID'=> 'required',
-            'DeviceType',
-            'DeviceName'=> 'required',
-            'DeviceBrand'=> 'required',
-            'DeviceModel'=> 'required',
-            'DeviceSerialNo',
-            'DeviceMacAdd',
-            'DeviceLocation'=> 'required',
-            'DeviceStatus',
-            'DeviceRemarks',
-            'DeviceOperatingSys',
-            'DeviceProductKey',
-            'DeviceProcessor',
-            'DeviceMemory',
-            'DeviceSize',
-            'DeviceStorage1',
-            'DeviceStorage2',
-            'DevicePriceprunit'=> 'required',
-            'DeviceSupplier'=> 'required',
-            'DeviceDateOfPurch'=> 'required',
-            'DeviceWarranty'
-        ]);
-
         DB::table('accountability_logs')->where('id',$id)->insert([
             'HostID' => $request['DeviceID'],
             'Type' => $request['DeviceType'],
             'Brand' => $request['DeviceBrand'],
+            'Model' => $request['DeviceModel'],
+            'SerialNo' => $request['DeviceSerialNo'],
             'issue_date' => $request['issue_date'],
             'return_date' => now(),
             'Location' => $request['DeviceLocation'],
@@ -236,7 +214,7 @@ class StudentController extends Controller
         ]);
 
         $studaccdev_details = DB::table('devices')->where('id',$id)->update([
-            'DeviceID' => 'STRG',
+            'DeviceID' => NULL,
             'DeviceType' => $request['DeviceType'],
             'DeviceName' => $request['DeviceName'],
             'DeviceBrand' => $request['DeviceBrand'],

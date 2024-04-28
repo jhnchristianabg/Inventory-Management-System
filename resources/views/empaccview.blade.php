@@ -68,12 +68,22 @@
                     </a>
                 </div>
 
-                <button onclick="printTable()" class="relative overflow-x-auto inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:ring-yellow-500 float-right mx-1">
-                    PRINT
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-1">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />
+                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="relative overflow-x-auto inline-flex items-center px-3 py-2 text-sm font-bold text-center text-black bg-blue-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:ring-yellow-500 float-right mx-1" type="button">PRINT <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-1">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />
                     </svg>
                 </button>
+
+                <!-- Dropdown menu -->
+                <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-300">
+                    <ul class="py-2 text-sm text-black dark:text-black" aria-labelledby="dropdownDefaultButton">
+                    <li class="text-center">
+                        <a onclick="printTable()" class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-yellow-500 dark:hover:text-white">Borrowed</a>
+                    </li>
+                    <li class="text-center">
+                        <a onclick="printTable1()" class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-yellow-500 dark:hover:text-white">Returned</a>
+                    </li>
+                    </ul>
+                </div>
 
                 <div class="border-b-2 border-neutral-100 px-6 py-3 dark:border-black/20 my-6">
                 </div>
@@ -207,13 +217,15 @@
                                     </form>
                                 </div>
 
-                                <table id="dataTable" class="w-full text-xs text-left rtl:text-right font-light text-surface text-black border-collapse">
+                                <table id="dataTable1" class="w-full text-xs text-left rtl:text-right font-light text-surface text-black border-collapse">
                                     <thead class="text-xs uppercase bg-gray-200 font-bold">
                                         <tr>
                                             <th scope="col" class="px-6 py-3">ID</th>
                                             <th scope="col" class="px-6 py-3">HOST ID</th>
                                             <th scope="col" class="px-6 py-3">TYPE</th>
                                             <th scope="col" class="px-6 py-3">BRAND</th>
+                                            <th scope="col" class="px-6 py-3">MODEL</th>
+                                            <th scope="col" class="px-6 py-3">SERIAL NO</th>
                                             <th scope="col" class="px-6 py-3">ISSUE DATE</th>
                                             <th scope="col" class="px-6 py-3">RETURN DATE</th>
                                             <th scope="col" class="px-6 py-3">LOCATION</th>
@@ -230,6 +242,8 @@
                                                     <td class="px-6 py-4 font-bold uppercase">{{$empdevacc_returned->HostID}}</td>
                                                     <td class="px-6 py-4">{{$empdevacc_returned->Type}}</td>
                                                     <td class="px-6 py-4">{{$empdevacc_returned->Brand}}</td>
+                                                    <td class="px-6 py-4">{{$empdevacc_returned->Model}}</td>
+                                                    <td class="px-6 py-4">{{$empdevacc_returned->SerialNo}}</td>
                                                     <td class="px-6 py-4 font-bold uppercase">{{$empdevacc_returned->issue_date}}</td>
                                                     <td class="px-6 py-4 font-bold uppercase">{{$empdevacc_returned->return_date}}</td>
                                                     <td class="px-6 py-4">{{$empdevacc_returned->Location}}</td>
@@ -277,6 +291,160 @@
                             });
                         });
                     //  TABS OF BORROWED AND RETURN ENDS HERE
+
+                    // PRINTING FOR BORROWED
+                        function printTable() {
+                            // Clone the table
+                            var table = document.getElementById('dataTable').cloneNode(true);
+
+                            // Add border-collapse style to the cloned table
+                            table.classList.add("border-collapse");
+
+                            // Remove the last column (Actions)
+                            var rows = table.getElementsByTagName('tr');
+                            for (var i = 0; i < rows.length; i++) {
+                                rows[i].deleteCell(-1); // Delete last cell in each row
+                            }
+
+                            // Create HTML for additional content
+                            var additionalContent = `
+                                <style>
+                                    .grid { display: grid; }
+                                    .sm\\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+                                    .relative { position: relative; }
+                                    .overflow-x-auto { overflow-x: auto; }
+                                    .max-w-sm { max-width: 20rem; }
+                                    .p-6 { padding: 1.5rem; }
+                                    .bg-white { background-color: #fff; }
+                                    .border { border-width: 10px; }
+                                    .rounded-lg { border-radius: 0.375rem; }
+                                    .shadow { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06); }
+                                    .dark\\:border-gray-800 { border-color: #e5e7eb; }
+                                    .dark\\:hover\\:bg-gray-200:hover { background-color: #edf2f7; }
+                                    .text-center { text-align: center; }
+                                    .h-28 { height: 7rem; }
+                                    .ml-5 { margin-left: 1.25rem; }
+                                    .mb-2 { margin-bottom: 0.5rem; }
+                                    .text-xl { font-size: 1.25rem; }
+                                    .font-bold { font-weight: 700; }
+                                    .tracking-tight { letter-spacing: -0.025em; }
+                                    .text-gray-900 { color: #1a202c; }
+                                    .dark\\:text-black { color: #000; }
+                                    .align { vertical-align: middle; }
+                                    .mb-3 { margin-bottom: 0.75rem; }
+                                    .text-sm { font-size: 0.875rem; }
+                                    .font-normal { font-weight: 400; }
+                                    .text-gray-700 { color: #4a5568; }
+                                    .dark\\:text-black { color: #000; }
+                                    .text-red { color: red; font-size: 12px; float:right; font-family:arial;}
+                                </style>
+                                <div class="grid sm:grid-cols-3 relative overflow-x-auto">
+                                    <div class="max-w-sm p-6 bg-white border border-gray-300 rounded-lg shadow dark:border-gray-200 dark:hover:bg-gray-200 text-center h-28 ml-5">
+                                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-black align">EMPLOYEE NAME</h5>
+                                        {{ $empdetails[0]->EmployeeFName }}<span class="ml-1">{{ $empdetails[0]->EmployeeIName }}. {{ $empdetails[0]->EmployeeLName }}</span>
+                                    </div>
+
+                                    <div class="max-w-sm p-6 bg-white border border-gray-300 rounded-lg shadow dark:border-gray-200 dark:hover:bg-gray-200 text-center h-28 ml-5">
+                                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-black align">EMPLOYEE ID NUMBER</h5>
+                                        {{ $empdetails[0]->EmployeeID }}
+                                    </div>
+
+                                    <div class="max-w-sm p-6 bg-white border border-gray-300 rounded-lg shadow dark:border-gray-200 dark:hover:bg-gray-200 text-center h-28 ml-5">
+                                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-black align">DEPARTMENT</h5>
+                                        {{ $empdetails[0]->Department }}
+                                    </div>
+                                </div>
+                                <br>
+                            `;
+
+                            // Open a new window and write the table content
+                            var newWin = window.open('', 'Print-Window');
+                            newWin.document.open();
+                            // Add landscape orientation style and CSS styles for additional content
+                            newWin.document.write('<html><head><title>Inventory Management System</title><h1 class="text-red">BORROWED</h1><br><br><style>@page { size: landscape; }</style><style>#dataTable { width: 100%; border-collapse: collapse; } #dataTable th, #dataTable td { padding: 8px; text-align: center; }</style><style>#dataTable th { background-color: #e5e7eb; }</style>' + additionalContent + '</head><body>' + table.outerHTML + '</body></html>');
+                            newWin.document.close();
+
+                            // Print the content
+                            newWin.print();
+                        }
+                    // BORROWED ENDS HERE
+
+                    // PRINTING FOR RETURNED
+                        function printTable1() {
+                            // Clone the table
+                            var table = document.getElementById('dataTable1').cloneNode(true);
+
+                            // Add border-collapse style to the cloned table
+                            table.classList.add("border-collapse");
+
+                            // Remove the last column (Actions)
+                            var rows = table.getElementsByTagName('tr');
+                            for (var i = 0; i < rows.length; i++) {
+                                // Delete last cell in each row
+                            }
+
+                            // Create HTML for additional content
+                            var additionalContent = `
+                                <style>
+                                    .grid { display: grid; }
+                                    .sm\\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+                                    .relative { position: relative; }
+                                    .overflow-x-auto { overflow-x: auto; }
+                                    .max-w-sm { max-width: 20rem; }
+                                    .p-6 { padding: 1.5rem; }
+                                    .bg-white { background-color: #fff; }
+                                    .border { border-width: 10px; }
+                                    .rounded-lg { border-radius: 0.375rem; }
+                                    .shadow { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06); }
+                                    .dark\\:border-gray-800 { border-color: #e5e7eb; }
+                                    .dark\\:hover\\:bg-gray-200:hover { background-color: #edf2f7; }
+                                    .text-center { text-align: center; }
+                                    .h-28 { height: 7rem; }
+                                    .ml-5 { margin-left: 1.25rem; }
+                                    .mb-2 { margin-bottom: 0.5rem; }
+                                    .text-xl { font-size: 1.25rem; }
+                                    .font-bold { font-weight: 700; }
+                                    .tracking-tight { letter-spacing: -0.025em; }
+                                    .text-gray-900 { color: #1a202c; }
+                                    .dark\\:text-black { color: #000; }
+                                    .align { vertical-align: middle; }
+                                    .mb-3 { margin-bottom: 0.75rem; }
+                                    .text-sm { font-size: 0.875rem; }
+                                    .font-normal { font-weight: 400; }
+                                    .text-gray-700 { color: #4a5568; }
+                                    .dark\\:text-black { color: #000; }
+                                    .text-red { color: red; font-size: 12px; float:right; font-family:arial;}
+                                </style>
+                                <div class="grid sm:grid-cols-3 relative overflow-x-auto">
+                                    <div class="max-w-sm p-6 bg-white border border-gray-300 rounded-lg shadow dark:border-gray-200 dark:hover:bg-gray-200 text-center h-28 ml-5">
+                                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-black align">EMPLOYEE NAME</h5>
+                                        {{ $empdetails[0]->EmployeeFName }}<span class="ml-1">{{ $empdetails[0]->EmployeeIName }}. {{ $empdetails[0]->EmployeeLName }}</span>
+                                    </div>
+
+                                    <div class="max-w-sm p-6 bg-white border border-gray-300 rounded-lg shadow dark:border-gray-200 dark:hover:bg-gray-200 text-center h-28 ml-5">
+                                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-black align">EMPLOYEE ID NUMBER</h5>
+                                        {{ $empdetails[0]->EmployeeID }}
+                                    </div>
+
+                                    <div class="max-w-sm p-6 bg-white border border-gray-300 rounded-lg shadow dark:border-gray-200 dark:hover:bg-gray-200 text-center h-28 ml-5">
+                                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-black align">DEPARTMENT</h5>
+                                        {{ $empdetails[0]->Department }}
+                                    </div>
+                                </div>
+                                <br>
+                            `;
+
+                            // Open a new window and write the table content
+                            var newWin = window.open('', 'Print-Window');
+                            newWin.document.open();
+                            // Add landscape orientation style and CSS styles for additional content
+                            newWin.document.write('<html><head><title>Inventory Management System</title><h1 class="text-red">RETURNED</h1><br><br><style>@page { size: landscape; }</style><style>#dataTable1 { width: 100%; border-collapse: collapse; } #dataTable1 th, #dataTable1 td { padding: 8px; text-align: center; }</style><style>#dataTable1 th { background-color: #e5e7eb; }</style>' + additionalContent + '</head><body>' + table.outerHTML + '</body></html>');
+                            newWin.document.close();
+
+                            // Print the content
+                            newWin.print();
+                        }
+                    // RETURNED ENDS HERE
                 </script>
 
             </x-app-layout>

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('HostID');
             $table->string('Type')->nullable();
             $table->string('Brand', 255);
+            $table->string('Model', 255);
+            $table->string('SerialNo', 255)->unique();
             $table->string('Location', 255);
             $table->string('issue_date')->nullable();
             $table->string('return_date')->nullable();

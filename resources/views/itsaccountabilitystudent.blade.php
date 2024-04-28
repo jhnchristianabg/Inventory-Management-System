@@ -29,6 +29,11 @@
                     </svg>
                 </button>
 
+                <button class="relative overflow-x-auto inline-flex items-center px-3 py-2 text-sm font-bold text-center text-black bg-blue-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:ring-yellow-500 float-right mx-1" onclick="printTable()" type="button">PRINT <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-1">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />
+                    </svg>
+                </button>
+
                 <div class="border-b-2 border-neutral-100 px-6 py-3 dark:border-black/20 my-6">
                 </div>
 
@@ -390,7 +395,53 @@
                     <!-- PAGINATION Ends Here -->
                 </div>
 
+                <script>
+                    function printTable() {
+                        // Clone the table
+                        var table = document.getElementById('dataTable').cloneNode(true);
 
+                        // Add border-collapse style to the cloned table
+                        table.classList.add("border-collapse");
+
+                        // Remove the last column (Actions)
+                        var rows = table.getElementsByTagName('tr');
+                        for (var i = 0; i < rows.length; i++) {
+                            rows[i].deleteCell(-1); // Delete last cell in each row
+                        }
+
+                        // Remove link behavior from <a> tags
+                        var links = table.getElementsByTagName('a');
+                        for (var i = 0; i < links.length; i++) {
+                            links[i].removeAttribute('href');
+                            links[i].style.cursor = 'auto';
+                        }
+
+                        // Remove SVG icons used for column sorting
+                        var headerCells = table.querySelectorAll('th');
+                        for (var i = 0; i < headerCells.length; i++) {
+                            var svgIcons = headerCells[i].querySelectorAll('svg');
+                            for (var j = 0; j < svgIcons.length; j++) {
+                                svgIcons[j].remove();
+                            }
+                        }
+
+                        // Center-align all data contents
+                        var dataCells = table.querySelectorAll('td');
+                        for (var i = 0; i < dataCells.length; i++) {
+                            dataCells[i].style.textAlign = 'center';
+                        }
+
+                        // Open a new window and write the table content
+                        var newWin = window.open('', 'Print-Window');
+                        newWin.document.open();
+                        // Add landscape orientation style and full width style
+                        newWin.document.write('<html><head><title>Inventory Management System</title><br><h1 class="text-red">STUDENTS</h1><br><br><br><style>@page { size: landscape; } body { margin: 0; } table { width: 100%; } #dataTable { border-collapse: collapse; } #dataTable th, #dataTable td { padding: 8px; } #dataTable th { background-color: #e5e7eb; } .text-red { color: red; font-size: 12px; float:right; font-family:arial;}</style></head><body>' + table.outerHTML + '</body></html>');
+                        newWin.document.close();
+
+                        // Print the content
+                        newWin.print();
+                    }
+                    </script>
 
             </x-app-layout>
         </body>

@@ -200,6 +200,8 @@ class EmployeeController extends Controller
             'HostID' => $request['DeviceID'],
             'Type' => $request['DeviceType'],
             'Brand' => $request['DeviceBrand'],
+            'Model' => $request['DeviceModel'],
+            'SerialNo' => $request['DeviceSerialNo'],
             'issue_date' => $request['issue_date'],
             'return_date' => now(),
             'Location' => $request['DeviceLocation'],
