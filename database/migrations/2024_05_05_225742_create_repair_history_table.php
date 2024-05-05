@@ -13,17 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('accountability_logs', function (Blueprint $table) {
+        Schema::create('repair_history', function (Blueprint $table) {
+
             $table->increments('id');
-            $table->string('HostID');
-            $table->string('Type')->nullable();
-            $table->string('Brand', 255);
-            $table->string('Model', 255);
+            $table->string('Type');
+            $table->string('Name', 255)->nullable();
             $table->string('SerialNo', 255);
-            $table->string('Location', 255);
+            $table->string('Status', 255)->nullable();
+            $table->string('Remarks', 255)->nullable();
+            $table->string('Defect')->nullable();
             $table->string('issue_date')->nullable();
-            $table->string('return_date')->nullable();
-            $table->string('is_accountability')->nullable();
+            $table->timestamp('repair_date')->nullable();
         });
     }
 
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accountability_logs');
+        Schema::dropIfExists('repair_history');
     }
 };

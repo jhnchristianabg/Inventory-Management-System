@@ -2,6 +2,7 @@
     <html lang="en">
         <head>
             <title>Dashboard</title>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
         </head>
         <body>
             <x-app-layout>
@@ -123,10 +124,107 @@
                         </div>
                     </dl>
 
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 max-w-full">
+                    {{-- This is for Graph Cards --}}
 
+                        <div class="p-6">
+                            <!--Graph Card-->
+                            <div class="bg-white border-transparent rounded-lg shadow-xl">
+                                <div class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                                    <h5 class="font-bold uppercase text-gray-600">Devices</h5>
+                                </div>
+                                <div class="p-5"><canvas id="chartjs-4" class="chartjs" width="undefined" height="undefined"></canvas>
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function() {
+                                            // Get the count of system units from PHP and pass it to JavaScript
+                                            var countSys = <?php echo $countsys; ?>;
+                                            var countlap = <?php echo $countlap; ?>;
+                                            var countaio = <?php echo $countaio; ?>;
+                                            var countimac = <?php echo $countimac; ?>;
+                                            new Chart(document.getElementById("chartjs-4"), {
+                                                "type": "doughnut",
+                                                "data": {
+                                                    "labels": ["System Unit", "Laptop", "AIO Desktop", "IMAC"],
+                                                    "datasets": [{
+                                                        "label": "Issues",
+                                                        // Pass the count value to the corresponding data index
+                                                        "data": [countSys, countlap, countaio, countimac], // Fill in other counts accordingly
+                                                        "backgroundColor": ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"]
+                                                    }]
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                            <!--/Graph Card-->
+                        </div>
 
-                <!-- This Field is for  Quick Dash -->
+                        <div class="p-6 float-right">
+                            <!--Graph Card-->
+                            <div class="bg-white border-transparent rounded-lg shadow-xl">
+                                <div class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                                    <h5 class="font-bold uppercase text-gray-600">Cables & Peripherals</h5>
+                                </div>
+                                <div class="p-5"><canvas id="cables" class="chartjs" width="undefined" height="undefined"></canvas>
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function() {
+                                            // Get the count of system units from PHP and pass it to JavaScript
+                                            var countcable = <?php echo $countcable; ?>;
+                                            var countadapter = <?php echo $countadapter; ?>;
+                                            var countconverter = <?php echo $countconverter; ?>;
+                                            var countcharger = <?php echo $countcharger; ?>;
+                                            new Chart(document.getElementById("cables"), {
+                                                "type": "doughnut",
+                                                "data": {
+                                                    "labels": ["Cables", "Adapter", "Converter", "Charger"],
+                                                    "datasets": [{
+                                                        "label": "Issues",
+                                                        // Pass the count value to the corresponding data index
+                                                        "data": [countcable, countadapter, countconverter, countcharger], // Fill in other counts accordingly
+                                                        "backgroundColor": ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"]
+                                                    }]
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                            <!--/Graph Card-->
+                        </div>
 
+                        <div class="p-6 float-right">
+                            <!--Graph Card-->
+                            <div class="bg-white border-transparent rounded-lg shadow-xl">
+                                <div class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                                    <h5 class="font-bold uppercase text-gray-600">Consumables</h5>
+                                </div>
+                                <div class="p-5"><canvas id="consumables" class="chartjs" width="undefined" height="undefined"></canvas>
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function() {
+                                            // Get the count of system units from PHP and pass it to JavaScript
+                                            var countink = <?php echo $countink; ?>;
+                                            var counttoner = <?php echo $counttoner; ?>;
+
+                                            new Chart(document.getElementById("consumables"), {
+                                                "type": "doughnut",
+                                                "data": {
+                                                    "labels": ["Ink", "Toner"],
+                                                    "datasets": [{
+                                                        "label": "Issues",
+                                                        // Pass the count value to the corresponding data index
+                                                        "data": [countink, counttoner], // Fill in other counts accordingly
+                                                        "backgroundColor": ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"]
+                                                    }]
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                            <!--/Graph Card-->
+                        </div>
+                </div>
             </x-app-layout>
         </body>
     </html>

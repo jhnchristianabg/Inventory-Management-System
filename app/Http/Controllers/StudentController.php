@@ -77,7 +77,7 @@ class StudentController extends Controller
 
             $searchTerm = $request->input('search_emp_details');
             $perPage = 1000;
-            $column = $request->get('column', 'id'); // Default column to sort
+            $column = $request->get('column', 'issue_date'); // Default column to sort
             $direction = $request->get('direction', 'asc'); // Default sorting direction
 
             // Variable = DB::select('select * from "DB TABLE NAME" where "TABLE" = ?', [$"TABLE"]);
@@ -213,37 +213,81 @@ class StudentController extends Controller
 
         ]);
 
-        $studaccdev_details = DB::table('devices')->where('id',$id)->update([
-            'DeviceID' => NULL,
-            'DeviceType' => $request['DeviceType'],
-            'DeviceName' => $request['DeviceName'],
-            'DeviceBrand' => $request['DeviceBrand'],
-            'DeviceModel' => $request['DeviceModel'],
-            'DeviceSerialNo' => $request['DeviceSerialNo'],
-            'DeviceMacAdd' => $request['DeviceMacAdd'],
-            'DeviceLocation' => 'Storage',
-            'DeviceStatus' => $request['DeviceStatus'],
-            'DeviceRemarks' => $request['DeviceRemarks'],
-            'is_accountability' => NULL
-        ]);
+        if ($request['DeviceStatus'] !== 'Working') {
+            DB::table('repair_history')->where('id',$id)->insert([
+                'Type' => $request['DeviceType'],
+                'Name' => $request['DeviceName'],
+                'SerialNo' => $request['DeviceSerialNo'],
+                'Status' => $request['DeviceStatus'],
+                'Remarks' => 'Unavailable',
+                'issue_date' => now()
+            ]);
 
-        $studaccdev_specs = DB::table('device_specs')->where('id',$id)->update([
-            'DeviceOperatingSys' => $request['DeviceOperatingSys'],
-            'DeviceProductKey' => $request['DeviceProductKey'],
-            'DeviceProcessor' => $request['DeviceProcessor'],
-            'DeviceMemory' => $request['DeviceMemory'],
-            'DeviceSize'=> $request['DeviceSize'],
-            'DeviceStorage1' => $request['DeviceStorage1'],
-            'DeviceStorage2' => $request['DeviceStorage2']
-        ]);
+            $studaccdev_details = DB::table('devices')->where('id',$id)->update([
+                'DeviceID' => NULL,
+                'DeviceType' => $request['DeviceType'],
+                'DeviceName' => $request['DeviceName'],
+                'DeviceBrand' => $request['DeviceBrand'],
+                'DeviceModel' => $request['DeviceModel'],
+                'DeviceSerialNo' => $request['DeviceSerialNo'],
+                'DeviceMacAdd' => $request['DeviceMacAdd'],
+                'DeviceLocation' => 'Storage',
+                'DeviceStatus' => $request['DeviceStatus'],
+                'DeviceRemarks' => 'Unavailable',
+                'is_accountability' => NULL,
+                'issue_date' => NULL
+            ]);
 
-        $studaccdev_pd = DB::table('device_purchase_details')->where('id',$id)->update([
-            'DevicePriceprunit' => $request['DevicePriceprunit'],
-            'DeviceSupplier' => $request['DeviceSupplier'],
-            'DeviceDateOfPurch' => $request['DeviceDateOfPurch'],
-            'DeviceWarranty' => $request['DeviceWarranty']
-        ]);
+            $studaccdev_specs = DB::table('device_specs')->where('id',$id)->update([
+                'DeviceOperatingSys' => $request['DeviceOperatingSys'],
+                'DeviceProductKey' => $request['DeviceProductKey'],
+                'DeviceProcessor' => $request['DeviceProcessor'],
+                'DeviceMemory' => $request['DeviceMemory'],
+                'DeviceSize'=> $request['DeviceSize'],
+                'DeviceStorage1' => $request['DeviceStorage1'],
+                'DeviceStorage2' => $request['DeviceStorage2']
+            ]);
 
+            $studaccdev_pd = DB::table('device_purchase_details')->where('id',$id)->update([
+                'DevicePriceprunit' => $request['DevicePriceprunit'],
+                'DeviceSupplier' => $request['DeviceSupplier'],
+                'DeviceDateOfPurch' => $request['DeviceDateOfPurch'],
+                'DeviceWarranty' => $request['DeviceWarranty']
+            ]);
+
+        } else {
+            $studaccdev_details = DB::table('devices')->where('id',$id)->update([
+                'DeviceID' => NULL,
+                'DeviceType' => $request['DeviceType'],
+                'DeviceName' => $request['DeviceName'],
+                'DeviceBrand' => $request['DeviceBrand'],
+                'DeviceModel' => $request['DeviceModel'],
+                'DeviceSerialNo' => $request['DeviceSerialNo'],
+                'DeviceMacAdd' => $request['DeviceMacAdd'],
+                'DeviceLocation' => 'Storage',
+                'DeviceStatus' => $request['DeviceStatus'],
+                'DeviceRemarks' => $request['DeviceRemarks'],
+                'is_accountability' => NULL,
+                'issue_date' => NULL
+            ]);
+
+            $studaccdev_specs = DB::table('device_specs')->where('id',$id)->update([
+                'DeviceOperatingSys' => $request['DeviceOperatingSys'],
+                'DeviceProductKey' => $request['DeviceProductKey'],
+                'DeviceProcessor' => $request['DeviceProcessor'],
+                'DeviceMemory' => $request['DeviceMemory'],
+                'DeviceSize'=> $request['DeviceSize'],
+                'DeviceStorage1' => $request['DeviceStorage1'],
+                'DeviceStorage2' => $request['DeviceStorage2']
+            ]);
+
+            $studaccdev_pd = DB::table('device_purchase_details')->where('id',$id)->update([
+                'DevicePriceprunit' => $request['DevicePriceprunit'],
+                'DeviceSupplier' => $request['DeviceSupplier'],
+                'DeviceDateOfPurch' => $request['DeviceDateOfPurch'],
+                'DeviceWarranty' => $request['DeviceWarranty']
+            ]);
+        }
 
         return redirect('/itsaccountabilitystudent')->with('return', ' ');
     }

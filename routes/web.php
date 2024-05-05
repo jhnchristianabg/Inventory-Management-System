@@ -9,8 +9,10 @@ use App\Http\Controllers\CPReportController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DeviceAccController;
+use App\Http\Controllers\ClearanceController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\RemoveInventory;
+use App\Http\Controllers\RepairHistory;
 
 /*
 |--------------------------------------------------------------------------
@@ -502,5 +504,53 @@ Route::get('/removecp', function () {
 Route::get('/removecons', function () {
     return view('removecons');
 })->middleware(['auth'])->name('removecons');
+
+/*---------------------------------------------------------------------*/
+
+
+
+/*---------------------------------------------------------------------*/
+// CLEARANCE
+Route::get('/clearance', [ClearanceController::class,'index']);
+
+// FOR Student
+Route::get('clearance', [ClearanceController::class, 'show'])->name('clearance.show');
+
+// FOR Student
+Route::get('search_clearance',[ClearanceController::Class, 'search_clearance']);
+
+/*---------------------------------------------------------------------*/
+
+
+
+/*---------------------------------------------------------------------*/
+/* REPAIR HISTORY */
+Route::get('/repairhistory', function () {
+    return view('repairhistory');
+})->middleware(['auth'])->name('repairhistory');
+
+// SHOW ALL DEVICES
+Route::get('repairhistory', [RepairHistory::class, 'show'])->name('repairhistory.show');
+
+// Search for all devices in repair history
+Route::get('repairhistory',[RepairHistory::Class, 'search_device']);
+
+/* Routes for viewing details in repair history */
+Route::get('/repairhistoryview', function () {
+    return view('repairhistoryview');
+})->middleware(['auth'])->name('repairhistoryview');
+
+// Unique view
+Route::get('repairhistoryview/{id}',[RepairHistory::class,'repair_details'])->name('repairhistoryview');
+
+// Edit before updating repair history
+Route::get('repairhistoryedit', function () {
+    return view('repairhistoryedit');
+})->middleware(['auth'])->name('repairhistoryedit');
+
+Route::get('repairhistoryedit/{id}',[RepairHistory::class,'edit']);
+
+// Update of details
+Route::put('update/{id}', [RepairHistory::class, 'update'])->name('update');
 
 /*---------------------------------------------------------------------*/

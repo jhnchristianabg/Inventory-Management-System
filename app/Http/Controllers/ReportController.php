@@ -291,7 +291,7 @@ class ReportController extends Controller
                     $query->where('DeviceID', 'like', "%$searchTerm%")
                           ->orWhere('id', 'like', "%$searchTerm%")
                           ->orWhere('DeviceType', 'like', "%$searchTerm%")
-                          ->orWhere('DeviceName', 'like', "%$searchTerm%")
+                          ->orWhere('is_accountability', 'like', "%$searchTerm%")
                           ->orWhere('DeviceBrand', 'like', "%$searchTerm%")
                           ->orWhere('DeviceModel', 'like', "%$searchTerm%")
                           ->orWhere('DeviceSerialNo', 'like', "%$searchTerm%")

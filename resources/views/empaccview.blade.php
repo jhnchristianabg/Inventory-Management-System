@@ -60,7 +60,7 @@
                 @endif
 
                 <div class="flex  ml-1 text-lg">
-                    <a href="{{ route('itsemployeeaccountabilityemployee.show') }}" class="inline-flex items-center">
+                    <a href="javascript:history.back()" class="inline-flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-6 h-6 stroke-yellow-500">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061A1.125 1.125 0 0 1 21 8.689v8.122ZM11.25 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061a1.125 1.125 0 0 1 1.683.977v8.122Z" />
                         </svg>
@@ -318,7 +318,7 @@
                                     .bg-white { background-color: #fff; }
                                     .border { border-width: 10px; }
                                     .rounded-lg { border-radius: 0.375rem; }
-                                    .shadow { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06); }
+                                    .shadow { box-shadow: 0 0 0 1px rgba(0, 0, 0, 1); }
                                     .dark\\:border-gray-800 { border-color: #e5e7eb; }
                                     .dark\\:hover\\:bg-gray-200:hover { background-color: #edf2f7; }
                                     .text-center { text-align: center; }
@@ -337,11 +337,12 @@
                                     .text-gray-700 { color: #4a5568; }
                                     .dark\\:text-black { color: #000; }
                                     .text-red { color: red; font-size: 12px; float:right; font-family:arial;}
+                                    #name { margin-left:5px; }
                                 </style>
                                 <div class="grid sm:grid-cols-3 relative overflow-x-auto">
                                     <div class="max-w-sm p-6 bg-white border border-gray-300 rounded-lg shadow dark:border-gray-200 dark:hover:bg-gray-200 text-center h-28 ml-5">
                                         <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-black align">EMPLOYEE NAME</h5>
-                                        {{ $empdetails[0]->EmployeeFName }}<span class="ml-1">{{ $empdetails[0]->EmployeeIName }}. {{ $empdetails[0]->EmployeeLName }}</span>
+                                        {{ $empdetails[0]->EmployeeFName }}<span id="name">{{ $empdetails[0]->EmployeeIName }}. {{ $empdetails[0]->EmployeeLName }}</span>
                                     </div>
 
                                     <div class="max-w-sm p-6 bg-white border border-gray-300 rounded-lg shadow dark:border-gray-200 dark:hover:bg-gray-200 text-center h-28 ml-5">
@@ -395,7 +396,7 @@
                                     .bg-white { background-color: #fff; }
                                     .border { border-width: 10px; }
                                     .rounded-lg { border-radius: 0.375rem; }
-                                    .shadow { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06); }
+                                    .shadow { box-shadow: 0 0 0 1px rgba(0, 0, 0, 1); }
                                     .dark\\:border-gray-800 { border-color: #e5e7eb; }
                                     .dark\\:hover\\:bg-gray-200:hover { background-color: #edf2f7; }
                                     .text-center { text-align: center; }
@@ -414,11 +415,12 @@
                                     .text-gray-700 { color: #4a5568; }
                                     .dark\\:text-black { color: #000; }
                                     .text-red { color: red; font-size: 12px; float:right; font-family:arial;}
+                                    #name { margin-left:5px; }
                                 </style>
                                 <div class="grid sm:grid-cols-3 relative overflow-x-auto">
                                     <div class="max-w-sm p-6 bg-white border border-gray-300 rounded-lg shadow dark:border-gray-200 dark:hover:bg-gray-200 text-center h-28 ml-5">
                                         <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-black align">EMPLOYEE NAME</h5>
-                                        {{ $empdetails[0]->EmployeeFName }}<span class="ml-1">{{ $empdetails[0]->EmployeeIName }}. {{ $empdetails[0]->EmployeeLName }}</span>
+                                        {{ $empdetails[0]->EmployeeFName }}<span id="name">{{ $empdetails[0]->EmployeeIName }}. {{ $empdetails[0]->EmployeeLName }}</span>
                                     </div>
 
                                     <div class="max-w-sm p-6 bg-white border border-gray-300 rounded-lg shadow dark:border-gray-200 dark:hover:bg-gray-200 text-center h-28 ml-5">

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\Storage;
 use App\Models\CPModel;
 use App\Models\ConsModel;
 use App\Models\DeviceModel;
@@ -25,7 +27,50 @@ class DeviceController extends Controller
         $totalcons = ConsModel::count();
         $totalaccountability = DB::table('devices')->whereNotNull('is_accountability')
                                                    ->where('DeviceID', '!=', 'FEU-Cavite')->count();
-        return view('dashboard', ['totaldevices' => $totaldevices, 'totalcp' => $totalcp, 'totalcons' => $totalcons, 'totalaccountability' => $totalaccountability]);
+
+        // FOR PIE CHART DEVICES
+            $countsys = DB::table('devices')->where('DeviceType', 'System Unit')
+                                            ->whereNull('deleted_at')
+                                            ->count();
+            $countlap = DB::table('devices')->where('DeviceType', 'Laptop')
+                                            ->whereNull('deleted_at')
+                                            ->count();
+            $countaio = DB::table('devices')->where('DeviceType', 'AIO Desktop')
+                                            ->whereNull('deleted_at')
+                                            ->count();
+            $countimac = DB::table('devices')->where('DeviceType', 'IMAC')
+                                            ->whereNull('deleted_at')
+                                            ->count();
+        // END OF PIE CHART DEVICES
+
+        // FOR PIE CHART CABLES & PERIPHERALS
+            $countcable = DB::table('cables_and_peripherals')->where('CPType', 'Cable')
+                                            ->whereNull('deleted_at')
+                                            ->count();
+            $countadapter = DB::table('cables_and_peripherals')->where('CPType', 'Adapter')
+                                            ->whereNull('deleted_at')
+                                            ->count();
+            $countconverter = DB::table('cables_and_peripherals')->where('CPType', 'Converter')
+                                            ->whereNull('deleted_at')
+                                            ->count();
+            $countcharger = DB::table('cables_and_peripherals')->where('CPType', 'Charger')
+                                            ->whereNull('deleted_at')
+                                            ->count();
+        // END OF PIE CHART CABLES & PERIPHERALS
+
+        // FOR PIE CHART CONSUMABLES
+            $countink = DB::table('consumables')->where('ConsType', 'Ink')
+                                            ->whereNull('deleted_at')
+                                            ->count();
+            $counttoner = DB::table('consumables')->where('ConsType', 'Toner')
+                                            ->whereNull('deleted_at')
+                                            ->count();
+        // END OF PIE CHART CONSUMABLES
+
+        return view('dashboard', ['totaldevices' => $totaldevices, 'totalcp' => $totalcp, 'totalcons' => $totalcons, 'totalaccountability' => $totalaccountability,
+                    'countsys' => $countsys,'countlap' => $countlap, 'countaio' => $countaio,'countimac' => $countimac,
+                    'countcable' => $countcable,'countadapter' => $countadapter, 'countconverter' => $countconverter,'countcharger' => $countcharger,
+                    'countink' => $countink, 'counttoner' => $counttoner]);
     }
 
     public function add(Request $request)
@@ -49,8 +94,22 @@ class DeviceController extends Controller
                 'DeviceMacAdd' => $request->input('DeviceMacAdd'),
                 'DeviceLocation' => $request->input('DeviceLocation'),
                 'DeviceStatus' => $request->input('DeviceStatus'),
-                'DeviceRemarks' => $request->input('DeviceRemarks')
+                'DeviceRemarks' => $request->input('DeviceRemarks'),
+                'qr_code' => '', // Placeholder for now
             ]);
+
+            // Generate QR code
+            $qrCode = QrCode::size(200)->generate($request->input('DeviceSerialNo'));
+
+            // Save QR code image to disk
+            $fileName = $request->input('DeviceSerialNo').'.png';
+            $path = 'qrcodes/'.$fileName;
+            Storage::put($path, $qrCode);
+
+            // Update the device with the QR code path
+            DB::table('devices')
+                ->where('DeviceSerialNo', $request->input('DeviceSerialNo'))
+                ->update(['qr_code' => $fileName]);
 
             // Create device specifications
             DB::table('device_specs')->insert([

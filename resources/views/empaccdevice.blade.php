@@ -118,7 +118,10 @@
                                                 <label for="DeviceStatus" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Status</label>
                                                 <select name="DeviceStatus" id="DeviceStatus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:130px" value="{{$empaccdev_details->DeviceStatus}}">
                                                     <option name="DeviceStatus" value="Working" @if ($empaccdev_details->DeviceStatus == 'Working') selected @endif>Working</option>
-                                                    <option name="DeviceStatus" value="Not Working" @if ($empaccdev_details->DeviceStatus == 'Not Working') selected @endif>Not Working</option>
+                                                    <option name="DeviceStatus" value="Under Repair" @if ($empaccdev_details->DeviceStatus == 'Under Repair') selected @endif>Under Repair</option>
+                                                    <option name="DeviceStatus" value="Defective" @if ($empaccdev_details->DeviceStatus == 'Defective') selected @endif>Defective</option>
+                                                    <option name="DeviceStatus" value="Missing" @if ($empaccdev_details->DeviceStatus == 'Missing') selected @endif>Missing</option>
+                                                    <option name="DeviceStatus" value="Disposed" @if ($empaccdev_details->DeviceStatus == 'Disposed') selected @endif>Disposed</option>
                                                 </select>
                                             </div>
                                         </div>

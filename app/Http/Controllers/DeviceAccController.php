@@ -19,7 +19,7 @@ class DeviceAccController extends Controller
         // OUTSIDE MODAL ASSIGNED
             $searchTerm2 = $request->input('search_device');
             $dev_acc_perPage = 10;
-            $column_acc_dev = $request->get('column_acc_dev', 'id');
+            $column_acc_dev = $request->get('column_acc_dev', 'issue_date');
             $direction_acc_dev = $request->get('direction_acc_dev', 'asc');
 
             $data = DeviceAccModel::all();
@@ -49,7 +49,7 @@ class DeviceAccController extends Controller
         // OUTSIDE MODAL DEPLOYED
             $searchTerm2_dep = $request->input('search_dep');
             $dev_acc_perPage_dep = 10;
-            $column_acc_dep = $request->get('column_acc_dep', 'id');
+            $column_acc_dep = $request->get('column_acc_dep', 'issue_date');
             $direction_acc_dep = $request->get('direction_acc_dep', 'asc');
 
             $dev_acc_query_dep = DeviceModel::select('id', 'DeviceID', 'DeviceType', 'DeviceBrand', 'issue_date', 'DeviceLocation', 'is_accountability', 'deleted_at')
@@ -105,9 +105,10 @@ class DeviceAccController extends Controller
             $column_acc_dev_modal = $request->get('column', 'id');
             $direction_acc_dev_modal = $request->get('direction', 'asc');
 
-            $deviceview_acc_query = DB::table('devices')->select('id', 'DeviceID', 'DeviceType', 'DeviceName', 'DeviceBrand', 'DeviceModel', 'DeviceSerialNo', 'DeviceLocation')
+            $deviceview_acc_query = DB::table('devices')->select('id', 'DeviceID', 'DeviceType', 'DeviceName', 'DeviceBrand', 'DeviceModel', 'DeviceSerialNo', 'DeviceLocation', 'DeviceStatus')
                 ->whereNull('is_accountability')
                 ->whereNull('deleted_at')
+                ->where('DeviceStatus', 'Working')
                 ->where(function ($query) use ($searchTerm1) {
                     $query->where('DeviceID', 'like', "%$searchTerm1%")
                         ->orWhere('id', 'like', "%$searchTerm1%")
@@ -137,6 +138,17 @@ class DeviceAccController extends Controller
         $newAcc = $request->input('is_accountability');
         $newDeviceId = $request->input('newDeviceID');
         $newLocation = $request->input('newLocation');
+
+        // Check if any other device already has the same DeviceID with the new is_accountability
+        $existingDevice = DB::table('devices')
+                            ->where('DeviceID', $newDeviceId)
+                            ->where('is_accountability', '<>', $newAcc) // Exclude the current is_accountability
+                            ->first();
+
+        if ($existingDevice) {
+            // Notify user that the DeviceID is already in use by another accountability
+            return redirect('/itsemployeeaccountabilitydevice')->with('error', ' ');
+        }
 
         // Loop through each selected device and update
         foreach ($selectedDevices as $deviceId) {

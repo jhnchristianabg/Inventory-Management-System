@@ -6,11 +6,11 @@
             <!-- Select2 CSS -->
             <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
             <style>
-                #dataTable th{
+                #dataTable1 th{
                     background-color: #e5e7eb;
                     padding: 10px;
                 }
-                #dataTable td{
+                #dataTable1 td{
                     padding: 10px;
                 }
                 .select2 {
@@ -149,6 +149,23 @@
 
                     {{ Session::get('update')}}
 
+                    @endif
+
+                    <!-- Notification for ERROR -->
+
+                    @if(Session::get('error'))
+                        <div class="mb-3 bg-red-100 border-t-4 border-red-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                            <div class="flex">
+                                <div class="py-1">
+                                    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Inventory Management System</p>
+                                    <p class="text-sm">Failed! Host ID is already in use by another accountability.</p>
+                                </div>
+                            </div>
+                        </div>
+                        {{ Session::get('error')}}
                     @endif
 
                     <!-- Notification for DEPLOY -->
@@ -751,7 +768,7 @@
                                                     <!-- DROPDOWN LIST -->
                                                     <div class="col-span-2 sm:col-span-1 mt-3 mr-3" id="employeeDropdown" style="display:none;">
                                                         <label for="is_accountability" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Employee ID</label>
-                                                        <select name="is_accountability" id="employee" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:181px" disabled>
+                                                        <select name="is_accountability" id="employee" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:250px" disabled>
                                                             @if(isset($data))
                                                                 @foreach ($data as $row)
                                                                     <option value="{{ $row->EmployeeID }}">{{ $row->EmployeeID }}</option>
@@ -762,7 +779,7 @@
 
                                                     <div class="col-span-2 sm:col-span-1 mt-3 mr-3" id="studentDropdown" style="display:none;">
                                                         <label for="is_accountability" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Student ID</label>
-                                                        <select name="is_accountability" id="student" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:181px" disabled>
+                                                        <select name="is_accountability" id="student" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:250px" disabled>
                                                             @if(isset($data_student))
                                                                 @foreach ($data_student as $row_student)
                                                                     <option value="{{ $row_student->StudentID }}">{{ $row_student->StudentID }}</option>
@@ -823,10 +840,10 @@
                                 <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-300">
                                     <ul class="py-2 text-sm text-black dark:text-black" aria-labelledby="dropdownDefaultButton">
                                     <li class="text-center">
-                                        <a onclick="" class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-yellow-500 dark:hover:text-white">Assigned</a>
+                                        <a onclick="printTable1()" class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-yellow-500 dark:hover:text-white">Assigned</a>
                                     </li>
                                     <li class="text-center">
-                                        <a onclick="" class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-yellow-500 dark:hover:text-white">Deployed</a>
+                                        <a onclick="printTable2()" class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-yellow-500 dark:hover:text-white">Deployed</a>
                                     </li>
                                     </ul>
                                 </div>
@@ -853,12 +870,12 @@
                             </div>
 
                             <div>
-                                <table id="dataTable" class="w-full text-xs text-left rtl:text-right font-light text-surface text-black ">
+                                <table id="dataTable1" class="w-full text-xs text-left rtl:text-right font-light text-surface text-black ">
                                     <thead class="text-xs uppercase bg-gray-200 font-medium">
                                         <tr>
                                             <th scope="col" class="px-6 py-3">
                                                 <a href="{{ route('itsemployeeaccountabilitydevice.show', ['column_acc_dev' => 'id', 'direction_acc_dev' => ($column_acc_dev == 'id' && $direction_acc_dev == 'asc') ? 'desc' : 'asc']) }}">
-                                                    id
+                                                    ID
                                                     @if($column_acc_dev == 'id')
                                                         @if($direction_acc_dev == 'asc')
                                                         <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1054,12 +1071,12 @@
                             </div>
 
                             <div>
-                                <table id="dataTable" class="w-full text-xs text-left rtl:text-right font-light text-surface text-black ">
+                                <table id="dataTable2" class="w-full text-xs text-left rtl:text-right font-light text-surface text-black ">
                                     <thead class="text-xs uppercase bg-gray-200 font-medium">
                                         <tr>
                                             <th scope="col" class="px-6 py-3">
                                                 <a href="{{ route('itsemployeeaccountabilitydevice.show', ['column_acc_dep' => 'id', 'direction_acc_dep' => ($column_acc_dep == 'id' && $direction_acc_dep == 'asc') ? 'desc' : 'asc']) }}">
-                                                    id
+                                                    ID
                                                     @if($column_acc_dep == 'id')
                                                         @if($direction_acc_dep == 'asc')
                                                         <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1232,7 +1249,6 @@
                                     </div>
                                 </div>
                             <!-- PAGINATION Ends Here -->
-
                         </div>
 
                     </div>
@@ -1385,6 +1401,112 @@
                             });
                         });
                     //  TABS OF ASSIGNED AND DEPLOYED ENDS HERE
+
+                    // PRINTING FOR ASSIGNED
+                        function printTable1() {
+                            // Clone the table
+                            var table = document.getElementById('dataTable1').cloneNode(true);
+
+                            // Remove sorting arrows and SVGs
+                            var headerCells = table.querySelectorAll('thead th');
+                            headerCells.forEach(function(cell) {
+                                var anchor = cell.querySelector('a');
+                                if (anchor) {
+                                    var text = anchor.textContent;
+                                    cell.innerHTML = text;
+                                }
+                            });
+
+                            // Make "HOST ID" and "ID" column data uppercase
+                            var idColumnIndex = 0; // Index of the "ID" column
+                            var hostIdColumnIndex = 1; // Index of the "HOST ID" column
+
+                            var rows = table.querySelectorAll('tbody tr');
+                            rows.forEach(function(row) {
+                                var cells = row.querySelectorAll('td');
+                                cells[idColumnIndex].textContent = cells[idColumnIndex].textContent.toUpperCase();
+                                cells[hostIdColumnIndex].textContent = cells[hostIdColumnIndex].textContent.toUpperCase();
+                            });
+
+                            // Add table styles
+                            table.id = 'printedTable';
+                            table.style.borderCollapse = 'collapse';
+                            table.style.width = '100%';
+                            table.style.fontSize = '14px'; // Adjust font size as necessary
+
+                            // Add cell styles
+                            var cells = table.querySelectorAll('td, th');
+                            cells.forEach(function(cell) {
+                                cell.style.padding = '10px';
+                                cell.style.textAlign = 'center'; // Center align all cells
+                            });
+
+                            // Open a new window and write the table content
+                            var newWin = window.open('', 'Print-Window');
+                            newWin.document.open();
+                            // Add landscape orientation style
+                            newWin.document.write('<html><head><title>Inventory Management System / Devices Management</title><style>@page { size: landscape; }</style><style>body {font-family: Arial, sans-serif;} #printedTable th { background-color: #e5e7eb;}</style></head><body>' +
+                            '<span style="color: red; font-size: 12px; float: right; font-family: Arial; font-weight:bold;">ASSIGNED</span><br><br>' +
+                            table.outerHTML + '</body></html>');
+                            newWin.document.close();
+
+                            // Print the content
+                            newWin.print();
+                        }
+                    // ASSIGNED ENDS HERE
+
+                    // PRINTING FOR DEPLOYED
+                        function printTable2() {
+                            // Clone the table
+                            var table = document.getElementById('dataTable2').cloneNode(true);
+
+                            // Remove sorting arrows and SVGs
+                            var headerCells = table.querySelectorAll('thead th');
+                            headerCells.forEach(function(cell) {
+                                var anchor = cell.querySelector('a');
+                                if (anchor) {
+                                    var text = anchor.textContent;
+                                    cell.innerHTML = text;
+                                }
+                            });
+
+                            // Make "HOST ID" and "ID" column data uppercase
+                            var idColumnIndex = 0; // Index of the "ID" column
+                            var hostIdColumnIndex = 1; // Index of the "HOST ID" column
+
+                            var rows = table.querySelectorAll('tbody tr');
+                            rows.forEach(function(row) {
+                                var cells = row.querySelectorAll('td');
+                                cells[idColumnIndex].textContent = cells[idColumnIndex].textContent.toUpperCase();
+                                cells[hostIdColumnIndex].textContent = cells[hostIdColumnIndex].textContent.toUpperCase();
+                            });
+
+                            // Add table styles
+                            table.id = 'printedTable';
+                            table.style.borderCollapse = 'collapse';
+                            table.style.width = '100%';
+                            table.style.fontSize = '14px'; // Adjust font size as necessary
+
+                            // Add cell styles
+                            var cells = table.querySelectorAll('td, th');
+                            cells.forEach(function(cell) {
+                                cell.style.padding = '10px';
+                                cell.style.textAlign = 'center'; // Center align all cells
+                            });
+
+                            // Open a new window and write the table content
+                            var newWin = window.open('', 'Print-Window');
+                            newWin.document.open();
+                            // Add landscape orientation style
+                            newWin.document.write('<html><head><title>Inventory Management System / Devices Management</title><style>@page { size: landscape; }</style><style>body {font-family: Arial, sans-serif;} #printedTable th { background-color: #e5e7eb;}</style></head><body>' +
+                            '<span style="color: red; font-size: 12px; float: right; font-family: Arial; font-weight:bold;">DEPLOYED</span><br><br>' +
+                            table.outerHTML + '</body></html>');
+                            newWin.document.close();
+
+                            // Print the content
+                            newWin.print();
+                        }
+                    // DEPLOYED ENDS HERE
 
                 </script>
 

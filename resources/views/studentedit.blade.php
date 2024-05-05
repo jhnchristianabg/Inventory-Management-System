@@ -54,20 +54,27 @@
                                         <div class="flex">
                                             <div class="col-span-2 sm:col-span-1 mt-3">
                                                 <label for="StudentID" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Student ID</label>
-                                                <input type="text" name="StudentID" id="StudentID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$student->StudentID}}" placeholder="Input Student ID" required="">
+                                                <input type="text" name="StudentID" id="StudentID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$student->StudentID}}" placeholder="Input Student ID" style="width:130px" required="">
                                             </div>
 
                                             <div class="col-span-2 sm:col-span-1 mt-3 ml-3">
                                                 <label for="Department" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase">Department</label>
-                                                <select name="Department" id="Department" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:181px">
-                                                    <option name="Department" value="HED - BSIT" @if ($student->Department == 'HED - BSIT') selected @endif>HED - BSIT</option>
-                                                    <option name="Department" value="HED - BSHM" @if ($student->Department == 'HED - BSHM') selected @endif>HED - BSHM</option>
+                                                <select name="Department" id="Department" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" style="width:255px">
+                                                    <option name="Department" value="BS Accountancy" @if ($student->Department == 'BS Accountancy') selected @endif>BS Accountancy</option>
+                                                    <option name="Department" value="BS Accounting Information System" @if ($student->Department == 'BS Accounting Information System') selected @endif>BS Accounting Information System</option>
+                                                    <option name="Department" value="BS Information Technology" @if ($student->Department == 'BS Information Technology') selected @endif>BS Information Technology</option>
+                                                    <option name="Department" value="BS Psychology" @if ($student->Department == 'BS Psychology') selected @endif>BS Psychology</option>
+                                                    <option name="Department" value="BS Medical Technology" @if ($student->Department == 'BS Medical Technology') selected @endif>BS Medical Technology</option>
+                                                    <option name="Department" value="BS Nursing" @if ($student->Department == 'BS Nursing') selected @endif>BS Nursing</option>
+                                                    <option name="Department" value="BS Business Administration" @if ($student->Department == 'BS Business Administration') selected @endif>BS Business Administration</option>
+                                                    <option name="Department" value="BS Hospitality Management" @if ($student->Department == 'BS Hospitality Management') selected @endif>BS Hospitality Management</option>
+                                                    <option name="Department" value="BS Tourism Management" @if ($student->Department == 'BS Tourism Management') selected @endif>BS Tourism Management</option>
                                                 </select>
                                             </div>
 
                                             <div class="col-span-2 sm:col-span-1 mt-3 ml-3">
                                                 <label for="Year" class="block mb-2 text-sm font-semibold text-blueGray-900 uppercase"style="width:181px">Year</label>
-                                                <input type="text" name="Year" id="Year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$student->Year}}" placeholder="Year Level (E.g. 1st Year)" required="">
+                                                <input type="text" name="Year" id="Year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-30 p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:focus:ring-green-500 dark:focus:border-green-500" value="{{$student->Year}}" placeholder="Year Level (E.g. 1st Year)" style="width:160px" required="">
                                         </div>
 
                                     </div>
